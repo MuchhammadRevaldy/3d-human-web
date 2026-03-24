@@ -195,8 +195,11 @@ function CameraAnimator({ activeCategoryId, activeSubHotspotId, categories, cont
       }
     } else {
       // Apply smooth Camera Positional Sway Parallax (No Object Rotation)
-      const parallaxX = state.pointer.x * 0.5
-      const parallaxY = state.pointer.y * 0.5
+      // Sengaja dikunci sangat kaku (0.015) saat belum Overview agar tombol yang letaknya di pinggir seperti Longevity gampang diklik (menghindari "cat and mouse")
+      const swayFactor = activeSubHotspotId ? 0.3 : 0.015
+      
+      const parallaxX = state.pointer.x * swayFactor
+      const parallaxY = state.pointer.y * swayFactor
       
       const finalPosX = targetPos.current.x + parallaxX
       const finalPosY = targetPos.current.y + parallaxY
