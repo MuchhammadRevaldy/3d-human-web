@@ -113,37 +113,7 @@ body {
   flex-direction: column;
 }
 
-/* Explore Page Specific Overrides */
-.explore-page {
-  padding-top: 0; /* Let canvas take full screen */
-}
-.explore-page .canvas-container {
-  top: 70px;
-  height: calc(100vh - 70px);
-  margin-top: 0;
-}
-.explore-page .header {
-  top: 90px !important; /* Move header slightly further below navbar */
-}
-.explore-page .logo {
-  top: 100px !important; /* Push logo below navbar */
-}
-.explore-page .back-zoom-overlay {
-  top: 100px !important; /* Push back button below navbar */
-}
-.explore-page .sidebar {
-  top: 120px !important; /* Push sidebar slightly down */
-}
-.explore-page .sub-info-overlay {
-  top: 70px !important; /* Push entire sub-hotspot overlay below navbar */
-  height: calc(100vh - 70px) !important;
-  bottom: auto !important;
-}
-.explore-page .footer-left,
-.explore-page .footer-right {
-  bottom: 2rem;
-}
-
+/* Explore Page layout reverts strictly to native index.css */
 /* Standard Pages */
 .standard-page {
   padding: 4rem 2rem;

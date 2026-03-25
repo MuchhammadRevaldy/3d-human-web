@@ -226,6 +226,61 @@ export default function Explore() {
   const [loaded, setLoaded] = useState(false)
   const controlsRef = useRef()
 
+  // Background Music BGM Logic (Web Audio API to bypass IDM download hijackers)
+  const [isSoundOn, setIsSoundOn] = useState(false)
+  const audioCtxRef = useRef(null)
+  const isMusicLoaded = useRef(false)
+
+  const toggleSound = async () => {
+    // Initialize Web Audio Context dynamically on first user interaction
+    if (!audioCtxRef.current) {
+      audioCtxRef.current = new (window.AudioContext || window.webkitAudioContext)()
+    }
+
+    if (!isMusicLoaded.current) {
+      try {
+        const response = await fetch('/models/Music.mp3')
+        const arrayBuffer = await response.arrayBuffer()
+        const audioBuffer = await audioCtxRef.current.decodeAudioData(arrayBuffer)
+        
+        const sourceNode = audioCtxRef.current.createBufferSource()
+        sourceNode.buffer = audioBuffer
+        sourceNode.loop = true
+        sourceNode.connect(audioCtxRef.current.destination)
+        sourceNode.start(0)
+        isMusicLoaded.current = true
+        
+        // Start in suspended mode so we can resume explicitly
+        await audioCtxRef.current.suspend()
+      } catch (e) {
+        console.error("Gagal memuat BGM via Web Audio API:", e)
+      }
+    }
+
+    if (isSoundOn) {
+      if (audioCtxRef.current.state === 'running') await audioCtxRef.current.suspend()
+      setIsSoundOn(false)
+    } else {
+      if (audioCtxRef.current.state === 'suspended') await audioCtxRef.current.resume()
+      setIsSoundOn(true)
+    }
+  }
+
+  // Handle Tab Switch (Pause Audio strictly via AudioContext suspension)
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (!audioCtxRef.current || !isMusicLoaded.current) return
+      if (document.hidden) {
+        audioCtxRef.current.suspend()
+      } else if (isSoundOn) {
+        audioCtxRef.current.resume()
+      }
+    }
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange)
+  }, [isSoundOn])
+
+  // Navigation Logic
   const activeIndex = activeOrgan ? CATEGORIES.findIndex(c => c.id === activeOrgan) : -1
   const prevCat = activeIndex <= 0 ? CATEGORIES[CATEGORIES.length - 1] : CATEGORIES[activeIndex - 1]
   const nextCat = activeIndex >= CATEGORIES.length - 1 || activeIndex === -1 ? CATEGORIES[0] : CATEGORIES[activeIndex + 1]
@@ -238,13 +293,30 @@ export default function Explore() {
 
   return (
     <div className="app-wrapper explore-page">
+      {/* Loading screen */}
       <div className={`loading-screen${loaded ? ' hidden' : ''}`}>
         <div className="loading-spinner" />
         <div className="loading-text">Loading 3D Experience…</div>
       </div>
 
+      {/* Particle CSS background */}
       <ParticleBg />
 
+      {/* Logo */}
+      <div className="logo">
+        <div className="logo-icon">
+          {/* A simple placeholder logo icon matching VibrantWellness (3 dots) */}
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="6" r="3" fill="#1a1a3a" />
+            <circle cx="6" cy="16" r="3" fill="#1a1a3a" />
+            <circle cx="18" cy="16" r="3" fill="#1a1a3a" />
+            <path d="M12 9L7 14M12 9L17 14M7 14L17 14" stroke="#1a1a3a" strokeWidth="2" strokeLinecap="round" />
+          </svg>
+        </div>
+        <div className="logo-text">Vibrant<span>Wellness</span></div>
+      </div>
+
+      {/* Sex toggle header */}
       <div className="header explore-header">
         <div className="sex-toggle">
           <button className={`sex-btn${sex === 'female' ? ' active' : ''}`} onClick={() => setSex('female')}>
@@ -262,6 +334,7 @@ export default function Explore() {
         </div>
       </div>
 
+      {/* Dynamic Content based on active state */}
       <Sidebar
         organs={CATEGORIES}
         activeOrgan={activeOrgan}
@@ -269,6 +342,7 @@ export default function Explore() {
         onHover={setHoveredOrgan}
       />
 
+      {/* THREE.js Canvas for Body Model */}
       <div className="canvas-container">
         <Canvas
           camera={{ position: [0, 0.4, 5.0], fov: 38 }}
@@ -336,16 +410,40 @@ export default function Explore() {
               enableRotate={false}
               minPolarAngle={Math.PI * 0.1}
               maxPolarAngle={Math.PI * 0.9}
+              // Removed the restricting 1.2 minDistance to allow extreme zoom on cell
               minDistance={0.15}
               maxDistance={3.8}
               autoRotate={!activeOrgan && !hoveredOrgan}
               autoRotateSpeed={0.4}
+              // Sighted the pivot target at the chest level
               target={[0, 0.8, 0]}
             />
           </Suspense>
         </Canvas>
       </div>
 
+      <div className="footer-left">
+        <div className="sound-toggle" onClick={toggleSound} style={{ cursor: 'pointer' }}>
+          {isSoundOn ? (
+            <div className="music-wave-container">
+              <span className="wave-bar"></span>
+              <span className="wave-bar"></span>
+              <span className="wave-bar"></span>
+              <span className="wave-bar"></span>
+              <span className="wave-bar"></span>
+            </div>
+          ) : (
+            <span className="dots">. . . . . . </span>
+          )}
+          <div className="sound-pill">SOUND {isSoundOn ? 'ON' : 'OFF'}</div>
+        </div>
+      </div>
+
+      <div className="footer-right">
+        CREATED BY <strong>noomo</strong> <em>agency</em>
+      </div>
+
+      {/* Top Left Back Button when Zoomed In */}
       <div className={`back-zoom-overlay ${activeOrgan && !activeSubHotspot ? 'visible' : ''}`}>
         <button className="back-zoom-btn" onClick={closeOrganZoom}>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
@@ -353,6 +451,7 @@ export default function Explore() {
         </button>
       </div>
 
+      {/* Main Glass Bottom Bar */}
       <div className={`bottom-bar-container ${activeOrgan && !activeSubHotspot ? 'visible' : ''}`}>
         <div className="bottom-bar-glass">
           <div className="active-pill-solid">
@@ -387,6 +486,7 @@ export default function Explore() {
         </div>
       </div>
 
+      {/* Sub-Hotspot Info Sidebar */}
       {activeSubHotspot && (
         <SubHotspotInfoView
           subHotspotId={activeSubHotspot}

@@ -1,8 +1,14 @@
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useLocation } from 'react-router-dom';
 import { Stethoscope } from 'lucide-react';
 import '../index.css';
 
 export default function Navbar() {
+  const location = useLocation();
+
+  if (location.pathname === '/explore') {
+    return null;
+  }
+
   return (
     <nav className="universal-navbar">
       <div className="navbar-container">
