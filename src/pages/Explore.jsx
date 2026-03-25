@@ -324,8 +324,8 @@ export default function Explore() {
 
   return (
     <div className="app-wrapper explore-page">
-      {/* Crosshair cursor – top of everything */}
-      <CrosshairCursor />
+      {/* Crosshair cursor – top of everything, only show when loaded */}
+      {loaded && <CrosshairCursor />}
 
       {/* Loading screen */}
       <div className={`loading-screen${loaded ? ' hidden' : ''}`}>

@@ -617,12 +617,12 @@ body,
 }
 
 .loading-spinner {
-  width: 48px;
-  height: 48px;
-  border: 3px solid rgba(91, 156, 246, 0.2);
-  border-top-color: var(--accent-blue);
+  width: 64px;
+  height: 64px;
+  border: 2px solid rgba(100, 150, 255, 0.2);
+  border-top-color: #5b9cf6;
   border-radius: 50%;
-  animation: spin 0.8s linear infinite;
+  animation: spin 0.9s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
 }
 
 @keyframes spin {
@@ -632,10 +632,13 @@ body,
 }
 
 .loading-text {
-  font-size: 13px;
-  color: var(--text-secondary);
-  letter-spacing: 0.1em;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  color: #6a7496;
+  letter-spacing: 0.25em;
   text-transform: uppercase;
+  margin-top: 10px;
 }
 
 /* ========================================================= */
