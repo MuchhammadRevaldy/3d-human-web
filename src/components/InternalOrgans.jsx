@@ -44,9 +44,9 @@ function InternalOrganMesh({ organ, isVisible, isActive }) {
     roughness: 0.8, // Rough so it doesn't reflect sharp light
     metalness: 0.0, // No metal reflection
     transparent: true,
-    opacity: 0.05, // High transparency (virtually invisible)
+    opacity: 0.0, // Completely invisible
     transmission: 0.0,
-    envMapIntensity: 0.1, // Prevent studio lights from blowing it out
+    envMapIntensity: 0.0, // Absolutely zero reflections
     depthWrite: false, // Prevent depth sorting artifacts with outer mesh
   }), [])
 

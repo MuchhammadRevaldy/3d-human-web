@@ -173,7 +173,6 @@ function CameraAnimator({ activeCategoryId, activeSubHotspotId, categories, cont
   useEffect(() => {
     const activeData = categories.find(c => c.id === activeCategoryId)
     const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768
-    const mobileYShift = isMobile ? 0.6 : 0.0
 
     if (activeData) {
       const zoomZ = activeData.zoomOffset !== undefined ? activeData.zoomOffset : 1.0
@@ -184,23 +183,24 @@ function CameraAnimator({ activeCategoryId, activeSubHotspotId, categories, cont
       if (activeSubHotspotId) {
         if (isMobile) {
           // Mobile: organ stays centered — no X-shift except explicit per-organ horizontal custom shifts.
-          targetLook.current.set(activeData.position[0] + customOffsetX, activeData.position[1] - 0.25 + mobileYShift + customOffsetY, activeData.position[2])
+          targetLook.current.set(activeData.position[0] + customOffsetX, activeData.position[1] - 0.25 + customOffsetY, activeData.position[2])
           // Zoom in closer (1.1) so the organ looks big and clear
-          targetPos.current.set(activeData.position[0] + customOffsetX, activeData.position[1] - 0.25 + mobileYShift + customOffsetY, activeData.position[2] + zoomZ * 1.1)
+          targetPos.current.set(activeData.position[0] + customOffsetX, activeData.position[1] - 0.25 + customOffsetY, activeData.position[2] + zoomZ * 1.1)
         } else {
           const dynamicShift = 0.18 * zoomZ
           const shiftX = Math.min(Math.max(dynamicShift, 0.05), 0.20)
-          targetLook.current.set(activeData.position[0] - shiftX, activeData.position[1] + mobileYShift, activeData.position[2])
-          targetPos.current.set(activeData.position[0] - shiftX, activeData.position[1] - 0.05 + mobileYShift, activeData.position[2] + zoomZ * 0.44)
+          targetLook.current.set(activeData.position[0] - shiftX, activeData.position[1], activeData.position[2])
+          targetPos.current.set(activeData.position[0] - shiftX, activeData.position[1] - 0.05, activeData.position[2] + zoomZ * 0.44)
         }
       } else {
-        targetLook.current.set(activeData.position[0], activeData.position[1] + mobileYShift, activeData.position[2])
-        targetPos.current.set(activeData.position[0], activeData.position[1] - 0.05 + mobileYShift, activeData.position[2] + zoomZ)
+        targetLook.current.set(activeData.position[0], activeData.position[1], activeData.position[2])
+        targetPos.current.set(activeData.position[0], activeData.position[1] - 0.05, activeData.position[2] + zoomZ)
       }
     } else {
-      // In overview mode, the camera stays at default while the mesh shifts up
-      targetLook.current.set(0, 0.8, 0)
-      targetPos.current.set(0, 0.4, 5.0)
+      // In overview mode, aim camera slightly higher on mobile to ensure the head isn't clipped
+      const overviewY = isMobile ? 1.05 : 0.8
+      targetLook.current.set(0, overviewY, 0)
+      targetPos.current.set(0, overviewY - 0.4, 5.0)
     }
     isAnimating.current = true
   }, [activeCategoryId, activeSubHotspotId, categories])
@@ -529,34 +529,32 @@ export default function Explore() {
             />
 
             <ParallaxGroup isZoomed={!!activeOrgan}>
-              <group position={[0, isMobileView ? 0.6 : 0, 0]}>
-                <group visible={!activeSubHotspot}>
-                  <BodyModel
-                    sex={sex}
-                    onLoaded={() => setLoaded(true)}
-                    activeOrgan={activeOrgan}
-                    hoveredOrgan={hoveredOrgan}
-                  />
-                </group>
+              <group visible={!activeSubHotspot}>
+                <BodyModel
+                  sex={sex}
+                  onLoaded={() => setLoaded(true)}
+                  activeOrgan={activeOrgan}
+                  hoveredOrgan={hoveredOrgan}
+                />
+              </group>
 
-                <InternalOrgans
-                  models={ORGAN_MODELS}
-                  categories={CATEGORIES}
-                  activeCategoryId={activeOrgan}
-                  hoveredCategoryId={hoveredOrgan}
+              <InternalOrgans
+                models={ORGAN_MODELS}
+                categories={CATEGORIES}
+                activeCategoryId={activeOrgan}
+                hoveredCategoryId={hoveredOrgan}
+                activeSubHotspotId={activeSubHotspot}
+              />
+
+              <group visible={!activeSubHotspot}>
+                <OrganHotspots
+                  organs={CATEGORIES}
+                  activeOrgan={activeOrgan}
+                  onSelect={setActiveOrgan}
+                  onHover={setHoveredOrgan}
+                  onSubSelect={setActiveSubHotspot}
                   activeSubHotspotId={activeSubHotspot}
                 />
-
-                <group visible={!activeSubHotspot}>
-                  <OrganHotspots
-                    organs={CATEGORIES}
-                    activeOrgan={activeOrgan}
-                    onSelect={setActiveOrgan}
-                    onHover={setHoveredOrgan}
-                    onSubSelect={setActiveSubHotspot}
-                    activeSubHotspotId={activeSubHotspot}
-                  />
-                </group>
               </group>
             </ParallaxGroup>
 
@@ -592,8 +590,8 @@ export default function Explore() {
         </Canvas>
       </div>
 
-      <div className="footer-right">
-        CREATED BY <strong>noomo</strong> <em>agency</em>
+      <div className="footer-center">
+        Created BY <strong>Team WIWYM.</strong>
       </div>
 
       {/* Main Glass Bottom Bar */}

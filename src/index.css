@@ -48,10 +48,25 @@ body,
 }
 
 @keyframes gradientShift {
-  0%   { background-position: 0% 0%; filter: hue-rotate(0deg); }
-  33%  { background-position: 60% 40%; filter: hue-rotate(15deg); }
-  66%  { background-position: 100% 100%; filter: hue-rotate(-10deg); }
-  100% { background-position: 0% 0%; filter: hue-rotate(0deg); }
+  0% {
+    background-position: 0% 0%;
+    filter: hue-rotate(0deg);
+  }
+
+  33% {
+    background-position: 60% 40%;
+    filter: hue-rotate(15deg);
+  }
+
+  66% {
+    background-position: 100% 100%;
+    filter: hue-rotate(-10deg);
+  }
+
+  100% {
+    background-position: 0% 0%;
+    filter: hue-rotate(0deg);
+  }
 }
 
 /* Individual bubble divs */
@@ -70,15 +85,19 @@ body,
     transform: translateY(0) translateX(0) scale(0.85);
     opacity: 0;
   }
+
   10% {
     opacity: var(--start-opacity, 0.3);
   }
+
   50% {
     transform: translateY(-45vh) translateX(var(--drift-x, 40px)) scale(1.05);
   }
+
   90% {
     opacity: var(--start-opacity, 0.3);
   }
+
   100% {
     transform: translateY(-110vh) translateX(calc(var(--drift-x, 40px) * 0.3)) scale(0.9);
     opacity: 0;
@@ -95,54 +114,99 @@ body,
 }
 
 .blob-1 {
-  width: 65vw; height: 65vw;
-  background: radial-gradient(circle, rgba(7,116,196,0.45) 0%, transparent 70%);
-  top: -20%; left: -15%;
+  width: 65vw;
+  height: 65vw;
+  background: radial-gradient(circle, rgba(7, 116, 196, 0.45) 0%, transparent 70%);
+  top: -20%;
+  left: -15%;
   animation: blobDrift1 18s ease-in-out infinite;
 }
 
 .blob-2 {
-  width: 55vw; height: 55vw;
-  background: radial-gradient(circle, rgba(7,116,196,0.35) 0%, transparent 70%);
-  bottom: -15%; right: -10%;
+  width: 55vw;
+  height: 55vw;
+  background: radial-gradient(circle, rgba(7, 116, 196, 0.35) 0%, transparent 70%);
+  bottom: -15%;
+  right: -10%;
   animation: blobDrift2 22s ease-in-out infinite;
 }
 
 .blob-3 {
-  width: 45vw; height: 45vw;
-  background: radial-gradient(circle, rgba(7,116,196,0.4) 0%, transparent 70%);
-  top: 40%; left: 35%;
+  width: 45vw;
+  height: 45vw;
+  background: radial-gradient(circle, rgba(7, 116, 196, 0.4) 0%, transparent 70%);
+  top: 40%;
+  left: 35%;
   animation: blobDrift3 26s ease-in-out infinite;
 }
 
 .blob-4 {
-  width: 40vw; height: 40vw;
-  background: radial-gradient(circle, rgba(7,116,196,0.3) 0%, transparent 70%);
-  top: 10%; right: 5%;
+  width: 40vw;
+  height: 40vw;
+  background: radial-gradient(circle, rgba(7, 116, 196, 0.3) 0%, transparent 70%);
+  top: 10%;
+  right: 5%;
   animation: blobDrift4 20s ease-in-out infinite;
 }
 
 @keyframes blobDrift1 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33%       { transform: translate(8vw, 6vh) scale(1.08); }
-  66%       { transform: translate(-4vw, 10vh) scale(0.95); }
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  33% {
+    transform: translate(8vw, 6vh) scale(1.08);
+  }
+
+  66% {
+    transform: translate(-4vw, 10vh) scale(0.95);
+  }
 }
 
 @keyframes blobDrift2 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  40%       { transform: translate(-10vw, -8vh) scale(1.1); }
-  70%       { transform: translate(5vw, -12vh) scale(0.92); }
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  40% {
+    transform: translate(-10vw, -8vh) scale(1.1);
+  }
+
+  70% {
+    transform: translate(5vw, -12vh) scale(0.92);
+  }
 }
 
 @keyframes blobDrift3 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  30%       { transform: translate(-6vw, -10vh) scale(1.05); }
-  65%       { transform: translate(8vw, 5vh) scale(0.97); }
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  30% {
+    transform: translate(-6vw, -10vh) scale(1.05);
+  }
+
+  65% {
+    transform: translate(8vw, 5vh) scale(0.97);
+  }
 }
 
 @keyframes blobDrift4 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50%       { transform: translate(-8vw, 12vh) scale(1.12); }
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(-8vw, 12vh) scale(1.12);
+  }
 }
 
 /* ─── Full-screen crosshair cursor ─── */
@@ -602,11 +666,13 @@ body,
 /* Sex toggle sits inline with the bar — tighten to match 40px icon button height */
 .top-left-bar .sex-toggle {
   margin: 0;
-  padding: 4px 6px; /* reduced from 6px 8px */
+  padding: 4px 6px;
+  /* reduced from 6px 8px */
 }
 
 .top-left-bar .sex-btn {
-  padding: 4px 14px; /* reduced from 7px 18px */
+  padding: 4px 14px;
+  /* reduced from 7px 18px */
   font-size: 12px;
 }
 
@@ -647,14 +713,36 @@ body,
   animation: miniWave 0.9s ease-in-out infinite;
 }
 
-.music-wave-mini span:nth-child(1) { height: 6px;  animation-delay: 0s; }
-.music-wave-mini span:nth-child(2) { height: 14px; animation-delay: 0.15s; }
-.music-wave-mini span:nth-child(3) { height: 10px; animation-delay: 0.3s; }
-.music-wave-mini span:nth-child(4) { height: 6px;  animation-delay: 0.45s; }
+.music-wave-mini span:nth-child(1) {
+  height: 6px;
+  animation-delay: 0s;
+}
+
+.music-wave-mini span:nth-child(2) {
+  height: 14px;
+  animation-delay: 0.15s;
+}
+
+.music-wave-mini span:nth-child(3) {
+  height: 10px;
+  animation-delay: 0.3s;
+}
+
+.music-wave-mini span:nth-child(4) {
+  height: 6px;
+  animation-delay: 0.45s;
+}
 
 @keyframes miniWave {
-  0%, 100% { transform: scaleY(1); }
-  50%       { transform: scaleY(0.35); }
+
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+
+  50% {
+    transform: scaleY(0.35);
+  }
 }
 
 /* ── Desktop-only footer & home button ── */
@@ -715,6 +803,7 @@ body,
   background: rgba(255, 255, 255, 0.55);
   transform: scale(1.08);
 }
+
 /* ── Mobile-only unified control pill ── */
 .mobile-ctrl-pill {
   position: absolute;
@@ -752,6 +841,7 @@ body,
   flex-shrink: 0;
   transition: background 0.2s ease;
 }
+
 .mob-icon-btn:hover {
   background: rgba(255, 255, 255, 0.4);
 }
@@ -785,37 +875,41 @@ body,
   white-space: nowrap;
   height: 32px;
 }
+
 .mob-sex-btn.active {
   background: rgba(91, 156, 246, 0.22);
   color: var(--text-primary);
 }
 
 /* Music colours */
-.mob-music-btn.music-on { color: #16a34a; }
-.mob-music-btn.music-off { color: #dc2626; }
+.mob-music-btn.music-on {
+  color: #16a34a;
+}
+
+.mob-music-btn.music-off {
+  color: #dc2626;
+}
 
 /* green wave bars inherit music-wave-mini styles already defined */
 
-.footer-right {
+.footer-center {
   position: absolute;
   bottom: 40px;
-  right: 40px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 10;
   color: white;
   font-size: 11px;
   font-family: 'Inter', sans-serif;
   letter-spacing: 0.1em;
   opacity: 0.9;
+  text-align: center;
+  width: 100%;
+  pointer-events: none;
 }
 
-.footer-right strong {
+.footer-center strong {
   font-weight: 800;
-}
-
-.footer-right em {
-  font-family: serif;
-  font-style: italic;
-  font-size: 13px;
 }
 
 /* ---- LOADING ---- */
@@ -1859,7 +1953,8 @@ body,
 .splash-overlay {
   position: fixed;
   inset: 0;
-  background: #ffffff; /* Premium white to make logo pop */
+  background: #ffffff;
+  /* Premium white to make logo pop */
   z-index: 99999;
   display: flex;
   align-items: center;
@@ -1896,12 +1991,21 @@ body,
 }
 
 @keyframes logoSpin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes logoScaleOut {
-  0% { transform: scale(1); opacity: 1; }
-  100% { transform: scale(70); opacity: 0; }
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(70);
+    opacity: 0;
+  }
 }
 
 /* Floating Home Button on Explore */
@@ -1943,21 +2047,37 @@ body,
   height: 36px;
   border-radius: 50%;
   background: white;
-  border: 1px solid rgba(0,0,0,0.05);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   transition: transform 0.3s;
 }
 
 @media (min-width: 769px) {
-  .mobile-only { display: none !important; }
-  .mobile-toggle-btn { display: none !important; }
-  .sidebar-header { margin-bottom: 12px; }
-  .sidebar-content { display: contents; }
+  .mobile-only {
+    display: none !important;
+  }
+
+  .mobile-toggle-btn {
+    display: none !important;
+  }
+
+  .sidebar-header {
+    margin-bottom: 12px;
+  }
+
+  .sidebar-content {
+    display: contents;
+  }
 }
 
 @media (max-width: 768px) {
-  .desktop-only { display: none !important; }
-  .crosshair-root { display: none !important; }
+  .desktop-only {
+    display: none !important;
+  }
+
+  .crosshair-root {
+    display: none !important;
+  }
 
   /* Push the 3D scene down so the model head clears the pill bar */
   .canvas-container {
@@ -2015,7 +2135,7 @@ body,
     height: auto;
     line-height: 1;
   }
-  
+
   /* Sidebar Bottom Sheet */
   .sidebar {
     top: auto;
@@ -2031,14 +2151,17 @@ body,
     background: rgba(255, 255, 255, 0.4);
     box-shadow: 0 -10px 40px rgba(0, 0, 50, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.5);
   }
+
   .sidebar.expanded {
     transform: translateY(0);
   }
+
   .sidebar.hidden {
     transform: translateY(100%);
     opacity: 0;
     pointer-events: none;
   }
+
   .sidebar-header {
     display: flex;
     justify-content: space-between;
@@ -2046,6 +2169,7 @@ body,
     margin-bottom: 20px;
     cursor: pointer;
   }
+
   .sidebar-content {
     display: flex;
     flex-direction: column;
@@ -2055,6 +2179,7 @@ body,
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
+
   .sidebar-content::-webkit-scrollbar {
     display: none;
   }
@@ -2064,12 +2189,14 @@ body,
     width: 90vw;
     bottom: 25px;
   }
+
   .bottom-bar-glass {
     padding: 8px 16px;
     background: #ffffff;
     border-radius: 40px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   }
+
   .active-pill-solid {
     background: transparent;
     box-shadow: none;
@@ -2077,11 +2204,13 @@ body,
     flex: 1;
     justify-content: center;
   }
+
   .mobile-text-center {
     text-align: center;
     font-size: 18px;
     width: 100%;
   }
+
   .nav-action-btn.solid.mobile-only {
     width: 40px;
     height: 40px;
@@ -2106,25 +2235,28 @@ body,
     box-shadow: none;
     pointer-events: none;
   }
+
   .panel-scroll-area {
     padding: 45vh 0 0 0;
     height: 100%;
     overflow-y: auto;
     pointer-events: auto;
   }
+
   .scroll-content-wrapper {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.45) 0%, rgba(240, 245, 255, 0.55) 100%);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(240, 245, 255, 0.15) 100%);
     backdrop-filter: blur(20px);
     border-radius: 40px 40px 0 0;
     padding: 30px 24px 100px 24px;
     min-height: 100vh;
     box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.08);
   }
+
   .panel-title {
     font-size: 28px;
     margin-bottom: 24px;
   }
-  
+
   /* Hide custom cursor */
   .sub-info-plus-cursor {
     display: none !important;
@@ -2140,6 +2272,7 @@ body,
     z-index: 100;
     position: fixed;
   }
+
   .nav-pill-container {
     padding: 0;
     gap: 0;
@@ -2153,9 +2286,11 @@ body,
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
+
   .nav-pill-container::-webkit-scrollbar {
     display: none;
   }
+
   .nav-pill-container .nav-inactive-btn,
   .nav-pill-container .nav-active-btn {
     flex: 1 0 auto;
@@ -2167,15 +2302,19 @@ body,
     background: transparent !important;
     text-transform: capitalize;
   }
+
   .nav-pill-container .nav-inactive-btn {
     color: #8c95a6;
-    opacity: 1; /* override desktop opacity */
+    opacity: 1;
+    /* override desktop opacity */
   }
+
   .nav-pill-container .nav-active-btn {
     color: #1a1a3a;
     position: relative;
     font-weight: 700;
   }
+
   .nav-pill-container .nav-active-btn::after {
     content: '';
     position: absolute;
@@ -2186,10 +2325,11 @@ body,
     background: #0077ff;
     border-radius: 3px;
   }
+
   .nav-subtitle {
-    display: none; 
+    display: none;
   }
-  
+
   /* Top Fixed Back Button */
   .sub-info-back-btn {
     top: 20px;
@@ -2206,12 +2346,14 @@ body,
     z-index: 90;
     position: fixed;
   }
+
   .mobile-back-text {
     font-weight: 800;
     font-size: 13px;
     letter-spacing: 0.1em;
     color: #1a1a3a;
   }
+
   .oxi-video-position-wrapper {
     top: 20%;
     right: 50%;
@@ -2219,7 +2361,7 @@ body,
     width: 180px;
     height: 180px;
   }
-  
+
   /* UI Elements adjustments */
   .home-btn-float {
     top: 20px;
@@ -2227,16 +2369,19 @@ body,
     width: 42px;
     height: 42px;
   }
+
   .logo {
     top: 20px;
     right: 20px;
   }
+
   .sex-toggle {
     top: 65px !important;
     right: 115px !important;
     margin-top: 25px !important;
     z-index: 50;
   }
+
   .footer-left {
     top: 70px;
     right: 20px;
@@ -2244,40 +2389,51 @@ body,
     left: auto;
     z-index: 50;
   }
+
   .sound-toggle {
     align-items: flex-end;
   }
-  .footer-right {
-    display: none; /* Hide on mobile to save space */
+
+  .footer-center {
+    display: none;
+    /* Hide on mobile to save space */
   }
+
   .next-button-container {
     min-width: unset;
     width: 100%;
     padding: 16px 20px;
     margin-top: 40px;
   }
-  
+
   /* Biomarker Cards Mobile Adjustment */
   .biomarker-card {
     padding: 12px 14px;
-    gap: 8px; /* Ensure space between info and pill */
+    gap: 8px;
+    /* Ensure space between info and pill */
   }
+
   .bm-name {
     font-size: 12px;
   }
+
   .bm-desc {
     font-size: 9px;
     letter-spacing: 0.1em;
   }
+
   .bm-value {
     font-size: 11px;
     padding: 6px 10px;
     border-radius: 16px;
     text-align: center;
     max-width: 40%;
-    white-space: normal; /* allow text wrapping if needed */
+    white-space: normal;
+    /* allow text wrapping if needed */
   }
-  .bm-value .arrow-up, .bm-value .arrow-down {
+
+  .bm-value .arrow-up,
+  .bm-value .arrow-down {
     font-size: 12px;
   }
 }
