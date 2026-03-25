@@ -14,7 +14,7 @@ export default function Navbar() {
       <div className="navbar-container">
         {/* Logo Section */}
         <Link to="/" className="navbar-logo">
-          <Stethoscope className="logo-icon-svg" />
+          {/* <Stethoscope className="logo-icon-svg" /> */}
           <img src="/somalab_logo.png" alt="SomaLab" style={{ height: '32px', objectFit: 'contain' }} />
           <span className="logo-text">Soma<span>Lab</span></span>
         </Link>
