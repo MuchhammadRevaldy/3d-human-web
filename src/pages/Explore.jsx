@@ -11,7 +11,8 @@ import InternalOrgans from '../components/InternalOrgans'
 import SubHotspotInfoView from '../components/SubHotspotInfoView'
 import ParticleBg from '../components/ParticleBg'
 import '../index.css'
-
+import { useNavigate } from 'react-router-dom'
+import { Home } from 'lucide-react'
 const ORGAN_MODELS = [
   {
     id: 'brain',
@@ -166,11 +167,11 @@ function CameraAnimator({ activeCategoryId, activeSubHotspotId, categories, cont
       const zoomZ = activeData.zoomOffset !== undefined ? activeData.zoomOffset : 1.0
 
       if (activeSubHotspotId) {
-        const dynamicShift = 0.35 * zoomZ
-        const shiftX = Math.min(Math.max(dynamicShift, 0.08), 0.35)
+        const dynamicShift = 0.18 * zoomZ
+        const shiftX = Math.min(Math.max(dynamicShift, 0.05), 0.20)
 
         targetLook.current.set(activeData.position[0] - shiftX, activeData.position[1], activeData.position[2])
-        targetPos.current.set(activeData.position[0] - shiftX, activeData.position[1] - 0.05, activeData.position[2] + zoomZ * 0.9)
+        targetPos.current.set(activeData.position[0] - shiftX, activeData.position[1] - 0.05, activeData.position[2] + zoomZ * 0.44)
       } else {
         targetLook.current.set(...activeData.position)
         targetPos.current.set(activeData.position[0], activeData.position[1] - 0.05, activeData.position[2] + zoomZ)
@@ -214,11 +215,38 @@ function CameraAnimator({ activeCategoryId, activeSubHotspotId, categories, cont
   return null
 }
 
-function ParallaxGroup({ isOverview, children }) {
-  return <group>{children}</group>
+function ParallaxGroup({ isZoomed, children }) {
+  const groupRef = useRef()
+
+  useFrame((state, delta) => {
+    if (!groupRef.current) return
+
+    // Kunci rotasi ke 0,0,0 (diam total) kalau lagi nge-zoom organ biar button-nya nggak lari-lari
+    if (isZoomed) {
+      easing.dampE(groupRef.current.rotation, [0, 0, 0], 0.15, delta)
+      return
+    }
+
+    // Goyangan parallax tipis pas layar utama Explore penuh
+    const factor = 35
+    
+    // Y inverted for natural up/down tilt, X for left/right
+    const targetX = (state.pointer.y * Math.PI) / factor
+    const targetY = (state.pointer.x * Math.PI) / factor
+
+    easing.dampE(
+      groupRef.current.rotation,
+      [targetX, targetY, 0],
+      0.15,
+      delta
+    )
+  })
+
+  return <group ref={groupRef}>{children}</group>
 }
 
 export default function Explore() {
+  const navigate = useNavigate()
   const [sex, setSex] = useState('female')
   const [activeOrgan, setActiveOrgan] = useState(null)
   const [hoveredOrgan, setHoveredOrgan] = useState(null)
@@ -302,6 +330,13 @@ export default function Explore() {
       {/* Particle CSS background */}
       <ParticleBg />
 
+      {/* Floating Home Button */}
+      {!activeOrgan && (
+        <button className="home-btn-float" onClick={() => navigate('/')} title="Kembali ke Landing Page">
+          <Home size={22} strokeWidth={2.5} />
+        </button>
+      )}
+
       {/* Logo */}
       <div className="logo">
         <div className="logo-icon">
@@ -317,22 +352,24 @@ export default function Explore() {
       </div>
 
       {/* Sex toggle header */}
-      <div className="header explore-header">
-        <div className="sex-toggle">
-          <button className={`sex-btn${sex === 'female' ? ' active' : ''}`} onClick={() => setSex('female')}>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-              <circle cx="12" cy="8" r="5" /><line x1="12" y1="13" x2="12" y2="21" /><line x1="9" y1="18" x2="15" y2="18" />
-            </svg>
-            Female
-          </button>
-          <button className={`sex-btn${sex === 'male' ? ' active' : ''}`} onClick={() => setSex('male')}>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-              <circle cx="10" cy="14" r="5" /><line x1="14" y1="10" x2="21" y2="3" /><polyline points="16 3 21 3 21 8" />
-            </svg>
-            Male
-          </button>
+      {!activeSubHotspot && (
+        <div className="header explore-header">
+          <div className="sex-toggle">
+            <button className={`sex-btn${sex === 'female' ? ' active' : ''}`} onClick={() => setSex('female')}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <circle cx="12" cy="8" r="5" /><line x1="12" y1="13" x2="12" y2="21" /><line x1="9" y1="18" x2="15" y2="18" />
+              </svg>
+              Female
+            </button>
+            <button className={`sex-btn${sex === 'male' ? ' active' : ''}`} onClick={() => setSex('male')}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <circle cx="10" cy="14" r="5" /><line x1="14" y1="10" x2="21" y2="3" /><polyline points="16 3 21 3 21 8" />
+              </svg>
+              Male
+            </button>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Dynamic Content based on active state */}
       <Sidebar
@@ -363,7 +400,7 @@ export default function Explore() {
               controlsRef={controlsRef}
             />
 
-            <ParallaxGroup isOverview={!!activeSubHotspot}>
+            <ParallaxGroup isZoomed={!!activeOrgan}>
               <group visible={!activeSubHotspot}>
                 <BodyModel
                   sex={sex}

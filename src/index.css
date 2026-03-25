@@ -1142,4 +1142,32 @@ html, body, #root {
   }
 }
 
+/* Home Button Floating in Explore */
+.home-btn-float {
+  position: absolute;
+  top: 35px;
+  left: 35px;
+  z-index: 50;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 20px var(--glass-shadow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.home-btn-float:hover {
+  background: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 4px 25px rgba(91,156,246,0.3);
+  transform: translateY(-2px);
+  color: #0077ff;
+}
 
