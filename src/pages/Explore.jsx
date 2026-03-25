@@ -1,4 +1,5 @@
 import { useState, Suspense, useRef, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { Canvas, useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import { OrbitControls, Environment, Stars } from '@react-three/drei'

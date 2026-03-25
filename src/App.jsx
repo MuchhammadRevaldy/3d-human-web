@@ -6,6 +6,7 @@ import About from './pages/About'
 import Content from './pages/Content'
 import Contact from './pages/Contact'
 import Explore from './pages/Explore'
+import Article from './pages/Article'
 
 function AnimatedRoutes() {
   const location = useLocation()
@@ -18,6 +19,7 @@ function AnimatedRoutes() {
         <Route path="/content" element={<Content />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/explore" element={<Explore />} />
+        <Route path="/article/:id" element={<Article />} />
       </Routes>
     </AnimatePresence>
   )

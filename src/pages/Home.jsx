@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Environment, Float } from '@react-three/drei';
@@ -8,6 +8,8 @@ import ParticleBg from '../components/ParticleBg';
 import '../index.css';
 
 export default function Home() {
+  const [modelSex, setModelSex] = useState('female');
+
   return (
     <PageTransition>
       <div className="home-scroll-page">
@@ -62,7 +64,7 @@ export default function Home() {
                     
                     <Float speed={2} rotationIntensity={0.2} floatIntensity={0.5}>
                       <group position={[0, -0.6, 0]}>
-                        <BodyModel sex="female" />
+                        <BodyModel sex={modelSex} />
                       </group>
                     </Float>
                     
@@ -77,7 +79,21 @@ export default function Home() {
                   </Suspense>
                 </Canvas>
                 
-                <div className="preview-glass-overlay">
+                <div className="preview-glass-overlay" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '15px' }}>
+                  <div className="gender-toggle-container">
+                    <button 
+                      className={`gender-btn ${modelSex === 'male' ? 'active' : ''}`}
+                      onClick={() => setModelSex('male')}
+                    >
+                      Male
+                    </button>
+                    <button 
+                      className={`gender-btn ${modelSex === 'female' ? 'active' : ''}`}
+                      onClick={() => setModelSex('female')}
+                    >
+                      Female
+                    </button>
+                  </div>
                   <div className="glass-indicator">
                     <div className="indicator-dot"></div> Live 3D Render
                   </div>
@@ -86,6 +102,42 @@ export default function Home() {
             </div>
           </div>
         </div>
+
+        <style>{`
+          .gender-toggle-container {
+            display: flex;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 30px;
+            padding: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+            z-index: 20;
+          }
+          
+          .gender-btn {
+            background: transparent;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 26px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #4a5a7a;
+            cursor: pointer;
+            transition: all 0.3s ease;
+          }
+          
+          .gender-btn:hover {
+            color: #1a1a3a;
+          }
+          
+          .gender-btn.active {
+            background: #ffffff;
+            color: #0077ff;
+            box-shadow: 0 4px 12px rgba(0, 119, 255, 0.15);
+          }
+        `}</style>
 
         {/* FEATURES SECTION */}
         <section className="discover-section">

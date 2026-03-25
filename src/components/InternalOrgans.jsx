@@ -98,6 +98,12 @@ export default function InternalOrgans({ models, categories, activeCategoryId, h
     
     const visibleIds = new Set()
     
+    // Tampilkan semua organ di 3D model jika tidak ada yang dipilih/difilter
+    if (!activeCat && !hoveredCat) {
+      models.forEach(m => visibleIds.add(m.id))
+      return visibleIds
+    }
+    
     if (activeCat && activeCat.shows) activeCat.shows.forEach(id => visibleIds.add(id))
     if (hoveredCat && hoveredCat.shows) hoveredCat.shows.forEach(id => visibleIds.add(id))
     return visibleIds
