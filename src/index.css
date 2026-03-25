@@ -2245,7 +2245,8 @@ body,
 
   .scroll-content-wrapper {
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(240, 245, 255, 0.15) 100%);
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(4px); /* Dikurangi blurnya agar organ tetap tajam */
+    -webkit-backdrop-filter: blur(4px);
     border-radius: 40px 40px 0 0;
     padding: 30px 24px 100px 24px;
     min-height: 100vh;

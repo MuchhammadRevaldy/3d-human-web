@@ -233,7 +233,7 @@ export default function SubHotspotInfoView({ subHotspotId, categoryData, onClose
             ) : subData.id === 'oxi' ? (
               <OxidativeStressPanel activeVideo={activeVideo} onGoToOverview={() => setShowOverview(true)} />
             ) : subData.id === 'cardio' ? (
-              activeCardioTab === 'endothelial' ? <CardioEndothelialPanel activeVideo={activeVideo} onGoToOverview={() => setShowOverview(true)} /> : <CardioMetabolicPanel activeVideo={activeVideo} onGoToOverview={() => setShowOverview(true)} />
+              activeCardioTab === 'endothelial' ? <CardioEndothelialPanel activeVideo={activeVideo} onGoToOverview={() => setActiveCardioTab('metabolic')} /> : <CardioMetabolicPanel activeVideo={activeVideo} onGoToOverview={() => setShowOverview(true)} />
             ) : subData.id === 'gutzoomer' ? (
               activeGutTab === 'permeability' ? <GutPermeabilityPanel activeVideo={activeVideo} onGoToOverview={() => setShowOverview(true)} /> : <GutEstrogenPanel activeVideo={activeVideo} onGoToOverview={() => setShowOverview(true)} />
             ) : (

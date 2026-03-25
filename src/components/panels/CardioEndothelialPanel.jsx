@@ -155,7 +155,7 @@ export default function CardioEndothelialPanel({ onGoToOverview, activeVideo }) 
         <div className="next-button-container" onClick={onGoToOverview}>
           <div className="next-content">
             <span className="next-label">NEXT</span>
-            <span className="next-title">Cardio Zoomer Assessment</span>
+            <span className="next-title">The Metabolic Syndrome</span>
           </div>
           <div className="next-arrow-btn">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
