@@ -1,6 +1,7 @@
 import React from 'react';
+import MobileInlineVideo from '../MobileInlineVideo';
 
-export default function GutEstrogenPanel({ onGoToOverview }) {
+export default function GutEstrogenPanel({ onGoToOverview, activeVideo }) {
   return (
     <>
       <h1 className="panel-title">
@@ -16,6 +17,7 @@ export default function GutEstrogenPanel({ onGoToOverview }) {
         <p>Rebecca, a 44-year-old marketing director, presented with heavy menstrual bleeding, breast tenderness, mood swings, and weight gain despite hormone replacement therapy.</p>
         <p>Her comprehensive gut and hormone testing revealed impaired estrogen clearance due to dysbiotic gut bacteria.</p>
         
+        <MobileInlineVideo activeVideo={activeVideo} />
         <div className="section-header" style={{marginTop: '48px'}}>
           <span className="section-icon">∴</span> 
           <h3>Key Biomarkers Working Together</h3>

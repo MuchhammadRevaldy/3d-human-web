@@ -1,6 +1,7 @@
 import React from 'react';
+import MobileInlineVideo from '../MobileInlineVideo';
 
-export default function NeurotransmitterOverviewPanel() {
+export default function NeurotransmitterOverviewPanel({ activeVideo }) {
   return (
     <>
       <h1 className="panel-title">
@@ -29,6 +30,7 @@ export default function NeurotransmitterOverviewPanel() {
           <li>Addiction or compulsive behaviors</li>
         </ul>
 
+        <MobileInlineVideo activeVideo={activeVideo} />
         <div className="section-header" style={{marginTop: '48px'}}>
           <span className="section-icon">∴</span> 
           <h3>Key Highlight Markers</h3>

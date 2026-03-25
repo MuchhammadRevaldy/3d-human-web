@@ -1,6 +1,7 @@
 import React from 'react';
+import MobileInlineVideo from '../MobileInlineVideo';
 
-export default function GutPermeabilityPanel({ onGoToOverview }) {
+export default function GutPermeabilityPanel({ onGoToOverview, activeVideo }) {
   return (
     <>
       <h1 className="panel-title">
@@ -21,6 +22,7 @@ export default function GutPermeabilityPanel({ onGoToOverview }) {
         
         <p>Her Gut Zoomer revealed a clear pattern of compromised intestinal barrier function.</p>
         
+        <MobileInlineVideo activeVideo={activeVideo} />
         <div className="section-header" style={{marginTop: '48px'}}>
           <span className="section-icon">∴</span> 
           <h3>Key Biomarkers Working Together</h3>

@@ -1,6 +1,7 @@
 import React from 'react';
+import MobileInlineVideo from '../MobileInlineVideo';
 
-export default function NeurotransmitterPanel({ onGoToOverview }) {
+export default function NeurotransmitterPanel({ onGoToOverview, activeVideo }) {
   return (
     <>
       <h1 className="panel-title">
@@ -20,6 +21,7 @@ export default function NeurotransmitterPanel({ onGoToOverview }) {
         <p>Sarah, a 32-year-old marketing executive, began experiencing persistent low mood, difficulty concentrating during meetings, and disrupted sleep patterns.</p>
         <p>She noticed increased anxiety before presentations and found herself relying more heavily on caffeine to maintain focus throughout the day.</p>
 
+        <MobileInlineVideo activeVideo={activeVideo} />
         <div className="section-header" style={{marginTop: '48px'}}>
           <span className="section-icon">∴</span> 
           <h3>Key Biomarkers Working Together</h3>

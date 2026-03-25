@@ -97,7 +97,7 @@ export default function SubHotspotInfoView({ subHotspotId, categoryData, onClose
     <div className="sub-info-overlay">
       
       <button className="sub-info-back-btn" onClick={onClose} aria-label="Back">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1a1a3a" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
           <polyline points="15 18 9 12 15 6"></polyline>
         </svg>
       </button>
@@ -190,7 +190,7 @@ export default function SubHotspotInfoView({ subHotspotId, categoryData, onClose
       </div>
 
       {activeVideo && (
-        <div className="oxi-video-position-wrapper" ref={wrapperRef}>
+        <div className="oxi-video-position-wrapper desktop-only" ref={wrapperRef}>
           <div className="oxi-video-container" ref={videoRef}>
             <video 
               ref={videoElementRef}
@@ -217,26 +217,26 @@ export default function SubHotspotInfoView({ subHotspotId, categoryData, onClose
         <div className="panel-scroll-area" ref={scrollerRef}>
           <div className="scroll-content-wrapper" ref={contentRef}>
             {showOverview ? (
-              subData.id === 'neural' ? <NeuralOverviewPanel /> :
-              subData.id === 'neurotrans' ? <NeurotransmitterOverviewPanel /> :
-              subData.id === 'hormone_z' ? <HormoneOverviewPanel /> :
-              subData.id === 'cardio' ? <CardioOverviewPanel /> :
-              subData.id === 'toxins_panel' ? <ToxinsOverviewPanel /> :
+              subData.id === 'neural' ? <NeuralOverviewPanel activeVideo={activeVideo} /> :
+              subData.id === 'neurotrans' ? <NeurotransmitterOverviewPanel activeVideo={activeVideo} /> :
+              subData.id === 'hormone_z' ? <HormoneOverviewPanel activeVideo={activeVideo} /> :
+              subData.id === 'cardio' ? <CardioOverviewPanel activeVideo={activeVideo} /> :
+              subData.id === 'toxins_panel' ? <ToxinsOverviewPanel activeVideo={activeVideo} /> :
               <div style={{padding: '40px', fontFamily: 'Inter', fontSize: '18px', color: '#1a1a3a'}}>Test overview coming soon...</div>
             ) : subData.id === 'neurotrans' ? (
-              <NeurotransmitterPanel onGoToOverview={() => setShowOverview(true)} />
+              <NeurotransmitterPanel activeVideo={activeVideo} onGoToOverview={() => setShowOverview(true)} />
             ) : subData.id === 'hormone_z' ? (
-              <HormonePanel onGoToOverview={() => setShowOverview(true)} />
+              <HormonePanel activeVideo={activeVideo} onGoToOverview={() => setShowOverview(true)} />
             ) : subData.id === 'toxins_panel' ? (
-              <ToxinsPanel onGoToOverview={() => setShowOverview(true)} />
+              <ToxinsPanel activeVideo={activeVideo} onGoToOverview={() => setShowOverview(true)} />
             ) : subData.id === 'oxi' ? (
-              <OxidativeStressPanel onGoToOverview={() => setShowOverview(true)} />
+              <OxidativeStressPanel activeVideo={activeVideo} onGoToOverview={() => setShowOverview(true)} />
             ) : subData.id === 'cardio' ? (
-              activeCardioTab === 'endothelial' ? <CardioEndothelialPanel onGoToOverview={() => setShowOverview(true)} /> : <CardioMetabolicPanel onGoToOverview={() => setShowOverview(true)} />
+              activeCardioTab === 'endothelial' ? <CardioEndothelialPanel activeVideo={activeVideo} onGoToOverview={() => setShowOverview(true)} /> : <CardioMetabolicPanel activeVideo={activeVideo} onGoToOverview={() => setShowOverview(true)} />
             ) : subData.id === 'gutzoomer' ? (
-              activeGutTab === 'permeability' ? <GutPermeabilityPanel onGoToOverview={() => setShowOverview(true)} /> : <GutEstrogenPanel onGoToOverview={() => setShowOverview(true)} />
+              activeGutTab === 'permeability' ? <GutPermeabilityPanel activeVideo={activeVideo} onGoToOverview={() => setShowOverview(true)} /> : <GutEstrogenPanel activeVideo={activeVideo} onGoToOverview={() => setShowOverview(true)} />
             ) : (
-              <MildDemyelinationPanel onGoToOverview={() => setShowOverview(true)} />
+              <MildDemyelinationPanel activeVideo={activeVideo} onGoToOverview={() => setShowOverview(true)} />
             )}
           </div>
         </div>

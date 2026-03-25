@@ -1,6 +1,7 @@
 import React from 'react';
+import MobileInlineVideo from '../MobileInlineVideo';
 
-export default function ToxinsPanel({ onGoToOverview }) {
+export default function ToxinsPanel({ onGoToOverview, activeVideo }) {
   return (
     <>
       <h1 className="panel-title">
@@ -17,6 +18,7 @@ export default function ToxinsPanel({ onGoToOverview }) {
         <p>Despite a "healthy" lifestyle, her history of living in an older home with potential mold exposure and using plastic containers raised concerns.</p>
         <p>Advanced toxin testing revealed elevated total tox burden with multiple exposures:</p>
 
+        <MobileInlineVideo activeVideo={activeVideo} />
         <div className="section-header" style={{marginTop: '48px'}}>
           <span className="section-icon">∴</span> 
           <h3>Key Biomarkers Working Together</h3>

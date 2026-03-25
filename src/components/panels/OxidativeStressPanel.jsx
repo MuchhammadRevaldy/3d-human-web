@@ -1,6 +1,7 @@
 import React from 'react';
+import MobileInlineVideo from '../MobileInlineVideo';
 
-export default function OxidativeStressPanel({ onGoToOverview }) {
+export default function OxidativeStressPanel({ onGoToOverview, activeVideo }) {
   return (
     <>
       <h1 className="panel-title">
@@ -17,6 +18,7 @@ export default function OxidativeStressPanel({ onGoToOverview }) {
         
         <p>He had difficulty concentrating at work, muscle aches after minimal exercise, and felt “aged beyond his years” despite normal routine blood tests:</p>
         
+        <MobileInlineVideo activeVideo={activeVideo} />
         <div className="section-header" style={{marginTop: '48px'}}>
           <span className="section-icon">∴</span> 
           <h3>Key Biomarkers Working Together</h3>

@@ -1,6 +1,7 @@
 import React from 'react';
+import MobileInlineVideo from '../MobileInlineVideo';
 
-export default function NeuralOverviewPanel() {
+export default function NeuralOverviewPanel({ activeVideo }) {
   return (
     <>
       <h1 className="panel-title">
@@ -27,6 +28,7 @@ export default function NeuralOverviewPanel() {
           <li>Family history of Alzheimer's, Parkinson's, or Multiple Sclerosis</li>
         </ul>
 
+        <MobileInlineVideo activeVideo={activeVideo} />
         <div className="section-header" style={{marginTop: '48px'}}>
           <span className="section-icon">∴</span> 
           <h3>Key Highlight Markers</h3>

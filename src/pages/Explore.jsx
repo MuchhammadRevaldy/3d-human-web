@@ -501,16 +501,20 @@ export default function Explore() {
       {/* Main Glass Bottom Bar */}
       <div className={`bottom-bar-container ${activeOrgan && !activeSubHotspot ? 'visible' : ''}`}>
         <div className="bottom-bar-glass">
+          <button className="nav-action-btn solid mobile-only" onClick={handlePrev}>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+
           <div className="active-pill-solid">
             {activeOrgan && (
               <>
-                <span className="icon">{CATEGORIES[activeIndex].icon}</span>
-                <span className="label">{CATEGORIES[activeIndex].label}</span>
+                <span className="icon desktop-only">{CATEGORIES[activeIndex].icon}</span>
+                <span className="label mobile-text-center">{CATEGORIES[activeIndex].label}</span>
               </>
             )}
           </div>
 
-          <div className="nav-controls">
+          <div className="nav-controls desktop-only">
             <div className="nav-btn-wrapper">
               <div className="nav-tooltip">
                 <span className="tooltip-sub">PREV</span>
@@ -530,6 +534,10 @@ export default function Explore() {
               </button>
             </div>
           </div>
+
+          <button className="nav-action-btn solid mobile-only" onClick={handleNext}>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
         </div>
       </div>
 

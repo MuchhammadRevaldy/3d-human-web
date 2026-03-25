@@ -1,6 +1,7 @@
 import React from 'react';
+import MobileInlineVideo from '../MobileInlineVideo';
 
-export default function CardioEndothelialPanel({ onGoToOverview }) {
+export default function CardioEndothelialPanel({ onGoToOverview, activeVideo }) {
   return (
     <>
       <h1 className="panel-title">
@@ -20,6 +21,7 @@ export default function CardioEndothelialPanel({ onGoToOverview }) {
         <p>Michael, a 45-year-old financial advisor, presented with elevated blood pressure readings during routine checkups and occasional chest tightness during strenuous exercise.</p>
         <p>His family history included early cardiovascular disease, and recent stress tests showed borderline abnormal results with reduced exercise tolerance.</p>
 
+        <MobileInlineVideo activeVideo={activeVideo} />
         <div className="section-header" style={{marginTop: '48px'}}>
           <span className="section-icon">∴</span> 
           <h3>Key Biomarkers Working Together</h3>

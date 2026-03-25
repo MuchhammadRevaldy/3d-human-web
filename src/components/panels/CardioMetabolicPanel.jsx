@@ -1,6 +1,7 @@
 import React from 'react';
+import MobileInlineVideo from '../MobileInlineVideo';
 
-export default function CardioMetabolicPanel({ onGoToOverview }) {
+export default function CardioMetabolicPanel({ onGoToOverview, activeVideo }) {
   return (
     <>
       <h1 className="panel-title">
@@ -16,6 +17,7 @@ export default function CardioMetabolicPanel({ onGoToOverview }) {
         <p>Thomas, a 52-year-old executive, presented with central obesity, hypertension, and family history of early cardiovascular disease.</p>
         <p>Despite “normal” total cholesterol, his advanced lipid testing revealed atherogenic dyslipidemia with oxidative stress:</p>
         
+        <MobileInlineVideo activeVideo={activeVideo} />
         <div className="section-header" style={{marginTop: '48px'}}>
           <span className="section-icon">∴</span> 
           <h3>Key Biomarkers Working Together</h3>

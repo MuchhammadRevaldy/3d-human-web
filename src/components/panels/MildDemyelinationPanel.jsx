@@ -1,6 +1,7 @@
 import React from 'react';
+import MobileInlineVideo from '../MobileInlineVideo';
 
-export default function MildDemyelinationPanel({ onGoToOverview }) {
+export default function MildDemyelinationPanel({ onGoToOverview, activeVideo }) {
   return (
     <>
       <h1 className="panel-title">
@@ -15,6 +16,7 @@ export default function MildDemyelinationPanel({ onGoToOverview }) {
 
         <p>Rachel, a 38-year-old nurse, noticed occasional difficulty finding words during patient handoffs and mild fatigue that worsened throughout her shifts.</p>
         <p>She experienced subtle coordination issues and brief episodes of visual blurring that resolved within minutes.</p>
+        <MobileInlineVideo activeVideo={activeVideo} />
         <div className="section-header" style={{marginTop: '48px'}}>
           <span className="section-icon">∴</span> 
           <h3>Key Biomarkers Working Together</h3>

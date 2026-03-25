@@ -1,6 +1,7 @@
 import React from 'react';
+import MobileInlineVideo from '../MobileInlineVideo';
 
-export default function HormonePanel({ onGoToOverview }) {
+export default function HormonePanel({ onGoToOverview, activeVideo }) {
   return (
     <>
       <h1 className="panel-title">
@@ -16,6 +17,7 @@ export default function HormonePanel({ onGoToOverview }) {
         <p>Margaret, a 56-year-old teacher, experienced her last menstrual period 18 months ago and recently noticed height loss and back pain.</p>
         <p>Her recent DEXA scan showed early osteopenia, and she was concerned about her family history of hip fractures:</p>
         
+        <MobileInlineVideo activeVideo={activeVideo} />
         <div className="section-header" style={{marginTop: '48px'}}>
           <span className="section-icon">∴</span> 
           <h3>Key Biomarkers Working Together</h3>
