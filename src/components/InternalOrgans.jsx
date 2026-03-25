@@ -33,17 +33,21 @@ function InternalOrganMesh({ organ, isVisible, isActive }) {
     transparent: true,
     opacity: 0.9,
     transmission: 0.2,
+    envMapIntensity: 1.0,
+    depthWrite: true,
   }), [organ])
 
   const inactiveParams = useMemo(() => ({
-    color: new THREE.Color('#4466aa'),
-    emissive: new THREE.Color('#223388'),
+    color: new THREE.Color('#050a15'), // Near-black / dark blue
+    emissive: new THREE.Color('#000000'), // No glow
     emissiveIntensity: 0.0,
-    roughness: 0.4,
-    metalness: 0.3,
+    roughness: 0.8, // Rough so it doesn't reflect sharp light
+    metalness: 0.0, // No metal reflection
     transparent: true,
-    opacity: 0.0,
+    opacity: 0.05, // High transparency (virtually invisible)
     transmission: 0.0,
+    envMapIntensity: 0.1, // Prevent studio lights from blowing it out
+    depthWrite: false, // Prevent depth sorting artifacts with outer mesh
   }), [])
 
   const materialRef = useRef(new THREE.MeshPhysicalMaterial(
@@ -72,6 +76,12 @@ function InternalOrganMesh({ organ, isVisible, isActive }) {
     materialRef.current.emissiveIntensity = THREE.MathUtils.lerp(materialRef.current.emissiveIntensity, dynamicEmissiveIntensity, speed)
     materialRef.current.opacity = THREE.MathUtils.lerp(materialRef.current.opacity, targetParams.opacity, speed)
     materialRef.current.transmission = THREE.MathUtils.lerp(materialRef.current.transmission, targetParams.transmission, speed)
+    
+    // Smoothly fade out reflections for inactive organs
+    materialRef.current.envMapIntensity = THREE.MathUtils.lerp(materialRef.current.envMapIntensity || 0, targetParams.envMapIntensity, speed)
+    
+    // Toggle depthWrite directly (cannot interpolate boolean)
+    materialRef.current.depthWrite = isVisible
 
     // Ensure scale stays strictly uniform (removed physical balloon-like mesh expansion)
     if (ref.current) {
