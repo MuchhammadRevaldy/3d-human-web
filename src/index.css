@@ -2257,7 +2257,7 @@ body,
   }
 
   .scroll-content-wrapper {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(240, 245, 255, 0.15) 100%);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(240, 245, 255, 0.55) 100%);
     backdrop-filter: blur(4px);
     /* Dikurangi blurnya agar organ tetap tajam */
     -webkit-backdrop-filter: blur(4px);
