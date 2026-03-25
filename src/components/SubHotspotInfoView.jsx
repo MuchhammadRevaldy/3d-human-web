@@ -1,6 +1,16 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import MildDemyelinationPanel from './panels/MildDemyelinationPanel'
+import NeurotransmitterPanel from './panels/NeurotransmitterPanel'
+import HormonePanel from './panels/HormonePanel'
+import CardioEndothelialPanel from './panels/CardioEndothelialPanel'
+import CardioMetabolicPanel from './panels/CardioMetabolicPanel'
+import ToxinsPanel from './panels/ToxinsPanel'
+import GutPermeabilityPanel from './panels/GutPermeabilityPanel'
+import GutEstrogenPanel from './panels/GutEstrogenPanel'
+import OxidativeStressPanel from './panels/OxidativeStressPanel'
+import NeuralOverviewPanel from './panels/NeuralOverviewPanel'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -18,13 +28,21 @@ const VIDEO_MAP = {
 export default function SubHotspotInfoView({ subHotspotId, categoryData, onClose }) {
   const subData = categoryData?.subHotspots?.find(s => s.id === subHotspotId) || {}
   const activeVideo = VIDEO_MAP[subData.id]
-  
   const videoRef = useRef(null)
   const videoElementRef = useRef(null)
   const wrapperRef = useRef(null)
   const labelRef = useRef(null)
   const scrollerRef = useRef(null)
   const contentRef = useRef(null)
+  const [activeCardioTab, setActiveCardioTab] = useState('endothelial')
+  const [activeGutTab, setActiveGutTab] = useState('permeability')
+  const [showOverview, setShowOverview] = useState(false)
+
+  useEffect(() => {
+    setActiveCardioTab('endothelial')
+    setActiveGutTab('permeability')
+    setShowOverview(false)
+  }, [subHotspotId])
 
   // Explicit Video Loader to aggressively bypass Browser AutoPlay safety blocks
   useEffect(() => {
@@ -81,10 +99,89 @@ export default function SubHotspotInfoView({ subHotspotId, categoryData, onClose
       </button>
 
       <div className="sub-info-top-navbar">
-        <div className="nav-pill-container">
-          <span className="nav-subtitle">{subData.label}:</span>
-          <div className="nav-active-btn">Test Overview</div>
-        </div>
+        {subData.id === 'cardio' ? (
+          <div className="nav-pill-container">
+            <span className="nav-subtitle">Cardio Zoomer:</span>
+            {showOverview ? (
+              <>
+                <span className="nav-inactive-btn" onClick={() => setShowOverview(false)} style={{cursor: 'pointer'}}>
+                  {activeCardioTab === 'endothelial' ? 'The Endothelial Dysfunction' : 'The Metabolic Syndrome'}
+                </span>
+                <div className="nav-active-btn">Test Overview</div>
+              </>
+            ) : activeCardioTab === 'endothelial' ? (
+              <>
+                <div className="nav-active-btn">The Endothelial Dysfunction</div>
+                <span className="nav-inactive-btn" onClick={() => setActiveCardioTab('metabolic')} style={{cursor: 'pointer'}}>The Metabolic Syndrome</span>
+                <span className="nav-inactive-btn" onClick={() => setShowOverview(true)} style={{cursor: 'pointer'}}>Test Overview</span>
+              </>
+            ) : (
+              <>
+                <span className="nav-inactive-btn" onClick={() => setActiveCardioTab('endothelial')} style={{cursor: 'pointer'}}>The Endothelial Dysfunction</span>
+                <div className="nav-active-btn">The Metabolic Syndrome</div>
+                <span className="nav-inactive-btn" onClick={() => setShowOverview(true)} style={{cursor: 'pointer'}}>Test Overview</span>
+              </>
+            )}
+          </div>
+        ) : subData.id === 'gutzoomer' ? (
+          <div className="nav-pill-container">
+            <span className="nav-subtitle">Gut Zoomer:</span>
+            {showOverview ? (
+              <>
+                <span className="nav-inactive-btn" onClick={() => setShowOverview(false)} style={{cursor: 'pointer'}}>
+                  {activeGutTab === 'permeability' ? 'The Intestinal Permeability Pattern' : 'The Estrogen Dominance'}
+                </span>
+                <div className="nav-active-btn">Test Overview</div>
+              </>
+            ) : activeGutTab === 'permeability' ? (
+              <>
+                <div className="nav-active-btn">The Intestinal Permeability Pattern</div>
+                <span className="nav-inactive-btn" onClick={() => setActiveGutTab('estrogen')} style={{cursor: 'pointer'}}>The Estrogen Dominance</span>
+                <span className="nav-inactive-btn" onClick={() => setShowOverview(true)} style={{cursor: 'pointer'}}>Test Overview</span>
+              </>
+            ) : (
+              <>
+                <span className="nav-inactive-btn" onClick={() => setActiveGutTab('permeability')} style={{cursor: 'pointer'}}>The Intestinal Permeability Pattern</span>
+                <div className="nav-active-btn">The Estrogen Dominance</div>
+                <span className="nav-inactive-btn" onClick={() => setShowOverview(true)} style={{cursor: 'pointer'}}>Test Overview</span>
+              </>
+            )}
+          </div>
+        ) : (
+          <div className="nav-pill-container">
+            <span className="nav-subtitle">
+              {subData.id === 'hormone_z' ? 'Hormone Zoomer:' : 
+               subData.id === 'toxins_panel' ? 'Tox Zoomer:' : 
+               subData.id === 'oxi' ? 'Oxi Zoomer:' : 
+               'Neural Zoomer Plus:'}
+            </span>
+            {showOverview ? (
+              <>
+                <span className="nav-inactive-btn" onClick={() => setShowOverview(false)} style={{cursor: 'pointer'}}>
+                  {subData.id === 'neurotrans' ? 'The Neurotransmitter' :
+                   subData.id === 'hormone_z' ? 'The Hormone Deficiency' :
+                   subData.id === 'toxins_panel' ? 'The Total Tox Burden' :
+                   subData.id === 'oxi' ? 'The Multi-System Oxidative Damage' :
+                   subData.id === 'neural' ? 'The Mild Demyelination' :
+                   subData.label || 'The Mild Demyelination'}
+                </span>
+                <div className="nav-active-btn">Test Overview</div>
+              </>
+            ) : (
+              <>
+                <div className="nav-active-btn">
+                  {subData.id === 'neurotrans' ? 'The Neurotransmitter' :
+                   subData.id === 'hormone_z' ? 'The Hormone Deficiency' :
+                   subData.id === 'toxins_panel' ? 'The Total Tox Burden' :
+                   subData.id === 'oxi' ? 'The Multi-System Oxidative Damage' :
+                   subData.id === 'neural' ? 'The Mild Demyelination' :
+                   subData.label || 'The Mild Demyelination'}
+                </div>
+                <span className="nav-inactive-btn" onClick={() => setShowOverview(true)} style={{cursor: 'pointer'}}>Test Overview</span>
+              </>
+            )}
+          </div>
+        )}
       </div>
 
       {activeVideo && (
@@ -114,30 +211,24 @@ export default function SubHotspotInfoView({ subHotspotId, categoryData, onClose
       <div className="sub-info-side-panel">
         <div className="panel-scroll-area" ref={scrollerRef}>
           <div className="scroll-content-wrapper" ref={contentRef}>
-            <h1 className="panel-title">
-              Comprehensive<br />
-              {subData.label} Screen —<br />
-              Deep Tissue Analysis
-            </h1>
-            
-            <div className="panel-body-text">
-              <p><strong>The {subData.label}</strong> aids in detecting early bio-markers and anomalous antigens associated with systemic {categoryData?.label?.toLowerCase()} conditions. Early detection is paramount for preventative protocols before deeper tissue damage occurs.</p>
-              
-              <p>{categoryData?.label} diseases often simmer for years before clinical diagnosis, causing preventable tissue damage and inflammation.</p>
-              
-              <p>This comprehensive panel detects immunological activity in its very early stages. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam id arcu ac urna hendrerit accumsan. Suspendisse potenti. Nam varius massa nec justo aliquet, in ullamcorper dolor fermentum.</p>
-              
-              <br/><br/><br/>
-              <h3>Section 2: Inter-Cellular Breakdown</h3>
-              <p>Scroll down to see the video scale up dynamically via GSAP ScrollTrigger. Fusce in mi felis. Aenean volutpat libero non bibendum venenatis. Curabitur quis sapien lectus.</p>
-              <br/><br/><br/><br/><br/><br/>
-              
-              <h3>Section 3: Reactive Oxygen Species (ROS)</h3>
-              <p>Continue scrolling to watch the video seamlessly scale back down to its initial size, demonstrating the peak interactive GSAP dampening effects typically found on Awwwards platforms.</p>
-              <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-              
-              <p>Aliquam ac justo vel nibh bibendum congue nec vel orci. Phasellus sed velit dapibus, aliquet mi eu, condimentum nisl. Nunc bibendum erat ut turpis finibus pharetra.</p>
-            </div>
+            {showOverview ? (
+              (subData.id === 'neural' || subData.id === 'neurotrans') ? <NeuralOverviewPanel /> : 
+              <div style={{padding: '40px', fontFamily: 'Inter', fontSize: '18px', color: '#1a1a3a'}}>Test overview coming soon...</div>
+            ) : subData.id === 'neurotrans' ? (
+              <NeurotransmitterPanel />
+            ) : subData.id === 'hormone_z' ? (
+              <HormonePanel />
+            ) : subData.id === 'toxins_panel' ? (
+              <ToxinsPanel />
+            ) : subData.id === 'oxi' ? (
+              <OxidativeStressPanel />
+            ) : subData.id === 'cardio' ? (
+              activeCardioTab === 'endothelial' ? <CardioEndothelialPanel /> : <CardioMetabolicPanel />
+            ) : subData.id === 'gutzoomer' ? (
+              activeGutTab === 'permeability' ? <GutPermeabilityPanel /> : <GutEstrogenPanel />
+            ) : (
+              <MildDemyelinationPanel />
+            )}
           </div>
         </div>
       </div>
