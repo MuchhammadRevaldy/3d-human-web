@@ -849,7 +849,7 @@ body,
   -webkit-backdrop-filter: blur(16px);
   padding: 10px 18px;
   border-radius: 40px;
-  color: #1a1a3a;
+  color: white;
   text-decoration: none;
   font-family: 'Inter', sans-serif;
   font-size: 13px;
@@ -1626,4 +1626,80 @@ body,
   justify-content: center;
   color: #1a1a3a;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* ---- SPLASH SCREEN PRELOADER ---- */
+.splash-overlay {
+  position: fixed;
+  inset: 0;
+  background: #ffffff; /* Premium white to make logo pop */
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* When exiting, delay the background fade out by 0.3s so the logo scales up visibly first */
+  transition: opacity 1.2s cubic-bezier(0.87, 0, 0.13, 1) 0.3s;
+}
+
+.splash-overlay.splash-exit {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.logo-scale-wrapper {
+  will-change: transform, opacity;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-scale-out {
+  /* Exit phase: Massive scale up to scale: 60 */
+  animation: logoScaleOut 1.5s cubic-bezier(0.87, 0, 0.13, 1) forwards;
+}
+
+.splash-logo-spin {
+  width: 140px;
+  height: auto;
+  object-fit: contain;
+  will-change: transform;
+  /* Phase 1: Infinite spin */
+  animation: logoSpin 3.5s linear infinite;
+  transform-origin: center;
+}
+
+@keyframes logoSpin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes logoScaleOut {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(70); opacity: 0; }
+}
+
+/* Floating Home Button on Explore */
+.home-btn-float {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 100;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.home-btn-float:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.08);
 }

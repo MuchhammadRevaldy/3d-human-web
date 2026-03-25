@@ -20,7 +20,7 @@ const inactiveMaterialParams = {
 function InternalOrganMesh({ organ, isVisible, isActive }) {
   const { scene } = useGLTF(organ.file)
   const ref = useRef()
-  
+
   // Clone scene so multiple instances don't share identical nested meshes
   const clonedScene = useMemo(() => scene.clone(true), [scene])
 
@@ -61,18 +61,18 @@ function InternalOrganMesh({ organ, isVisible, isActive }) {
   // Smoothly interpolate between active and inactive states
   useFrame((state, delta) => {
     const targetParams = isVisible ? activeParams : inactiveParams
-    
+
     // Pulsating Emission (Breathing Glow): Modulates inner light rhythmically without rubber-banding mesh
     const breath = (Math.sin(state.clock.elapsedTime * 2.0) + 1) / 2 // 0.0 to 1.0, slower, natural rhythm
     const dynamicEmissiveIntensity = isActive ? THREE.MathUtils.lerp(0.8, 2.5, breath) : (isVisible ? targetParams.emissiveIntensity : 0.0)
-    
+
     const speed = 0.25 // Mempercepat transisi hide/show (tadinya 0.1)
     materialRef.current.color.lerp(targetParams.color, speed)
     materialRef.current.emissive.lerp(targetParams.emissive, speed)
     materialRef.current.emissiveIntensity = THREE.MathUtils.lerp(materialRef.current.emissiveIntensity, dynamicEmissiveIntensity, speed)
     materialRef.current.opacity = THREE.MathUtils.lerp(materialRef.current.opacity, targetParams.opacity, speed)
     materialRef.current.transmission = THREE.MathUtils.lerp(materialRef.current.transmission, targetParams.transmission, speed)
-    
+
     // Ensure scale stays strictly uniform (removed physical balloon-like mesh expansion)
     if (ref.current) {
       ref.current.scale.setScalar(organ.scale)
@@ -91,19 +91,14 @@ function InternalOrganMesh({ organ, isVisible, isActive }) {
 }
 
 export default function InternalOrgans({ models, categories, activeCategoryId, hoveredCategoryId, activeSubHotspotId }) {
-  
+
   const getVisibleModelIds = () => {
     const activeCat = categories.find(c => c.id === activeCategoryId)
     const hoveredCat = categories.find(c => c.id === hoveredCategoryId)
-    
+
     const visibleIds = new Set()
-    
-    // Tampilkan semua organ di 3D model jika tidak ada yang dipilih/difilter
-    if (!activeCat && !hoveredCat) {
-      models.forEach(m => visibleIds.add(m.id))
-      return visibleIds
-    }
-    
+
+    // Default: jangan tampilkan organ apapun jika tidak ada kategori yang aktif
     if (activeCat && activeCat.shows) activeCat.shows.forEach(id => visibleIds.add(id))
     if (hoveredCat && hoveredCat.shows) hoveredCat.shows.forEach(id => visibleIds.add(id))
     return visibleIds
@@ -116,7 +111,7 @@ export default function InternalOrgans({ models, categories, activeCategoryId, h
       {models.map((model) => {
         const isVisible = visibleModels.has(model.id)
         const isActive = activeCategoryId ? visibleModels.has(model.id) : false
-        
+
         return (
           <InternalOrganMesh
             key={model.id}

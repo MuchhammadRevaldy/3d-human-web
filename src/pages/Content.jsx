@@ -62,7 +62,6 @@ function BentoCanvas({ modelClass, path, scale, position, rotation, color, emiss
 
 export default function Content() {
   const [selectedArticle, setSelectedArticle] = useState(null);
-  const [showMore, setShowMore] = useState(false);
   const navigate = useNavigate();
 
   const handleCardClick = (art) => {
@@ -258,7 +257,7 @@ export default function Content() {
         </div>
 
         <div className="bento-grid-container">
-          {articles.map((art) => (
+          {[...articles, ...extraArticles].map((art) => (
             <motion.div
               key={art.id}
               className={`bento-card ${art.bentoClass}`}
@@ -294,74 +293,6 @@ export default function Content() {
               </div>
             </motion.div>
           ))}
-        </div>
-
-        {/* See More Button – shown only when more is hidden */}
-        <div className="see-more-section">
-          <AnimatePresence>
-            {!showMore && (
-              <motion.button
-                className="see-more-btn"
-                onClick={() => setShowMore(true)}
-                whileHover={{ scale: 1.04 }}
-                whileTap={{ scale: 0.97 }}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-              >
-                <span>See More Content</span>
-                <ArrowRight size={18} style={{ transform: 'rotate(90deg)' }} />
-              </motion.button>
-            )}
-          </AnimatePresence>
-
-          <AnimatePresence>
-            {showMore && (
-              <motion.div
-                className="bento-grid-container"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 20 }}
-                transition={{ duration: 0.5, ease: 'easeOut' }}
-              >
-                {extraArticles.map((art) => (
-                  <motion.div
-                    key={art.id}
-                    className={`bento-card ${art.bentoClass}`}
-                    whileHover={{ scale: 1.015, y: -4 }}
-                    onClick={() => handleCardClick(art)}
-                  >
-                    {art.has3D && (
-                      <BentoCanvas
-                        modelClass={`canvas-layout-${art.bentoClass}`}
-                        path={art.modelPath}
-                        scale={art.modelScale}
-                        position={art.modelPos}
-                        rotation={art.modelRotation}
-                        color={art.color}
-                        emissive={art.emissive}
-                        fov={art.bentoClass === 'bento-tall' ? 60 : 45}
-                      />
-                    )}
-                    <div className="bento-card-content">
-                      <div className="bento-card-header">
-                        <div className="bento-icon-box">{art.icon}</div>
-                        <span className="bento-category" style={{ color: art.color || '#0077ff' }}>{art.category}</span>
-                      </div>
-                      <div className="bento-text-body">
-                        <h3 className="bento-title">{art.title}</h3>
-                        <p className="bento-desc">{art.shortDesc}</p>
-                      </div>
-                      <div className="bento-footer">
-                        <span className="read-more">Read Article</span>
-                        <ArrowRight size={18} />
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </motion.div>
-            )}
-          </AnimatePresence>
         </div>
 
         {/* Modal Overlay using Framer Motion */}
@@ -461,7 +392,7 @@ export default function Content() {
           .bento-grid-container {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            grid-auto-rows: 280px;
+            grid-auto-rows: 310px;
             gap: 24px;
             position: relative;
             z-index: 10;
@@ -518,7 +449,7 @@ export default function Content() {
           .bento-card-content {
             position: relative;
             z-index: 2;
-            padding: 32px;
+            padding: 28px;
             display: flex;
             flex-direction: column;
             height: 100%;
@@ -627,19 +558,19 @@ export default function Content() {
 
           .bento-desc {
             color: #4a5a7a;
-            line-height: 1.6;
+            line-height: 1.5;
             font-size: 0.95rem;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             flex: 1;
             /* Text ellipsis for small cards */
             display: -webkit-box;
-            -webkit-line-clamp: 4;
+            -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
             text-overflow: ellipsis;
           }
           .bento-hero .bento-desc {
-            -webkit-line-clamp: 6;
+            -webkit-line-clamp: 5;
             font-size: 1.05rem;
           }
 

@@ -12,6 +12,7 @@ import InternalOrgans from '../components/InternalOrgans'
 import SubHotspotInfoView from '../components/SubHotspotInfoView'
 import BubbleBg from '../components/BubbleBg'
 import CrosshairCursor from '../components/CrosshairCursor'
+import SplashScreen from '../components/SplashScreen'
 import '../index.css'
 import { useNavigate } from 'react-router-dom'
 import { Home } from 'lucide-react'
@@ -232,7 +233,7 @@ function ParallaxGroup({ isZoomed, children }) {
 
     // Goyangan parallax tipis pas layar utama Explore penuh
     const factor = 35
-    
+
     // Y inverted for natural up/down tilt, X for left/right
     const targetX = (state.pointer.y * Math.PI) / factor
     const targetY = (state.pointer.x * Math.PI) / factor
@@ -255,6 +256,18 @@ export default function Explore() {
   const [hoveredOrgan, setHoveredOrgan] = useState(null)
   const [activeSubHotspot, setActiveSubHotspot] = useState(null)
   const [loaded, setLoaded] = useState(false)
+
+  // Custom artificial delay to let user admire the splash screen
+  const [minDelayPassed, setMinDelayPassed] = useState(false)
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setMinDelayPassed(true)
+    }, 2800)
+    return () => clearTimeout(timer)
+  }, [])
+
+  const isAppReady = loaded && minDelayPassed
+
   const controlsRef = useRef()
 
   // Background Music BGM Logic (Web Audio API to bypass IDM download hijackers)
@@ -273,14 +286,14 @@ export default function Explore() {
         const response = await fetch('/models/Music.mp3')
         const arrayBuffer = await response.arrayBuffer()
         const audioBuffer = await audioCtxRef.current.decodeAudioData(arrayBuffer)
-        
+
         const sourceNode = audioCtxRef.current.createBufferSource()
         sourceNode.buffer = audioBuffer
         sourceNode.loop = true
         sourceNode.connect(audioCtxRef.current.destination)
         sourceNode.start(0)
         isMusicLoaded.current = true
-        
+
         // Start in suspended mode so we can resume explicitly
         await audioCtxRef.current.suspend()
       } catch (e) {
@@ -324,17 +337,14 @@ export default function Explore() {
 
   return (
     <div className="app-wrapper explore-page">
-      {/* Crosshair cursor – top of everything, only show when loaded */}
-      {loaded && <CrosshairCursor />}
+      {/* SplashScreen Preloader Overlay */}
+      <SplashScreen isLoading={!isAppReady} />
 
-      {/* Loading screen */}
-      <div className={`loading-screen${loaded ? ' hidden' : ''}`}>
-        <div className="loading-spinner" />
-        <div className="loading-text">Loading 3D Experience…</div>
-      </div>
+      {/* Crosshair cursor – top of everything, only show when loaded */}
+      {isAppReady && <CrosshairCursor />}
 
       {/* Animated bubble gradient background */}
-      <BubbleBg />
+      <BubbleBg showBubbles={!activeOrgan} />
 
       {/* Floating Home Button */}
       {!activeOrgan && (

@@ -11,7 +11,7 @@ const BUBBLES = Array.from({ length: 10 }, (_, i) => ({
   opacity: Math.random() * 0.35 + 0.12,   // 0.12 – 0.47
 }))
 
-export default function BubbleBg() {
+export default function BubbleBg({ showBubbles = true }) {
   const bubbles = useMemo(() => BUBBLES, [])
 
   return (
@@ -22,8 +22,8 @@ export default function BubbleBg() {
       <div className="smoke-blob blob-3" />
       <div className="smoke-blob blob-4" />
 
-      {/* ── Floating mat20.png bubbles ── */}
-      {bubbles.map((b) => (
+      {/* ── Floating mat20.png bubbles (disabled when zooming to save FPS) ── */}
+      {showBubbles && bubbles.map((b) => (
         <div
           key={b.id}
           className="floating-bubble"
