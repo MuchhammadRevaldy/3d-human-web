@@ -271,36 +271,38 @@ export default function Explore() {
   const controlsRef = useRef()
 
   // Background Music BGM Logic (Web Audio API to bypass IDM download hijackers)
-  const [isSoundOn, setIsSoundOn] = useState(false)
+  const [isSoundOn, setIsSoundOn] = useState(true)
   const audioCtxRef = useRef(null)
   const isMusicLoaded = useRef(false)
 
-  const toggleSound = async () => {
-    // Initialize Web Audio Context dynamically on first user interaction
-    if (!audioCtxRef.current) {
-      audioCtxRef.current = new (window.AudioContext || window.webkitAudioContext)()
-    }
-
-    if (!isMusicLoaded.current) {
+  // Auto-start music when app becomes ready
+  useEffect(() => {
+    if (!isAppReady) return
+    const autoPlay = async () => {
+      if (isMusicLoaded.current) return
       try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)()
+        audioCtxRef.current = ctx
         const response = await fetch('/models/Music.mp3')
         const arrayBuffer = await response.arrayBuffer()
-        const audioBuffer = await audioCtxRef.current.decodeAudioData(arrayBuffer)
-
-        const sourceNode = audioCtxRef.current.createBufferSource()
+        const audioBuffer = await ctx.decodeAudioData(arrayBuffer)
+        const sourceNode = ctx.createBufferSource()
         sourceNode.buffer = audioBuffer
         sourceNode.loop = true
-        sourceNode.connect(audioCtxRef.current.destination)
+        sourceNode.connect(ctx.destination)
         sourceNode.start(0)
         isMusicLoaded.current = true
-
-        // Start in suspended mode so we can resume explicitly
-        await audioCtxRef.current.suspend()
+        // ctx starts in 'running' state — music plays immediately
       } catch (e) {
-        console.error("Gagal memuat BGM via Web Audio API:", e)
+        console.warn("BGM autoplay failed (browser policy):", e)
+        setIsSoundOn(false)
       }
     }
+    autoPlay()
+  }, [isAppReady])
 
+  const toggleSound = async () => {
+    if (!audioCtxRef.current) return
     if (isSoundOn) {
       if (audioCtxRef.current.state === 'running') await audioCtxRef.current.suspend()
       setIsSoundOn(false)
@@ -346,13 +348,6 @@ export default function Explore() {
       {/* Animated bubble gradient background */}
       <BubbleBg showBubbles={!activeOrgan} />
 
-      {/* Floating Home Button */}
-      {!activeOrgan && (
-        <button className="home-btn-float" onClick={() => navigate('/')} title="Kembali ke Landing Page">
-          <Home size={22} strokeWidth={2.5} />
-        </button>
-      )}
-
       {/* Logo */}
       <div className="logo">
         <div className="logo-icon">
@@ -361,9 +356,18 @@ export default function Explore() {
         <div className="logo-text">Soma<span>Lab</span></div>
       </div>
 
-      {/* Sex toggle header */}
+      {/* ══ DESKTOP LAYOUT ══ */}
+
+      {/* Floating Home Button – desktop only */}
+      {!activeOrgan && (
+        <button className="home-btn-float desktop-only" onClick={() => navigate('/')} title="Kembali ke Landing Page">
+          <Home size={22} strokeWidth={2.5} />
+        </button>
+      )}
+
+      {/* Sex toggle header – desktop only */}
       {!activeSubHotspot && (
-        <div className="header explore-header">
+        <div className="header explore-header desktop-only">
           <div className="sex-toggle">
             <button className={`sex-btn${sex === 'female' ? ' active' : ''}`} onClick={() => setSex('female')}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
@@ -378,6 +382,94 @@ export default function Explore() {
               Male
             </button>
           </div>
+        </div>
+      )}
+
+      {/* Back to Body button – desktop only */}
+      <div className={`back-zoom-overlay desktop-only ${activeOrgan && !activeSubHotspot ? 'visible' : ''}`}>
+        <button className="back-zoom-btn" onClick={closeOrganZoom}>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          Back to Body
+        </button>
+      </div>
+
+      {/* Sound toggle – desktop only */}
+      <div className="footer-left desktop-only">
+        <div className="sound-toggle" onClick={toggleSound} style={{ cursor: 'pointer' }}>
+          {isSoundOn ? (
+            <div className="music-wave-container">
+              <span className="wave-bar"></span>
+              <span className="wave-bar"></span>
+              <span className="wave-bar"></span>
+              <span className="wave-bar"></span>
+              <span className="wave-bar"></span>
+            </div>
+          ) : (
+            <span className="dots">. . . . . . </span>
+          )}
+          <div className="sound-pill">SOUND {isSoundOn ? 'ON' : 'OFF'}</div>
+        </div>
+      </div>
+
+      {/* ══ MOBILE LAYOUT — Unified Control Pill ══ */}
+      {!activeSubHotspot && (
+        <div className="mobile-ctrl-pill mobile-only">
+          {/* Left icon: Back (when zoomed) or Home (when not) */}
+          {activeOrgan ? (
+            <button className="mob-icon-btn" onClick={closeOrganZoom} aria-label="Back to body">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="15 18 9 12 15 6" />
+              </svg>
+            </button>
+          ) : (
+            <button className="mob-icon-btn" onClick={() => navigate('/')} aria-label="Go home">
+              <Home size={15} strokeWidth={2.5} />
+            </button>
+          )}
+
+          {/* Divider */}
+          <div className="mob-divider" />
+
+          {/* Sex toggle — flat buttons inside the pill */}
+          <button
+            className={`mob-sex-btn${sex === 'female' ? ' active' : ''}`}
+            onClick={() => setSex('female')}
+          >
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              <circle cx="12" cy="8" r="5" /><line x1="12" y1="13" x2="12" y2="21" /><line x1="9" y1="18" x2="15" y2="18" />
+            </svg>
+            Female
+          </button>
+          <button
+            className={`mob-sex-btn${sex === 'male' ? ' active' : ''}`}
+            onClick={() => setSex('male')}
+          >
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              <circle cx="10" cy="14" r="5" /><line x1="14" y1="10" x2="21" y2="3" /><polyline points="16 3 21 3 21 8" />
+            </svg>
+            Male
+          </button>
+
+          {/* Divider */}
+          <div className="mob-divider" />
+
+          {/* Music icon */}
+          <button
+            className={`mob-icon-btn mob-music-btn ${isSoundOn ? 'music-on' : 'music-off'}`}
+            onClick={toggleSound}
+            aria-label={isSoundOn ? 'Mute music' : 'Play music'}
+          >
+            {isSoundOn ? (
+              <div className="music-wave-mini">
+                <span /><span /><span /><span />
+              </div>
+            ) : (
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="1" y1="1" x2="23" y2="23"/><path d="M9 9v3a3 3 0 0 0 5.12 2.12M15 9.34V4a3 3 0 0 0-5.94-.6"/>
+                <path d="M17 16.95A7 7 0 0 1 5 12v-2m14 0v2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/>
+              </svg>
+            )}
+          </button>
         </div>
       )}
 
@@ -469,33 +561,8 @@ export default function Explore() {
         </Canvas>
       </div>
 
-      <div className="footer-left">
-        <div className="sound-toggle" onClick={toggleSound} style={{ cursor: 'pointer' }}>
-          {isSoundOn ? (
-            <div className="music-wave-container">
-              <span className="wave-bar"></span>
-              <span className="wave-bar"></span>
-              <span className="wave-bar"></span>
-              <span className="wave-bar"></span>
-              <span className="wave-bar"></span>
-            </div>
-          ) : (
-            <span className="dots">. . . . . . </span>
-          )}
-          <div className="sound-pill">SOUND {isSoundOn ? 'ON' : 'OFF'}</div>
-        </div>
-      </div>
-
       <div className="footer-right">
         CREATED BY <strong>noomo</strong> <em>agency</em>
-      </div>
-
-      {/* Top Left Back Button when Zoomed In */}
-      <div className={`back-zoom-overlay ${activeOrgan && !activeSubHotspot ? 'visible' : ''}`}>
-        <button className="back-zoom-btn" onClick={closeOrganZoom}>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-          Back to Body
-        </button>
       </div>
 
       {/* Main Glass Bottom Bar */}

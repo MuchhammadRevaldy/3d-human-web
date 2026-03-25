@@ -97,9 +97,10 @@ export default function SubHotspotInfoView({ subHotspotId, categoryData, onClose
     <div className="sub-info-overlay">
       
       <button className="sub-info-back-btn" onClick={onClose} aria-label="Back">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
           <polyline points="15 18 9 12 15 6"></polyline>
         </svg>
+        <span className="mobile-back-text mobile-only">{subData?.label?.toUpperCase()}</span>
       </button>
 
       <div className="sub-info-top-navbar">

@@ -543,7 +543,121 @@ body,
   z-index: 1;
 }
 
-/* Footer Elements */
+/* ──────────────────────────────────────────────────────── */
+/* UNIFIED TOP-LEFT CONTROL BAR                            */
+/* ──────────────────────────────────────────────────────── */
+
+/* Wrapper row – positioned top-left, always on top */
+.top-left-bar {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  /* float above everything */
+  pointer-events: all;
+}
+
+/* Generic square icon button (home, back, music) */
+.ctrl-icon-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: #1a1a3a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+  box-shadow: 0 4px 14px rgba(0, 0, 50, 0.08);
+  flex-shrink: 0;
+}
+
+.ctrl-icon-btn:hover {
+  background: rgba(255, 255, 255, 0.55);
+  transform: scale(1.08);
+  box-shadow: 0 6px 20px rgba(0, 0, 50, 0.14);
+}
+
+/* Back button: hidden by default, slides in when zoomed */
+.back-ctrl-btn {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.8) translateX(-8px);
+  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.back-ctrl-btn.visible {
+  opacity: 1;
+  pointer-events: all;
+  transform: scale(1) translateX(0);
+}
+
+/* Sex toggle sits inline with the bar — tighten to match 40px icon button height */
+.top-left-bar .sex-toggle {
+  margin: 0;
+  padding: 4px 6px; /* reduced from 6px 8px */
+}
+
+.top-left-bar .sex-btn {
+  padding: 4px 14px; /* reduced from 7px 18px */
+  font-size: 12px;
+}
+
+/* Music button colour states */
+.music-ctrl-btn.music-on {
+  background: rgba(34, 197, 94, 0.22);
+  border-color: rgba(34, 197, 94, 0.55);
+  color: #16a34a;
+}
+
+.music-ctrl-btn.music-on:hover {
+  background: rgba(34, 197, 94, 0.38);
+}
+
+.music-ctrl-btn.music-off {
+  background: rgba(239, 68, 68, 0.18);
+  border-color: rgba(239, 68, 68, 0.45);
+  color: #dc2626;
+}
+
+.music-ctrl-btn.music-off:hover {
+  background: rgba(239, 68, 68, 0.32);
+}
+
+/* Mini animated wave bars inside music-on button */
+.music-wave-mini {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: 16px;
+}
+
+.music-wave-mini span {
+  display: block;
+  width: 3px;
+  border-radius: 2px;
+  background: #16a34a;
+  animation: miniWave 0.9s ease-in-out infinite;
+}
+
+.music-wave-mini span:nth-child(1) { height: 6px;  animation-delay: 0s; }
+.music-wave-mini span:nth-child(2) { height: 14px; animation-delay: 0.15s; }
+.music-wave-mini span:nth-child(3) { height: 10px; animation-delay: 0.3s; }
+.music-wave-mini span:nth-child(4) { height: 6px;  animation-delay: 0.45s; }
+
+@keyframes miniWave {
+  0%, 100% { transform: scaleY(1); }
+  50%       { transform: scaleY(0.35); }
+}
+
+/* ── Desktop-only footer & home button ── */
 .footer-left {
   position: absolute;
   bottom: 40px;
@@ -574,6 +688,113 @@ body,
   padding: 6px 12px;
   border-radius: 12px;
 }
+
+/* Home button floating top-left – desktop */
+.home-btn-float {
+  position: absolute;
+  top: 28px;
+  left: 28px;
+  z-index: 50;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: #1a1a3a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.2s ease;
+  box-shadow: 0 4px 14px rgba(0, 0, 50, 0.08);
+}
+
+.home-btn-float:hover {
+  background: rgba(255, 255, 255, 0.55);
+  transform: scale(1.08);
+}
+/* ── Mobile-only unified control pill ── */
+.mobile-ctrl-pill {
+  position: absolute;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 42px;
+  background: rgba(255, 255, 255, 0.28);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 24px;
+  padding: 0 6px;
+  gap: 2px;
+  box-shadow: 0 4px 20px rgba(0, 0, 50, 0.10);
+  pointer-events: all;
+}
+
+/* Icon-only buttons inside the pill */
+.mob-icon-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: #1a1a3a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.2s ease;
+}
+.mob-icon-btn:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+/* Thin vertical divider between sections */
+.mob-divider {
+  width: 1px;
+  height: 20px;
+  background: rgba(30, 42, 74, 0.15);
+  flex-shrink: 0;
+  margin: 0 2px;
+}
+
+/* Sex selector buttons inside the pill */
+.mob-sex-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 18px;
+  background: transparent;
+  color: rgba(30, 42, 74, 0.55);
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  height: 32px;
+}
+.mob-sex-btn.active {
+  background: rgba(91, 156, 246, 0.22);
+  color: var(--text-primary);
+}
+
+/* Music colours */
+.mob-music-btn.music-on { color: #16a34a; }
+.mob-music-btn.music-off { color: #dc2626; }
+
+/* green wave bars inherit music-wave-mini styles already defined */
 
 .footer-right {
   position: absolute;
@@ -1736,6 +1957,51 @@ body,
 
 @media (max-width: 768px) {
   .desktop-only { display: none !important; }
+
+  /* ── Mobile top-left bar alignment fixes ── */
+
+  /* Logo: keep at top-right on mobile (its natural position) */
+  .logo {
+    top: 20px;
+    right: 16px;
+    left: auto;
+    transform: none;
+  }
+
+  /* Bar: fixed height so all children share the same vertical midline */
+  .top-left-bar {
+    top: 16px;
+    left: 12px;
+    height: 44px;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* Icon buttons: same fixed size */
+  .ctrl-icon-btn {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    align-self: center;
+  }
+
+  /* Sex toggle pill: constrain to fit inside 44px bar */
+  .top-left-bar .sex-toggle {
+    padding: 3px 5px;
+    height: 36px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    align-self: center;
+  }
+
+  /* Sex buttons: tighten to fit */
+  .top-left-bar .sex-btn {
+    padding: 3px 10px;
+    font-size: 11px;
+    height: auto;
+    line-height: 1;
+  }
   
   /* Sidebar Bottom Sheet */
   .sidebar {
@@ -1844,38 +2110,92 @@ body,
     margin-bottom: 24px;
   }
   
+  /* Hide custom cursor */
+  .sub-info-plus-cursor {
+    display: none !important;
+  }
+
   /* Sub Hotspot View Layouts */
   .sub-info-top-navbar {
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: auto;
-    z-index: 70;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    transform: none;
+    z-index: 100;
+    position: fixed;
   }
   .nav-pill-container {
-    padding: 6px 16px; /* slightly more padding for the pill */
-    gap: 8px;
-    background: rgba(255, 255, 255, 0.95); /* make the navbar more opaque */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    padding: 0;
+    gap: 0;
+    background: white;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 32px 32px 0 0;
+    display: flex;
+    width: 100vw;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
-  .nav-active-btn {
+  .nav-pill-container::-webkit-scrollbar {
+    display: none;
+  }
+  .nav-pill-container .nav-inactive-btn,
+  .nav-pill-container .nav-active-btn {
+    flex: 1 0 auto;
+    padding: 24px 20px;
+    border-radius: 0;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    background: transparent !important;
+    text-transform: capitalize;
+  }
+  .nav-pill-container .nav-inactive-btn {
+    color: #8c95a6;
+    opacity: 1; /* override desktop opacity */
+  }
+  .nav-pill-container .nav-active-btn {
     color: #1a1a3a;
-    background: transparent;
-    box-shadow: none;
+    position: relative;
     font-weight: 700;
   }
-  .nav-inactive-btn {
-    opacity: 0.5;
+  .nav-pill-container .nav-active-btn::after {
+    content: '';
+    position: absolute;
+    bottom: 12px;
+    left: 20%;
+    right: 20%;
+    height: 3px;
+    background: #0077ff;
+    border-radius: 3px;
   }
   .nav-subtitle {
-    display: none; /* Hide subtitle to match the "TOXINS PANEL" image */
+    display: none; 
   }
+  
+  /* Top Fixed Back Button */
   .sub-info-back-btn {
     top: 20px;
     left: 20px;
-    width: 42px;
+    width: auto;
     height: 42px;
-    z-index: 70;
+    padding: 0 20px 0 12px;
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    z-index: 90;
+    position: fixed;
+  }
+  .mobile-back-text {
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    color: #1a1a3a;
   }
   .oxi-video-position-wrapper {
     top: 20%;
@@ -1897,11 +2217,20 @@ body,
     right: 20px;
   }
   .sex-toggle {
-    margin-top: 70px;
+    top: 65px !important;
+    right: 115px !important;
+    margin-top: 25px !important;
+    z-index: 50;
   }
   .footer-left {
-    bottom: 25px;
-    left: 25px;
+    top: 70px;
+    right: 20px;
+    bottom: auto;
+    left: auto;
+    z-index: 50;
+  }
+  .sound-toggle {
+    align-items: flex-end;
   }
   .footer-right {
     display: none; /* Hide on mobile to save space */
