@@ -233,6 +233,60 @@ export default function App() {
   const [loaded, setLoaded] = useState(false)
   const controlsRef = useRef()
 
+  // Background Music BGM Logic (Web Audio API to bypass IDM download hijackers)
+  const [isSoundOn, setIsSoundOn] = useState(false)
+  const audioCtxRef = useRef(null)
+  const isMusicLoaded = useRef(false)
+
+  const toggleSound = async () => {
+    // Initialize Web Audio Context dynamically on first user interaction
+    if (!audioCtxRef.current) {
+      audioCtxRef.current = new (window.AudioContext || window.webkitAudioContext)()
+    }
+
+    if (!isMusicLoaded.current) {
+      try {
+        const response = await fetch('/models/Music.mp3')
+        const arrayBuffer = await response.arrayBuffer()
+        const audioBuffer = await audioCtxRef.current.decodeAudioData(arrayBuffer)
+        
+        const sourceNode = audioCtxRef.current.createBufferSource()
+        sourceNode.buffer = audioBuffer
+        sourceNode.loop = true
+        sourceNode.connect(audioCtxRef.current.destination)
+        sourceNode.start(0)
+        isMusicLoaded.current = true
+        
+        // Start in suspended mode so we can resume explicitly
+        await audioCtxRef.current.suspend()
+      } catch (e) {
+        console.error("Gagal memuat BGM via Web Audio API:", e)
+      }
+    }
+
+    if (isSoundOn) {
+      if (audioCtxRef.current.state === 'running') await audioCtxRef.current.suspend()
+      setIsSoundOn(false)
+    } else {
+      if (audioCtxRef.current.state === 'suspended') await audioCtxRef.current.resume()
+      setIsSoundOn(true)
+    }
+  }
+
+  // Handle Tab Switch (Pause Audio strictly via AudioContext suspension)
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (!audioCtxRef.current || !isMusicLoaded.current) return
+      if (document.hidden) {
+        audioCtxRef.current.suspend()
+      } else if (isSoundOn) {
+        audioCtxRef.current.resume()
+      }
+    }
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange)
+  }, [isSoundOn])
+
   // Navigation Logic
   const activeIndex = activeOrgan ? CATEGORIES.findIndex(c => c.id === activeOrgan) : -1
   const prevCat = activeIndex <= 0 ? CATEGORIES[CATEGORIES.length - 1] : CATEGORIES[activeIndex - 1]
@@ -376,9 +430,19 @@ export default function App() {
       </div>
 
       <div className="footer-left">
-        <div className="sound-toggle">
-          <span className="dots">. . . . . . </span>
-          <div className="sound-pill">SOUND OFF</div>
+        <div className="sound-toggle" onClick={toggleSound} style={{ cursor: 'pointer' }}>
+          {isSoundOn ? (
+            <div className="music-wave-container">
+              <span className="wave-bar"></span>
+              <span className="wave-bar"></span>
+              <span className="wave-bar"></span>
+              <span className="wave-bar"></span>
+              <span className="wave-bar"></span>
+            </div>
+          ) : (
+            <span className="dots">. . . . . . </span>
+          )}
+          <div className="sound-pill">SOUND {isSoundOn ? 'ON' : 'OFF'}</div>
         </div>
       </div>
 
