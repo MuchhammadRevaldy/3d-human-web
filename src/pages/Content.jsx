@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Heart, Brain, Wind, Activity, X, Droplet, ShieldCheck, ArrowRight } from 'lucide-react';
 import PageTransition from '../components/PageTransition';
+import Footer from '../components/Footer';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Environment, Float, useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
@@ -12,7 +13,7 @@ function CardModel({ path, scale, position, rotation, color, emissive }) {
   const { scene } = useGLTF(path)
   const ref = useRef()
   const cloned = useMemo(() => scene.clone(true), [scene])
-  
+
   useMemo(() => {
     cloned.traverse((node) => {
       if (node.isMesh) {
@@ -31,7 +32,7 @@ function CardModel({ path, scale, position, rotation, color, emissive }) {
   }, [cloned, color, emissive])
 
   useFrame((state) => {
-    if(ref.current) {
+    if (ref.current) {
       ref.current.rotation.y = state.clock.elapsedTime * 0.4
     }
   })
@@ -61,6 +62,7 @@ function BentoCanvas({ modelClass, path, scale, position, rotation, color, emiss
 
 export default function Content() {
   const [selectedArticle, setSelectedArticle] = useState(null);
+  const [showMore, setShowMore] = useState(false);
   const navigate = useNavigate();
 
   const handleCardClick = (art) => {
@@ -82,7 +84,7 @@ export default function Content() {
       color: "#ff3366",
       emissive: "#aa0033",
       modelPath: "/models/realistic_human_heart.glb",
-      modelScale: 0.35,
+      modelScale: 0.55,
       modelPos: [0, 0, 0],
       modelRotation: [0, 0, 0],
       bgClass: "bg-rose-50",
@@ -104,7 +106,7 @@ export default function Content() {
       modelRotation: [0, 0, 0],
       bgClass: "bg-purple-50",
       bentoClass: "bento-square-small",
-      has3D: true
+      has3D: false
     },
     {
       id: 3,
@@ -138,7 +140,7 @@ export default function Content() {
       modelRotation: [0, 0, 0],
       bgClass: "bg-emerald-50",
       bentoClass: "bento-square-small",
-      has3D: true,
+      has3D: false,
       route: "/article/4"
     },
     {
@@ -151,7 +153,7 @@ export default function Content() {
       color: "#f59e0b",
       emissive: "#b45309",
       modelPath: "/models/human_liver_and_gallbladder.glb",
-      modelScale: 1.2,
+      modelScale: 4.2,
       modelPos: [0, -0.2, 0],
       modelRotation: [0, 0, 0],
       bgClass: "bg-amber-50",
@@ -174,15 +176,78 @@ export default function Content() {
       modelRotation: [0, 0, 0],
       bgClass: "bg-sky-50",
       bentoClass: "bento-wide",
-      has3D: true,
+      has3D: false,
       route: "/article/6"
+    }
+  ];
+
+  const extraArticles = [
+    {
+      id: 7,
+      title: "Respiratory Health",
+      category: "Pulmonary System",
+      icon: <Wind size={28} className="text-cyan-500" />,
+      shortDesc: "Optimize your lung capacity and oxygenation for peak energy levels and sustained vitality.",
+      content: "The lungs are responsible for oxygenating every cell in your body. Practices like diaphragmatic breathing (belly breathing) can increase lung capacity and reduce activation of the stress response. Exposure to clean air, avoiding pollutants, and regular cardio training are key. Advanced techniques like cyclic hyperventilation (Wim Hof Method) or box breathing can improve CO2 tolerance and oxygen efficiency.",
+      color: "#06b6d4",
+      emissive: "#0891b2",
+      modelPath: "/models/human-brain.glb",
+      modelScale: 0.50,
+      modelPos: [0, -0.2, 0],
+      modelRotation: [0, 0, 0],
+      bgClass: "bg-cyan-50",
+      bentoClass: "bento-hero",
+      has3D: true
+    },
+    {
+      id: 8,
+      title: "Musculoskeletal System",
+      category: "Structural Health",
+      icon: <Activity size={28} className="text-orange-500" />,
+      shortDesc: "Build a resilient framework of bones and muscles for lifelong strength and mobility.",
+      content: "Your bones and muscles form the structural foundation of your body. To maintain musculoskeletal health, prioritize resistance training (2–4x/week) which promotes bone density and combats sarcopenia (age-related muscle loss). Collagen synthesis for cartilage health depends on vitamin C and adequate protein intake. Mobility work like yoga or dynamic stretching maintains joint range of motion and prevents chronic injury.",
+      color: "#f97316",
+      emissive: "#c2410c",
+      modelPath: "/models/realistic_human_heart.glb",
+      modelScale: 0.70,
+      modelPos: [0, 0, 0],
+      modelRotation: [0, 0, 0],
+      bgClass: "bg-orange-50",
+      bentoClass: "bento-tall",
+      has3D: true
+    },
+    {
+      id: 9,
+      title: "Hormonal Balance",
+      category: "Endocrine System",
+      icon: <Brain size={28} className="text-pink-500" />,
+      shortDesc: "Regulate your body's chemical messengers to master metabolism and mood.",
+      content: "The endocrine system governs hormones—chemical messengers that control metabolism, growth, mood, and reproduction. Key lifestyle factors for hormonal balance include managing cortisol (the stress hormone) through sleep and mindfulness, maintaining healthy blood sugar to keep insulin stable, and supporting thyroid function with adequate iodine, selenium, and zinc.",
+      color: "#ec4899",
+      emissive: "#be185d",
+      bgClass: "bg-pink-50",
+      bentoClass: "bento-square-small",
+      has3D: false
+    },
+    {
+      id: 10,
+      title: "Sleep & Recovery",
+      category: "Restorative Health",
+      icon: <ShieldCheck size={28} className="text-indigo-500" />,
+      shortDesc: "Master the science of sleep for cellular repair, memory, and longevity.",
+      content: "Sleep is where the brain consolidates memories, the body repairs tissues, and the glymphatic system flushes out metabolic waste. Optimal sleep (7–9 hours) requires a consistent schedule, a dark and cool environment, and minimizing blue light exposure. Sleep deprivation is a major driver of metabolic syndrome and accelerated aging.",
+      color: "#6366f1",
+      emissive: "#4338ca",
+      bgClass: "bg-indigo-50",
+      bentoClass: "bento-square-small",
+      has3D: false
     }
   ];
 
   return (
     <PageTransition>
       <div className="content-page-container">
-        
+
         {/* Decorative Background */}
         <div className="content-bg-blob blob-a"></div>
         <div className="content-bg-blob blob-b"></div>
@@ -194,14 +259,14 @@ export default function Content() {
 
         <div className="bento-grid-container">
           {articles.map((art) => (
-            <motion.div 
-              key={art.id} 
+            <motion.div
+              key={art.id}
               className={`bento-card ${art.bentoClass}`}
               whileHover={{ scale: 1.015, y: -4 }}
               onClick={() => handleCardClick(art)}
             >
               {art.has3D && (
-                <BentoCanvas 
+                <BentoCanvas
                   modelClass={`canvas-layout-${art.bentoClass}`}
                   path={art.modelPath}
                   scale={art.modelScale}
@@ -212,7 +277,7 @@ export default function Content() {
                   fov={art.bentoClass === 'bento-tall' ? 60 : 45}
                 />
               )}
-              
+
               <div className="bento-card-content">
                 <div className="bento-card-header">
                   <div className="bento-icon-box">{art.icon}</div>
@@ -231,18 +296,86 @@ export default function Content() {
           ))}
         </div>
 
+        {/* See More Button – shown only when more is hidden */}
+        <div className="see-more-section">
+          <AnimatePresence>
+            {!showMore && (
+              <motion.button
+                className="see-more-btn"
+                onClick={() => setShowMore(true)}
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.97 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+              >
+                <span>See More Content</span>
+                <ArrowRight size={18} style={{ transform: 'rotate(90deg)' }} />
+              </motion.button>
+            )}
+          </AnimatePresence>
+
+          <AnimatePresence>
+            {showMore && (
+              <motion.div
+                className="bento-grid-container"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 20 }}
+                transition={{ duration: 0.5, ease: 'easeOut' }}
+              >
+                {extraArticles.map((art) => (
+                  <motion.div
+                    key={art.id}
+                    className={`bento-card ${art.bentoClass}`}
+                    whileHover={{ scale: 1.015, y: -4 }}
+                    onClick={() => handleCardClick(art)}
+                  >
+                    {art.has3D && (
+                      <BentoCanvas
+                        modelClass={`canvas-layout-${art.bentoClass}`}
+                        path={art.modelPath}
+                        scale={art.modelScale}
+                        position={art.modelPos}
+                        rotation={art.modelRotation}
+                        color={art.color}
+                        emissive={art.emissive}
+                        fov={art.bentoClass === 'bento-tall' ? 60 : 45}
+                      />
+                    )}
+                    <div className="bento-card-content">
+                      <div className="bento-card-header">
+                        <div className="bento-icon-box">{art.icon}</div>
+                        <span className="bento-category" style={{ color: art.color || '#0077ff' }}>{art.category}</span>
+                      </div>
+                      <div className="bento-text-body">
+                        <h3 className="bento-title">{art.title}</h3>
+                        <p className="bento-desc">{art.shortDesc}</p>
+                      </div>
+                      <div className="bento-footer">
+                        <span className="read-more">Read Article</span>
+                        <ArrowRight size={18} />
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+
         {/* Modal Overlay using Framer Motion */}
         <AnimatePresence>
           {selectedArticle && (
             <div className="modal-container">
-              <motion.div 
+              <motion.div
                 className="modal-backdrop"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 onClick={() => setSelectedArticle(null)}
               />
-              <motion.div 
+              <motion.div
                 className="article-modal"
                 initial={{ opacity: 0, y: 50, scale: 0.95 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -611,8 +744,39 @@ export default function Content() {
           .article-modal::-webkit-scrollbar { width: 6px; }
           .article-modal::-webkit-scrollbar-track { background: transparent; }
           .article-modal::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+
+          .see-more-section {
+            max-width: 1250px;
+            margin: 80px auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 60px;
+          }
+
+          .see-more-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 40px;
+            background: linear-gradient(135deg, #0077ff 0%, #00d2ff 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0, 119, 255, 0.25);
+            transition: box-shadow 0.3s ease;
+          }
+
+          .see-more-btn:hover {
+            box-shadow: 0 15px 40px rgba(0, 119, 255, 0.35);
+          }
         `}</style>
       </div>
+      <Footer />
     </PageTransition>
   );
 }

@@ -1,5 +1,6 @@
 import PageTransition from '../components/PageTransition';
 import { Eye, Target, Lightbulb, ArrowRight, Microscope, BookOpen } from 'lucide-react';
+import Footer from '../components/Footer';
 
 export default function About() {
   return (
@@ -350,6 +351,7 @@ export default function About() {
           }
         `}</style>
       </div>
+      <Footer />
     </PageTransition>
   );
 }

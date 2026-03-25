@@ -7,6 +7,8 @@ import BodyModel from '../components/BodyModel';
 import ParticleBg from '../components/ParticleBg';
 import '../index.css';
 
+import Footer from '../components/Footer';
+
 export default function Home() {
   const [modelSex, setModelSex] = useState('female');
 
@@ -167,30 +169,8 @@ export default function Home() {
           </div>
         </section>
 
-        {/* FOOTER SECTION */}
-        <footer className="home-footer">
-          <div className="footer-content">
-            <div className="footer-brand">
-              <h3>Soma<span>Lab</span></h3>
-              <p>Empowering preventative healthcare through immersive 3D clinical visualization.</p>
-            </div>
-            <div className="footer-links">
-              <div className="footer-col">
-                <h4>Platform</h4>
-                <Link to="/explore">3D Explorer</Link>
-                <Link to="/about">About Us</Link>
-              </div>
-              <div className="footer-col">
-                <h4>Resources</h4>
-                <Link to="/content">Clinical Articles</Link>
-                <Link to="/contact">Contact Support</Link>
-              </div>
-            </div>
-          </div>
-          <div className="footer-bottom">
-            <p>&copy; {new Date().getFullYear()} SomaLab. All rights reserved.</p>
-          </div>
-        </footer>
+        {/* Global Footer */}
+        <Footer />
       </div>
     </PageTransition>
   );

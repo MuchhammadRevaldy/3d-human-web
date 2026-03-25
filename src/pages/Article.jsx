@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Clock, Share2, Bookmark, Heart, Brain, Wind, Activity, Droplet, ShieldCheck } from 'lucide-react';
 import PageTransition from '../components/PageTransition';
+import Footer from '../components/Footer';
 import '../index.css';
 
 const ARTICLES_DATA = {
@@ -313,6 +314,7 @@ export default function Article() {
           }
         `}</style>
       </div>
+      <Footer />
     </PageTransition>
   )
 }

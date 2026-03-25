@@ -1,7 +1,30 @@
+import React, { useState } from 'react';
 import PageTransition from '../components/PageTransition';
+import Footer from '../components/Footer';
 import { Mail, MapPin, Phone, MessageSquare, Send } from 'lucide-react';
 
 export default function Contact() {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    message: ''
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleWhatsAppRedirect = (e) => {
+    e.preventDefault();
+    const phoneNumber = "6282387775667";
+    const text = `Halo SomaLab,\n\nNama: ${formData.firstName} ${formData.lastName}\nEmail: ${formData.email}\n\nPesan:\n${formData.message}`;
+    const encodedText = encodeURIComponent(text);
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedText}`;
+    
+    window.open(whatsappUrl, '_blank');
+  };
   return (
     <PageTransition>
       <div className="contact-page-container">
@@ -21,24 +44,24 @@ export default function Contact() {
             {/* Contact Form */}
             <div className="contact-form-card glass-panel">
               <h2 className="form-heading"><MessageSquare className="inline-icon" /> Send a Message</h2>
-              <form className="contact-form" onSubmit={(e) => e.preventDefault()}>
+              <form className="contact-form" onSubmit={handleWhatsAppRedirect}>
                 <div className="form-group-split">
                   <div className="form-group">
                     <label>First Name</label>
-                    <input type="text" placeholder="John" required />
+                    <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} placeholder="John" required />
                   </div>
                   <div className="form-group">
                     <label>Last Name</label>
-                    <input type="text" placeholder="Doe" required />
+                    <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} placeholder="Doe" required />
                   </div>
                 </div>
                 <div className="form-group">
                   <label>Email Address</label>
-                  <input type="email" placeholder="john@example.com" required />
+                  <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="john@example.com" required />
                 </div>
                 <div className="form-group">
                   <label>Message</label>
-                  <textarea rows="5" placeholder="How can we help you today?" required></textarea>
+                  <textarea name="message" rows="5" value={formData.message} onChange={handleChange} placeholder="How can we help you today?" required></textarea>
                 </div>
                 <button type="submit" className="submit-btn-premium">
                   <span>Send Message</span> <Send size={18} />
@@ -258,6 +281,7 @@ export default function Contact() {
           }
         `}</style>
       </div>
+      <Footer />
     </PageTransition>
   );
 }
