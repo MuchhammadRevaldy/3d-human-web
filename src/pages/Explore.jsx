@@ -118,7 +118,7 @@ const CATEGORIES = [
     id: 'toxins',
     label: 'Toxins',
     icon: '🧪',
-    position: [-0.07, 0.80, 0.1],
+    position: [-0.07, 0.90, 0.1],
     shows: ['liver', 'kidney'],
     mobileOffsetY: 0, // Push toxins panel up slightly
     subHotspots: [
@@ -145,6 +145,7 @@ const CATEGORIES = [
     position: [-0.50, 0.85, -0.1],
     shows: ['dna'],
     mobileOffsetX: -0.1, // Geser kamera lebih ke kiri agar DNA yang melengkung bisa pas di tengah
+    mobileOffsetY: 0.1, // Pindah fokus kamera ke bawah sedikit supaya DNA lebih ke tengah dan tidak terpotong tombol atas
     subHotspots: [
       { id: 'genetics_test', label: 'Genetics Testing Suite', position: [-0.38, 0.85, 0.0], focusOrgan: 'dna' }
     ]
@@ -154,6 +155,8 @@ const CATEGORIES = [
     label: 'Longevity',
     icon: '🧫',
     position: [0.55, 0.85, 0.0],
+    mobileOffsetX: 0, // Geser kamera lebih ke kiri agar DNA yang melengkung bisa pas di tengah
+    mobileOffsetY: 0.2,
     shows: ['cell'],
     zoomOffset: 0.25, // Diubah ke 0.25 karena pembatas minimum jarak kamera sudah di lepas
     subHotspots: [
@@ -184,13 +187,14 @@ function CameraAnimator({ activeCategoryId, activeSubHotspotId, categories, cont
         if (isMobile) {
           // Mobile: organ stays centered — no X-shift except explicit per-organ horizontal custom shifts.
           targetLook.current.set(activeData.position[0] + customOffsetX, activeData.position[1] - 0.25 + customOffsetY, activeData.position[2])
-          // Zoom in closer (1.1) so the organ looks big and clear
-          targetPos.current.set(activeData.position[0] + customOffsetX, activeData.position[1] - 0.25 + customOffsetY, activeData.position[2] + zoomZ * 1.1)
+          // Zoom in closer (1.1) so the organ looks big and clear. Keep pitch angle consistent (-0.05 * 1.1)
+          targetPos.current.set(activeData.position[0] + customOffsetX, activeData.position[1] - 0.25 + customOffsetY - 0.055, activeData.position[2] + zoomZ * 1.1)
         } else {
           const dynamicShift = 0.18 * zoomZ
           const shiftX = Math.min(Math.max(dynamicShift, 0.05), 0.20)
           targetLook.current.set(activeData.position[0] - shiftX, activeData.position[1], activeData.position[2])
-          targetPos.current.set(activeData.position[0] - shiftX, activeData.position[1] - 0.05, activeData.position[2] + zoomZ * 0.44)
+          // Keep pitch angle consistent. Z scales by 0.44, so Y should scale by 0.44 (-0.05 * 0.44 = -0.022)
+          targetPos.current.set(activeData.position[0] - shiftX, activeData.position[1] - 0.022, activeData.position[2] + zoomZ * 0.44)
         }
       } else {
         targetLook.current.set(activeData.position[0], activeData.position[1], activeData.position[2])
@@ -359,11 +363,18 @@ export default function Explore() {
   const prevCat = activeIndex <= 0 ? CATEGORIES[CATEGORIES.length - 1] : CATEGORIES[activeIndex - 1]
   const nextCat = activeIndex >= CATEGORIES.length - 1 || activeIndex === -1 ? CATEGORIES[0] : CATEGORIES[activeIndex + 1]
 
-  const handlePrev = () => setActiveOrgan(prevCat.id)
-  const handleNext = () => setActiveOrgan(nextCat.id)
+  const handlePrev = () => {
+    setActiveOrgan(prevCat.id);
+    setHoveredOrgan(null); // Clear stuck hover state on touch devices
+  }
+  
+  const handleNext = () => {
+    setActiveOrgan(nextCat.id);
+    setHoveredOrgan(null); // Clear stuck hover state on touch devices
+  }
 
   const closeSubHotspot = () => setActiveSubHotspot(null)
-  const closeOrganZoom = () => { setActiveOrgan(null); setActiveSubHotspot(null); }
+  const closeOrganZoom = () => { setActiveOrgan(null); setActiveSubHotspot(null); setHoveredOrgan(null); }
 
   return (
     <div className={`app-wrapper explore-page${activeSubHotspot ? ' subhotspot-active' : ''}`}>

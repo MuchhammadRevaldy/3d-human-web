@@ -107,14 +107,24 @@ function InternalOrganMesh({ organ, isVisible, isActive, isMobile }) {
 export default function InternalOrgans({ models, categories, activeCategoryId, hoveredCategoryId, activeSubHotspotId, isMobile }) {
 
   const getVisibleModelIds = () => {
+    const visibleIds = new Set()
     const activeCat = categories.find(c => c.id === activeCategoryId)
+
+    // Jika sedang melihat detail overview (sub-hotspot aktif), hanya tampilkan organ target (focusOrgan)
+    if (activeSubHotspotId && activeCat) {
+      const activeSub = activeCat.subHotspots?.find(s => s.id === activeSubHotspotId)
+      if (activeSub && activeSub.focusOrgan) {
+        visibleIds.add(activeSub.focusOrgan)
+        return visibleIds
+      }
+    }
+
     const hoveredCat = categories.find(c => c.id === hoveredCategoryId)
 
-    const visibleIds = new Set()
-
-    // Default: jangan tampilkan organ apapun jika tidak ada kategori yang aktif
+    // Default: tampilkan organ sesuai definisi "shows" dari kategori yang aktif atau di-hover
     if (activeCat && activeCat.shows) activeCat.shows.forEach(id => visibleIds.add(id))
     if (hoveredCat && hoveredCat.shows) hoveredCat.shows.forEach(id => visibleIds.add(id))
+    
     return visibleIds
   }
 
