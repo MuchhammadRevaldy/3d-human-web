@@ -1,8 +1,35 @@
+import React from 'react';
+import { motion } from 'framer-motion';
 import PageTransition from '../components/PageTransition';
 import { Eye, Target, Lightbulb, ArrowRight, Microscope, BookOpen } from 'lucide-react';
 import Footer from '../components/Footer';
+import useReveal from '../hooks/useReveal';
 
 export default function About() {
+  const heroRef = useReveal();
+  const storyRef = useReveal();
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 24, scale: 0.99 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      scale: 1,
+      transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] }
+    }
+  };
+
   return (
     <PageTransition>
       <div className="about-page-container">
@@ -13,24 +40,24 @@ export default function About() {
         <div className="about-content-wrapper">
           
           {/* Hero Section */}
-          <div className="about-hero">
-            <div className="about-badge">Discover SomaLab</div>
+          <div className="about-hero" ref={heroRef}>
+            <div className="about-badge reveal-item">Discover SomaLab</div>
             <div className="hero-content">
-              <div className="hero-icon-wrapper">
+              <div className="hero-icon-wrapper reveal-item reveal-delay-1">
                 <BookOpen size={48} />
               </div>
-              <h1 className="about-title">
+              <h1 className="about-title reveal-item reveal-delay-2">
                 Bridging the Gap Between <span className="text-gradient">Medical Science</span> and You.
               </h1>
-              <p className="about-subtitle">
+              <p className="about-subtitle reveal-item reveal-delay-3">
                 SomaLab is an interactive digital anatomy and health educational platform designed to provide a deep, accurate, and accessible visualization of the human body's structures and functions.
               </p>
             </div>
           </div>
 
           {/* Main Story Section */}
-          <div className="about-story-grid">
-            <div className="story-text-card glass-panel">
+          <div className="about-story-grid" ref={storyRef}>
+            <div className="story-text-card glass-panel reveal-item">
               <h2 className="story-heading">Empowering Through Knowledge</h2>
               <p>
                 This platform was created to bridge the gap between complex medical information and general public comprehension. We believe that knowledge of one's own body is the first step toward a healthier lifestyle. 
@@ -39,8 +66,7 @@ export default function About() {
                 SomaLab brings modern 3D technology to your fingertips—empowering students, educators, medical professionals, and the general public to explore the wonders of the human body without limits.
               </p>
             </div>
-            <div className="story-visual-card">
-               {/* Decorative glassmorphic visual representation */}
+            <div className="story-visual-card reveal-item reveal-delay-2">
                <div className="visual-glass-element">
                   <Microscope className="visual-icon" size={64} />
                   <div className="visual-text">Explore<br/>Without Limits</div>
@@ -49,49 +75,56 @@ export default function About() {
           </div>
 
           {/* Core Pillars */}
-          <div className="about-pillars-header">
-            <h2>Our Core Pillars</h2>
-            <p>The foundations that drive our platform forward.</p>
-          </div>
-
-          <div className="about-pillars-grid">
-            <div className="pillar-card glass-panel interactive-card">
-              <div className="pillar-icon-wrapper bg-blue-tint">
-                <Eye size={28} className="text-blue" />
-              </div>
-              <h3>Our Vision</h3>
-              <p>
-                To be the leading interactive anatomy learning platform that democratizes medical knowledge, enabling individuals from all backgrounds to better recognize and understand their bodies.
-              </p>
-            </div>
-            
-            <div className="pillar-card glass-panel interactive-card">
-              <div className="pillar-icon-wrapper bg-purple-tint">
-                <Target size={28} className="text-purple" />
-              </div>
-              <h3>Our Mission</h3>
-              <ul className="mission-list">
-                <li><ArrowRight size={16} /> Present accurate yet lightweight and interactive 3D medical models.</li>
-                <li><ArrowRight size={16} /> Transform rigid biology learning into a fun exploration experience.</li>
-                <li><ArrowRight size={16} /> Provide reliable science-based information to improve public health literacy.</li>
-              </ul>
+          <motion.div 
+            className="about-pillars-section"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+          >
+            <div className="about-pillars-header">
+              <motion.h2 variants={itemVariants}>Our Core Pillars</motion.h2>
+              <motion.p variants={itemVariants}>The foundations that drive our platform forward.</motion.p>
             </div>
 
-            <div className="pillar-card glass-panel interactive-card">
-              <div className="pillar-icon-wrapper bg-cyan-tint">
-                <Lightbulb size={28} className="text-cyan" />
-              </div>
-              <h3>Why We Built It</h3>
-              <p>
-                Textbooks and 2D illustrations are often insufficient to represent the complexity of a living, moving body. SomaLab was built to create a virtual laboratory where your curiosity can be answered visually, in detail, and in real-time.
-              </p>
+            <div className="about-pillars-grid">
+              <motion.div className="pillar-card glass-panel interactive-card" variants={itemVariants}>
+                <div className="pillar-icon-wrapper bg-blue-tint">
+                  <Eye size={28} className="text-blue" />
+                </div>
+                <h3>Our Vision</h3>
+                <p>
+                  To be the leading interactive anatomy learning platform that democratizes medical knowledge, enabling individuals from all backgrounds to better recognize and understand their bodies.
+                </p>
+              </motion.div>
+              
+              <motion.div className="pillar-card glass-panel interactive-card" variants={itemVariants}>
+                <div className="pillar-icon-wrapper bg-purple-tint">
+                  <Target size={28} className="text-purple" />
+                </div>
+                <h3>Our Mission</h3>
+                <ul className="mission-list">
+                  <li><ArrowRight size={16} /> Present accurate yet lightweight and interactive 3D medical models.</li>
+                  <li><ArrowRight size={16} /> Transform rigid biology learning into a fun exploration experience.</li>
+                  <li><ArrowRight size={16} /> Provide reliable science-based information to improve public health literacy.</li>
+                </ul>
+              </motion.div>
+
+              <motion.div className="pillar-card glass-panel interactive-card" variants={itemVariants}>
+                <div className="pillar-icon-wrapper bg-cyan-tint">
+                  <Lightbulb size={28} className="text-cyan" />
+                </div>
+                <h3>Why We Built It</h3>
+                <p>
+                  Textbooks and 2D illustrations are often insufficient to represent the complexity of a living, moving body. SomaLab was built to create a virtual laboratory where your curiosity can be answered visually, in detail, and in real-time.
+                </p>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
           
         </div>
 
         <style>{`
-          /* Scoped CSS for About Page */
           .about-page-container {
             position: relative;
             min-height: 100vh;
@@ -107,20 +140,8 @@ export default function About() {
             opacity: 0.6;
             pointer-events: none;
           }
-          .blob-1 {
-            top: -50px;
-            left: -100px;
-            width: 450px;
-            height: 450px;
-            background: rgba(91, 156, 246, 0.35);
-          }
-          .blob-2 {
-            bottom: 50px;
-            right: -100px;
-            width: 500px;
-            height: 500px;
-            background: rgba(167, 139, 250, 0.25);
-          }
+          .blob-1 { top: -50px; left: -100px; width: 450px; height: 450px; background: rgba(91, 156, 246, 0.35); }
+          .blob-2 { bottom: 50px; right: -100px; width: 500px; height: 500px; background: rgba(167, 139, 250, 0.25); }
 
           .about-content-wrapper {
             position: relative;
@@ -129,7 +150,6 @@ export default function About() {
             margin: 0 auto;
           }
 
-          /* HERO */
           .about-hero {
             text-align: center;
             max-width: 800px;
@@ -172,7 +192,6 @@ export default function About() {
             margin: 0 auto;
           }
 
-          /* GLASS PANEL UTILS */
           .glass-panel {
             background: rgba(255, 255, 255, 0.5);
             backdrop-filter: blur(24px);
@@ -182,7 +201,6 @@ export default function About() {
             box-shadow: 0 20px 50px rgba(0, 50, 150, 0.04);
           }
 
-          /* STORY GRID */
           .about-story-grid {
             display: grid;
             grid-template-columns: 1.2fr 0.8fr;
@@ -194,23 +212,9 @@ export default function About() {
             .about-title { font-size: 2.8rem; }
             .story-text-card { padding: 30px !important; }
           }
-          .story-text-card {
-            padding: 50px;
-          }
-          .story-heading {
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: #1a1a3a;
-            margin-bottom: 24px;
-            letter-spacing: -0.01em;
-          }
-          .story-text-card p {
-            font-size: 1.1rem;
-            line-height: 1.75;
-            color: #4a5a7a;
-            margin-bottom: 20px;
-          }
-          .story-text-card p:last-child { margin-bottom: 0; }
+          .story-text-card { padding: 50px; }
+          .story-heading { font-size: 2.2rem; font-weight: 800; color: #1a1a3a; margin-bottom: 24px; }
+          .story-text-card p { font-size: 1.1rem; line-height: 1.75; color: #4a5a7a; margin-bottom: 20px; }
           
           .story-visual-card {
             background: linear-gradient(135deg, #0077ff 0%, #00d2ff 100%);
@@ -219,18 +223,10 @@ export default function About() {
             align-items: center;
             justify-content: center;
             position: relative;
-            overflow: hidden;
             min-height: 350px;
             box-shadow: 0 24px 50px rgba(0, 119, 255, 0.25);
           }
-          .story-visual-card::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at top right, rgba(255,255,255,0.4), transparent 60%);
-          }
           .visual-glass-element {
-            position: relative;
             z-index: 2;
             background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(16px);
@@ -241,56 +237,31 @@ export default function About() {
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            width: 220px;
-            height: 220px;
+            width: 210px;
+            height: 210px;
             color: white;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
             transition: transform 0.3s ease;
           }
-          .story-visual-card:hover .visual-glass-element {
-            transform: scale(1.05);
-          }
           .visual-icon { margin-bottom: 16px; opacity: 0.9; }
-          .visual-text { 
-            font-weight: 700; 
-            font-size: 0.95rem; 
-            text-transform: uppercase; 
-            letter-spacing: 0.1em; 
-            text-align: center; 
-            line-height: 1.4;
-          }
+          .visual-text { font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; text-align: center; }
 
-          /* PILLARS */
-          .about-pillars-header {
-            text-align: center;
-            margin-bottom: 40px;
-          }
-          .about-pillars-header h2 {
-            font-size: 2.8rem;
-            font-weight: 800;
-            color: #1a1a3a;
-            margin-bottom: 12px;
-            letter-spacing: -0.01em;
-          }
-          .about-pillars-header p {
-            font-size: 1.15rem;
-            color: #5a6a8a;
-          }
+          .about-pillars-header { text-align: center; margin-bottom: 40px; }
+          .about-pillars-header h2 { font-size: 2.8rem; font-weight: 800; color: #1a1a3a; margin-bottom: 12px; }
+          .about-pillars-header p { font-size: 1.15rem; color: #5a6a8a; }
 
           .about-pillars-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 30px;
           }
-          @media (max-width: 950px) {
-             .about-pillars-grid { grid-template-columns: 1fr; }
-          }
+          @media (max-width: 950px) { .about-pillars-grid { grid-template-columns: 1fr; } }
+          
           .pillar-card {
             padding: 45px 35px;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             display: flex;
             flex-direction: column;
             border: 1px solid rgba(255, 255, 255, 0.9);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
           }
           .interactive-card:hover {
             transform: translateY(-8px);
@@ -298,13 +269,8 @@ export default function About() {
             background: rgba(255, 255, 255, 0.9);
           }
           .pillar-icon-wrapper {
-            width: 64px;
-            height: 64px;
-            border-radius: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 24px;
+            width: 64px; height: 64px; border-radius: 18px;
+            display: flex; align-items: center; justify-content: center; margin-bottom: 24px;
           }
           .bg-blue-tint { background: rgba(0, 119, 255, 0.12); }
           .text-blue { color: #0077ff; }
@@ -313,41 +279,11 @@ export default function About() {
           .bg-cyan-tint { background: rgba(0, 210, 255, 0.15); }
           .text-cyan { color: #00b8d4; }
 
-          .pillar-card h3 {
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: #1a1a3a;
-            margin-bottom: 16px;
-            letter-spacing: -0.01em;
-          }
-          .pillar-card p {
-            font-size: 1.05rem;
-            line-height: 1.7;
-            color: #4a5a7a;
-            flex-grow: 1;
-          }
-          .mission-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-            flex-grow: 1;
-          }
-          .mission-list li {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            font-size: 1.05rem;
-            line-height: 1.6;
-            color: #4a5a7a;
-          }
-          .mission-list li svg {
-            color: #8b5cf6;
-            flex-shrink: 0;
-            margin-top: 4px;
-          }
+          .pillar-card h3 { font-size: 1.6rem; font-weight: 800; color: #1a1a3a; margin-bottom: 16px; }
+          .pillar-card p { font-size: 1.05rem; line-height: 1.7; color: #4a5a7a; }
+          .mission-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 14px; }
+          .mission-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 1.05rem; color: #4a5a7a; }
+          .mission-list li svg { color: #8b5cf6; flex-shrink: 0; margin-top: 4px; }
         `}</style>
       </div>
       <Footer />

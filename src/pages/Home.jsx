@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Environment, Float } from '@react-three/drei';
 import PageTransition from '../components/PageTransition';
@@ -11,7 +12,27 @@ import '../index.css';
 
 export default function Home() {
   const heroRef = useReveal();
-  const featuresRef = useReveal();
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 24, scale: 0.99 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      scale: 1,
+      transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] }
+    }
+  };
 
   return (
     <PageTransition>
@@ -94,30 +115,36 @@ export default function Home() {
 
         {/* FEATURES SECTION */}
         <section className="discover-section">
-          <div className="discover-content" ref={featuresRef}>
+          <motion.div 
+            className="discover-content"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+          >
             <div className="discover-header">
-              <h2 className="reveal-item reveal-delay-1">Why Choose SomaLab?</h2>
-              <p className="reveal-item reveal-delay-2">Our platform goes beyond traditional 2D textbooks, offering an unprecedented level of clinical depth and interactivity.</p>
+              <motion.h2 variants={itemVariants}>Why Choose SomaLab?</motion.h2>
+              <motion.p variants={itemVariants}>Our platform goes beyond traditional 2D textbooks, offering an unprecedented level of clinical depth and interactivity.</motion.p>
             </div>
             
             <div className="features-grid">
-              <div className="feature-box reveal-item reveal-delay-2">
+              <motion.div className="feature-box" variants={itemVariants}>
                 <div className="feature-icon-wrapper">🔬</div>
                 <h3>Zoom to Cellular Level</h3>
                 <p>Seamlessly transition from macro organ structures to microscopic cellular activity and neurotransmitter pathways.</p>
-              </div>
-              <div className="feature-box reveal-item reveal-delay-3">
+              </motion.div>
+              <motion.div className="feature-box" variants={itemVariants}>
                 <div className="feature-icon-wrapper">⚕️</div>
                 <h3>Clinical Biomarkers</h3>
                 <p>Visualize early signs of oxidative stress, toxins, and autoimmune markers before clinical diagnosis.</p>
-              </div>
-              <div className="feature-box reveal-item reveal-delay-4">
+              </motion.div>
+              <motion.div className="feature-box" variants={itemVariants}>
                 <div className="feature-icon-wrapper">🧬</div>
                 <h3>Accurate Anatomy</h3>
                 <p>Interact with highly detailed 3D models of the brain, heart, liver, digestive tract, and DNA.</p>
-              </div>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
         </section>
 
         {/* Global Footer */}

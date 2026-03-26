@@ -6,6 +6,7 @@ import PageTransition from '../components/PageTransition';
 import Footer from '../components/Footer';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Environment, Float, useGLTF } from '@react-three/drei';
+import useReveal from '../hooks/useReveal';
 import * as THREE from 'three';
 
 // 3D Model Component for Cards
@@ -63,6 +64,7 @@ function BentoCanvas({ modelClass, path, scale, position, rotation, color, emiss
 export default function Content() {
   const [selectedArticle, setSelectedArticle] = useState(null);
   const navigate = useNavigate();
+  const headerRef = useReveal();
 
   const handleCardClick = (art) => {
     if (art.route) {
@@ -243,6 +245,27 @@ export default function Content() {
     }
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.12,
+        delayChildren: 0.2
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 30, scale: 0.95 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      scale: 1,
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+    }
+  };
+
   return (
     <PageTransition>
       <div className="content-page-container">
@@ -251,16 +274,23 @@ export default function Content() {
         <div className="content-bg-blob blob-a"></div>
         <div className="content-bg-blob blob-b"></div>
 
-        <div className="content-header text-center">
-          <h1 className="content-title">Clinical <span className="text-gradient">Insights</span></h1>
-          <p className="content-subtitle">Explore expertly curated articles on maintaining organ health and understanding your body's complex systems.</p>
+        <div className="content-header text-center" ref={headerRef}>
+          <h1 className="content-title reveal-item">Clinical <span className="text-gradient">Insights</span></h1>
+          <p className="content-subtitle reveal-item reveal-delay-1">Explore expertly curated articles on maintaining organ health and understanding your body's complex systems.</p>
         </div>
 
-        <div className="bento-grid-container">
+        <motion.div 
+          className="bento-grid-container" 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+        >
           {[...articles, ...extraArticles].map((art) => (
             <motion.div
               key={art.id}
               className={`bento-card ${art.bentoClass}`}
+              variants={cardVariants}
               whileHover={{ scale: 1.015, y: -4 }}
               onClick={() => handleCardClick(art)}
             >
@@ -293,7 +323,7 @@ export default function Content() {
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* Modal Overlay using Framer Motion */}
         <AnimatePresence>
@@ -420,7 +450,7 @@ export default function Content() {
             box-shadow: 0 10px 30px rgba(0, 30, 80, 0.04);
             display: flex;
             flex-direction: column;
-            transition: box-shadow 0.3s ease;
+            transition: box-shadow 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
           }
           .bento-card:hover {
             box-shadow: 0 20px 50px rgba(0, 119, 255, 0.1);
@@ -462,7 +492,6 @@ export default function Content() {
           }
 
           @media (max-width: 768px) {
-            /* Cards become vertical flex on mobile */
             .bento-card {
               overflow: hidden;
               min-height: unset !important;
@@ -482,7 +511,6 @@ export default function Content() {
               box-sizing: border-box;
             }
 
-            /* On mobile, make 3D canvas appear below content as a block */
             .bento-canvas-wrapper {
               position: relative !important;
               top: unset !important;
@@ -603,7 +631,6 @@ export default function Content() {
             font-size: 0.95rem;
             margin-bottom: 20px;
             flex: 1;
-            /* Text ellipsis for small cards */
             display: -webkit-box;
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
@@ -624,7 +651,6 @@ export default function Content() {
             margin-top: auto;
           }
 
-          /* MODAL STYLES */
           .modal-container {
             position: fixed;
             inset: 0;
@@ -679,9 +705,6 @@ export default function Content() {
             padding-bottom: 25px;
             border-bottom: 1px solid #f0f4f8;
           }
-          @media (max-width: 600px) {
-            .modal-header { flex-direction: column; text-align: center; }
-          }
           .modal-icon-box {
             width: 80px;
             height: 80px;
@@ -704,9 +727,6 @@ export default function Content() {
             color: #1a1a3a;
             line-height: 1.2;
           }
-          .modal-body {
-            padding-right: 10px;
-          }
           .modal-text {
             font-size: 1.15rem;
             line-height: 1.8;
@@ -716,36 +736,6 @@ export default function Content() {
           .article-modal::-webkit-scrollbar { width: 6px; }
           .article-modal::-webkit-scrollbar-track { background: transparent; }
           .article-modal::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
-
-          .see-more-section {
-            max-width: 1250px;
-            margin: 80px auto;
-            padding: 0 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 60px;
-          }
-
-          .see-more-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 16px 40px;
-            background: linear-gradient(135deg, #0077ff 0%, #00d2ff 100%);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 700;
-            cursor: pointer;
-            box-shadow: 0 10px 30px rgba(0, 119, 255, 0.25);
-            transition: box-shadow 0.3s ease;
-          }
-
-          .see-more-btn:hover {
-            box-shadow: 0 15px 40px rgba(0, 119, 255, 0.35);
-          }
         `}</style>
       </div>
       <Footer />
