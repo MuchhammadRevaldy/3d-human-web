@@ -1,25 +1,26 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import MobileInlineVideo from '../MobileInlineVideo';
 
 export default function MildDemyelinationPanel({ onGoToOverview, activeVideo }) {
+  const { t } = useTranslation();
   return (
     <>
       <h1 className="panel-title">
-        The Mild Demyelination<br/>& Cognitive Pattern
+        {t('explore.panels.mild_demyelination.title')}
       </h1>
       
       <div className="panel-body-text">
         <div className="section-header">
           <span className="section-icon">∴</span> 
-          <h3>The Clinical Picture</h3>
+          <h3>{t('explore.panels.mild_demyelination.clinical_picture')}</h3>
         </div>
 
-        <p>Rachel, a 38-year-old nurse, noticed occasional difficulty finding words during patient handoffs and mild fatigue that worsened throughout her shifts.</p>
-        <p>She experienced subtle coordination issues and brief episodes of visual blurring that resolved within minutes.</p>
+        <p>{t('explore.panels.mild_demyelination.case_history')}</p>
         <MobileInlineVideo activeVideo={activeVideo} />
         <div className="section-header" style={{marginTop: '48px'}}>
           <span className="section-icon">∴</span> 
-          <h3>Key Biomarkers Working Together</h3>
+          <h3>{t('explore.panels.mild_demyelination.biomarkers_title')}</h3>
         </div>
 
         <div className="biomarkers-list">
@@ -76,16 +77,16 @@ export default function MildDemyelinationPanel({ onGoToOverview, activeVideo }) 
 
         <div className="section-header" style={{marginTop: '48px'}}>
           <span className="section-icon">∴</span> 
-          <h3>The Clinical Insight</h3>
+          <h3>{t('explore.panels.mild_demyelination.clinical_insight')}</h3>
         </div>
 
-        <p>This pattern indicates mild autoimmune activity directed toward neuronal structural components rather than synaptic receptors.</p>
-        <p>The presence of anti-myelin basic protein antibodies reflects early demyelination and oligodendrocyte stress, consistent with intermittent conduction delays and subtle neurological symptoms.</p>
-        <p>The absence of anti-GABA, anti-AChR, anti-NMDA, and anti-MOG antibodies suggests that receptor-mediated neurotransmission and broader myelin integrity remain largely preserved, pointing to an early stage of autoimmune involvement.</p>
+        <p>{t('explore.panels.mild_demyelination.insight_desc1')}</p>
+        <p>{t('explore.panels.mild_demyelination.insight_desc2')}</p>
+        <p>{t('explore.panels.mild_demyelination.insight_desc3')}</p>
 
         <div className="section-header" style={{marginTop: '48px'}}>
           <span className="section-icon">∴</span> 
-          <h3>Neuroprotective Support Protocol</h3>
+          <h3>{t('explore.panels.mild_demyelination.protocol_title')}</h3>
         </div>
 
         <div className="protocols-list">
@@ -147,8 +148,8 @@ export default function MildDemyelinationPanel({ onGoToOverview, activeVideo }) 
 
         <div className="next-button-container" onClick={onGoToOverview}>
           <div className="next-content">
-            <span className="next-label">NEXT</span>
-            <span className="next-title">Neurological Autoimmunity Assessment</span>
+            <span className="next-label">{t('explore.panels.mild_demyelination.next_label')}</span>
+            <span className="next-title">{t('explore.panels.mild_demyelination.next_title')}</span>
           </div>
           <div className="next-arrow-btn">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

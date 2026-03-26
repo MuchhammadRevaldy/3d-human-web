@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Stethoscope, Mail, MapPin } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import '../index.css';
 
 export default function Footer() {
+  const { t } = useTranslation();
   return (
     <footer className="global-footer">
       <div className="footer-glow-line"></div>
@@ -19,7 +21,7 @@ export default function Footer() {
               <span className="logo-text">Soma<span>Lab</span></span>
             </Link>
             <p className="footer-desc">
-              Empowering preventative healthcare through immersive 3D clinical visualization. Bridging the gap between complex medical science and accessible public knowledge.
+              {t('footer.desc')}
             </p>
             <div className="footer-socials">
               <a href="#" className="social-icon" aria-label="Instagram">
@@ -39,31 +41,31 @@ export default function Footer() {
 
           {/* Links Column 1 */}
           <div className="footer-links-col">
-            <h4 className="footer-heading">Platform</h4>
+            <h4 className="footer-heading">{t('footer.links')}</h4>
             <ul className="footer-link-list">
-              <li><Link to="/explore">3D Explorer</Link></li>
-              <li><Link to="/about">About Us</Link></li>
-              <li><Link to="/">Interactive Home</Link></li>
+              <li><Link to="/explore">{t('footer.explorer')}</Link></li>
+              <li><Link to="/about">{t('footer.about_us')}</Link></li>
+              <li><Link to="/">{t('footer.interactive_home')}</Link></li>
             </ul>
           </div>
 
           {/* Links Column 2 */}
           <div className="footer-links-col">
-            <h4 className="footer-heading">Resources</h4>
+            <h4 className="footer-heading">{t('footer.resources')}</h4>
             <ul className="footer-link-list">
-              <li><Link to="/content">Clinical Articles</Link></li>
-              <li><Link to="/contact">Contact Support</Link></li>
-              <li><Link to="/content">Organ Guides</Link></li>
+              <li><Link to="/content">{t('footer.clinical_articles')}</Link></li>
+              <li><Link to="/contact">{t('footer.contact_support')}</Link></li>
+              <li><Link to="/content">{t('footer.organ_guides')}</Link></li>
             </ul>
           </div>
 
           {/* Contact Column */}
           <div className="footer-contact-col">
-            <h4 className="footer-heading">Get in Touch</h4>
+            <h4 className="footer-heading">{t('footer.get_in_touch')}</h4>
             <ul className="footer-contact-list">
               <li>
                 <MapPin size={18} className="contact-icon" />
-                <span>123 Medical Innovation Dr.<br/>Jakarta, Indonesia</span>
+                <span dangerouslySetInnerHTML={{ __html: t('contact.address').replace(', ', '<br/>') }}></span>
               </li>
               <li>
                 <Mail size={18} className="contact-icon" />
@@ -76,11 +78,11 @@ export default function Footer() {
 
         {/* Bottom Section */}
         <div className="footer-bottom">
-          <p className="copyright">&copy; {new Date().getFullYear()} SomaLab. All rights reserved.</p>
+          <p className="copyright">&copy; {new Date().getFullYear()} SomaLab. {t('footer.copyright')}</p>
           <div className="footer-legal-links">
-            <Link to="#">Privacy Policy</Link>
+            <Link to="#">{t('footer.privacy')}</Link>
             <span className="dot-separator">•</span>
-            <Link to="#">Terms of Service</Link>
+            <Link to="#">{t('footer.terms')}</Link>
           </div>
         </div>
         

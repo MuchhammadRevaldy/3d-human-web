@@ -163,6 +163,10 @@ body {
   letter-spacing: 0.01em;
 }
 
+.cta-button.lang-id {
+  font-size: 0.8rem;
+}
+
 .shimmer-btn::after {
   content: '';
   position: absolute;

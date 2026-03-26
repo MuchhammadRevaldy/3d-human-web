@@ -1,5 +1,6 @@
-import { useState, Suspense, useRef, useEffect } from 'react'
+import { useState, Suspense, useRef, useEffect, useMemo } from 'react'
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { Canvas, useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import { OrbitControls, Environment, Stars } from '@react-three/drei'
@@ -79,93 +80,7 @@ const ORGAN_MODELS = [
   }
 ]
 
-const CATEGORIES = [
-  {
-    id: 'neurology',
-    label: 'Neurology',
-    icon: '🧠',
-    position: [0, 1.75, 0.05],
-    shows: ['brain'],
-    mobileOffsetY: 0.1, // Look even lower to push the brain up
-    subHotspots: [
-      { id: 'neural', label: 'Neural Zoomer', position: [0.08, 1.83, 0.15], focusOrgan: 'brain' },
-      { id: 'neurotrans', label: 'Neurotransmitters', position: [0.08, 1.71, 0.15], focusOrgan: 'brain' }
-    ]
-  },
-  {
-    id: 'hormones',
-    label: 'Hormones',
-    icon: '♂️',
-    position: [0, 1.21, 0.04],
-    shows: ['brain', 'kidney'],
-    zoomOffset: 4.8, // Ditarik lebih jauh lagi mundurnya karena otak+ginjal terlalu besar pas di-zoom
-    subHotspots: [
-      { id: 'hormone_z', label: 'Hormones Zoomer', position: [0.12, 1.65, 0.15], focusOrgan: 'brain' } // Pituitary gland
-    ]
-  },
-  {
-    id: 'cardiovascular',
-    label: 'Cardiovascular',
-    icon: '🤍',
-    position: [0, 1.1, 0.10],
-    shows: ['heart'],
-    mobileOffsetY: 0.1, // Push heart up slightly
-    subHotspots: [
-      { id: 'cardio', label: 'Cardio Zoomer', position: [0.08, 1.15, 0.15], focusOrgan: 'heart' }
-    ]
-  },
-  {
-    id: 'toxins',
-    label: 'Toxins',
-    icon: '🧪',
-    position: [-0.07, 0.90, 0.1],
-    shows: ['liver', 'kidney'],
-    mobileOffsetY: 0, // Push toxins panel up slightly
-    subHotspots: [
-      { id: 'toxins_panel', label: 'Toxins Panel', position: [-0.15, 0.72, 0.15], focusOrgan: 'liver' }
-    ]
-  },
-  {
-    id: 'gut_health',
-    label: 'Gut Health',
-    icon: '🦠',
-    position: [-0.05, 0.65, 0.1], // Pusat kamera dinaikkan ke atas
-    shows: ['intestine', 'kidney', 'liver'],
-    mobileOffsetY: -0.1, // Push toxins panel up slightly
-    zoomOffset: 2, // Ditarik mundur sedikit agar gabungan organ saluran cerna tidak kepotong
-    subHotspots: [
-      { id: 'food', label: 'Food Sensitivity', position: [-0.05, 0.82, 0.12], focusOrgan: 'intestine' },
-      { id: 'gutzoomer', label: 'Gut Zoomer', position: [0.08, 0.65, 0.12], focusOrgan: 'intestine' }
-    ]
-  },
-  {
-    id: 'genetics',
-    label: 'Genetics',
-    icon: '🧬',
-    position: [-0.50, 0.85, -0.1],
-    shows: ['dna'],
-    mobileOffsetX: -0.1, // Geser kamera lebih ke kiri agar DNA yang melengkung bisa pas di tengah
-    mobileOffsetY: 0.1, // Pindah fokus kamera ke bawah sedikit supaya DNA lebih ke tengah dan tidak terpotong tombol atas
-    subHotspots: [
-      { id: 'genetics_test', label: 'Genetics Testing Suite', position: [-0.38, 0.85, 0.0], focusOrgan: 'dna' }
-    ]
-  },
-  {
-    id: 'longevity',
-    label: 'Longevity',
-    icon: '🧫',
-    position: [0.55, 0.85, 0.0],
-    mobileOffsetX: 0, // Geser kamera lebih ke kiri agar DNA yang melengkung bisa pas di tengah
-    mobileOffsetY: 0.2,
-    shows: ['cell'],
-    zoomOffset: 0.25, // Diubah ke 0.25 karena pembatas minimum jarak kamera sudah di lepas
-    subHotspots: [
-      { id: 'oxi', label: 'Oxidative Stress', position: [0.54, 0.85, 0.08], focusOrgan: 'cell' },
-      { id: 'nutri', label: 'Nutrition', position: [0.53, 0.83, 0.08], focusOrgan: 'cell' },
-      { id: 'auto', label: 'Autoimmunity', position: [0.55, 0.81, 0.08], focusOrgan: 'cell' }
-    ]
-  }
-]
+// Categories will be moved inside Explore component for i18n reactivity
 
 // Component to handle smooth camera flying to active targets
 function CameraAnimator({ activeCategoryId, activeSubHotspotId, categories, controlsRef }) {
@@ -272,7 +187,98 @@ function ParallaxGroup({ isZoomed, children }) {
 }
 
 export default function Explore() {
+  const { t } = useTranslation()
   const navigate = useNavigate()
+
+  // Memoized categories with translated labels for i18n reactivity
+  const translatedCategories = useMemo(() => [
+    {
+      id: 'neurology',
+      label: t('explore.categories.neurology'),
+      icon: '🧠',
+      position: [0, 1.75, 0.05],
+      shows: ['brain'],
+      mobileOffsetY: 0.1,
+      subHotspots: [
+        { id: 'neural', label: t('explore.hotspots.neural'), position: [0.08, 1.83, 0.15], focusOrgan: 'brain' },
+        { id: 'neurotrans', label: t('explore.hotspots.neurotrans'), position: [0.08, 1.71, 0.15], focusOrgan: 'brain' }
+      ]
+    },
+    {
+      id: 'hormones',
+      label: t('explore.categories.hormones'),
+      icon: '♂️',
+      position: [0, 1.21, 0.04],
+      shows: ['brain', 'kidney'],
+      zoomOffset: 4.8,
+      subHotspots: [
+        { id: 'hormone_z', label: t('explore.hotspots.hormone_z'), position: [0.12, 1.65, 0.15], focusOrgan: 'brain' }
+      ]
+    },
+    {
+      id: 'cardiovascular',
+      label: t('explore.categories.cardiovascular'),
+      icon: '🤍',
+      position: [0, 1.1, 0.10],
+      shows: ['heart'],
+      mobileOffsetY: 0.1,
+      subHotspots: [
+        { id: 'cardio', label: t('explore.hotspots.cardio'), position: [0.08, 1.15, 0.15], focusOrgan: 'heart' }
+      ]
+    },
+    {
+      id: 'toxins',
+      label: t('explore.categories.toxins'),
+      icon: '🧪',
+      position: [-0.07, 0.90, 0.1],
+      shows: ['liver', 'kidney'],
+      mobileOffsetY: 0,
+      subHotspots: [
+        { id: 'toxins_panel', label: t('explore.hotspots.toxins_panel'), position: [-0.15, 0.72, 0.15], focusOrgan: 'liver' }
+      ]
+    },
+    {
+      id: 'gut_health',
+      label: t('explore.categories.gut_health'),
+      icon: '🦠',
+      position: [-0.05, 0.65, 0.1],
+      shows: ['intestine', 'kidney', 'liver'],
+      mobileOffsetY: -0.1,
+      zoomOffset: 2,
+      subHotspots: [
+        { id: 'food', label: t('explore.hotspots.food'), position: [-0.05, 0.82, 0.12], focusOrgan: 'intestine' },
+        { id: 'gutzoomer', label: t('explore.hotspots.gutzoomer'), position: [0.08, 0.65, 0.12], focusOrgan: 'intestine' }
+      ]
+    },
+    {
+      id: 'genetics',
+      label: t('explore.categories.genetics'),
+      icon: '🧬',
+      position: [-0.50, 0.85, -0.1],
+      shows: ['dna'],
+      mobileOffsetX: -0.1,
+      mobileOffsetY: 0.1,
+      subHotspots: [
+        { id: 'genetics_test', label: t('explore.hotspots.genetics_test'), position: [-0.38, 0.85, 0.0], focusOrgan: 'dna' }
+      ]
+    },
+    {
+      id: 'longevity',
+      label: t('explore.categories.longevity'),
+      icon: '🧫',
+      position: [0.55, 0.85, 0.0],
+      mobileOffsetX: 0,
+      mobileOffsetY: 0.2,
+      shows: ['cell'],
+      zoomOffset: 0.25,
+      subHotspots: [
+        { id: 'oxi', label: t('explore.hotspots.oxi'), position: [0.54, 0.85, 0.08], focusOrgan: 'cell' },
+        { id: 'nutri', label: t('explore.hotspots.nutri'), position: [0.53, 0.83, 0.08], focusOrgan: 'cell' },
+        { id: 'auto', label: t('explore.hotspots.auto'), position: [0.55, 0.81, 0.08], focusOrgan: 'cell' }
+      ]
+    }
+  ], [t])
+
   const [sex, setSex] = useState('female')
   const [activeOrgan, setActiveOrgan] = useState(null)
   const [hoveredOrgan, setHoveredOrgan] = useState(null)
@@ -359,9 +365,9 @@ export default function Explore() {
   }, [isSoundOn])
 
   // Navigation Logic
-  const activeIndex = activeOrgan ? CATEGORIES.findIndex(c => c.id === activeOrgan) : -1
-  const prevCat = activeIndex <= 0 ? CATEGORIES[CATEGORIES.length - 1] : CATEGORIES[activeIndex - 1]
-  const nextCat = activeIndex >= CATEGORIES.length - 1 || activeIndex === -1 ? CATEGORIES[0] : CATEGORIES[activeIndex + 1]
+  const activeIndex = activeOrgan ? translatedCategories.findIndex(c => c.id === activeOrgan) : -1
+  const prevCat = activeIndex <= 0 ? translatedCategories[translatedCategories.length - 1] : translatedCategories[activeIndex - 1]
+  const nextCat = activeIndex >= translatedCategories.length - 1 || activeIndex === -1 ? translatedCategories[0] : translatedCategories[activeIndex + 1]
 
   const handlePrev = () => {
     setActiveOrgan(prevCat.id);
@@ -428,7 +434,7 @@ export default function Explore() {
       <div className={`back-zoom-overlay desktop-only ${activeOrgan && !activeSubHotspot ? 'visible' : ''}`}>
         <button className="back-zoom-btn" onClick={closeOrganZoom}>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-          Back to Body
+          {t('explore.back')}
         </button>
       </div>
 
@@ -514,7 +520,7 @@ export default function Explore() {
 
       {/* Dynamic Content based on active state */}
       <Sidebar
-        organs={CATEGORIES}
+        organs={translatedCategories}
         activeOrgan={activeOrgan}
         onSelect={setActiveOrgan}
         onHover={setHoveredOrgan}
@@ -537,7 +543,7 @@ export default function Explore() {
             <CameraAnimator
               activeCategoryId={activeOrgan}
               activeSubHotspotId={activeSubHotspot}
-              categories={CATEGORIES}
+              categories={translatedCategories}
               controlsRef={controlsRef}
             />
 
@@ -553,7 +559,7 @@ export default function Explore() {
 
               <InternalOrgans
                 models={ORGAN_MODELS}
-                categories={CATEGORIES}
+                categories={translatedCategories}
                 activeCategoryId={activeOrgan}
                 hoveredCategoryId={hoveredOrgan}
                 activeSubHotspotId={activeSubHotspot}
@@ -562,7 +568,7 @@ export default function Explore() {
 
               <group visible={!activeSubHotspot}>
                 <OrganHotspots
-                  organs={CATEGORIES}
+                  organs={translatedCategories}
                   activeOrgan={activeOrgan}
                   onSelect={setActiveOrgan}
                   onHover={setHoveredOrgan}
@@ -618,8 +624,8 @@ export default function Explore() {
           <div className="active-pill-solid">
             {activeOrgan && (
               <>
-                <span className="icon desktop-only">{CATEGORIES[activeIndex].icon}</span>
-                <span className="label mobile-text-center">{CATEGORIES[activeIndex].label}</span>
+                <span className="icon desktop-only">{translatedCategories[activeIndex].icon}</span>
+                <span className="label mobile-text-center">{translatedCategories[activeIndex].label}</span>
               </>
             )}
           </div>
@@ -627,7 +633,7 @@ export default function Explore() {
           <div className="nav-controls desktop-only">
             <div className="nav-btn-wrapper">
               <div className="nav-tooltip">
-                <span className="tooltip-sub">PREV</span>
+                <span className="tooltip-sub">{t('explore.ui.prev') || 'PREV'}</span>
                 <span className="tooltip-title">{prevCat.label}</span>
               </div>
               <button className="nav-action-btn solid" onClick={handlePrev}>
@@ -636,7 +642,7 @@ export default function Explore() {
             </div>
             <div className="nav-btn-wrapper">
               <div className="nav-tooltip">
-                <span className="tooltip-sub">NEXT</span>
+                <span className="tooltip-sub">{t('explore.ui.next') || 'NEXT'}</span>
                 <span className="tooltip-title">{nextCat.label}</span>
               </div>
               <button className="nav-action-btn solid" onClick={handleNext}>
@@ -655,7 +661,7 @@ export default function Explore() {
       {activeSubHotspot && (
         <SubHotspotInfoView
           subHotspotId={activeSubHotspot}
-          categoryData={CATEGORIES.find(c => c.id === activeOrgan)}
+          categoryData={translatedCategories.find(c => c.id === activeOrgan)}
           onClose={closeSubHotspot}
           isMobile={isMobileView}
         />

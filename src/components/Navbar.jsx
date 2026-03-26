@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import { Menu, X, ArrowRight } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import '../index.css';
 
 export default function Navbar() {
+  const { t, i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
@@ -46,15 +48,18 @@ export default function Navbar() {
         {/* Navigation Links & CTA Wrapper */}
         <div className={`navbar-menu-wrapper ${isOpen ? 'is-open' : ''}`}>
           <div className="navbar-links">
-            <NavLink to="/" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>Home</NavLink>
-            <NavLink to="/about" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>About</NavLink>
-            <NavLink to="/content" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>Content</NavLink>
-            <NavLink to="/contact" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>Contact</NavLink>
+            <NavLink to="/" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>{t('nav.home')}</NavLink>
+            <NavLink to="/about" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>{t('nav.about')}</NavLink>
+            <NavLink to="/content" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>{t('nav.content')}</NavLink>
+            <NavLink to="/contact" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>{t('nav.contact')}</NavLink>
           </div>
 
           <div className="navbar-cta">
-            <Link to="/explore" className="cta-button primary-btn shimmer-btn">
-              <span>Start 3D Exploration</span>
+            <Link 
+              to="/explore" 
+              className={`cta-button primary-btn shimmer-btn ${i18n.language === 'id' ? 'lang-id' : ''}`}
+            >
+              <span>{t('nav.start_explore')}</span>
               <ArrowRight size={18} className="btn-icon-right" />
             </Link>
           </div>

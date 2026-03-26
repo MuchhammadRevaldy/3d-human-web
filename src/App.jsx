@@ -8,6 +8,7 @@ import Content from './pages/Content'
 import Contact from './pages/Contact'
 import Explore from './pages/Explore'
 import Article from './pages/Article'
+import LanguageSelector from './components/LanguageSelector'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -41,6 +42,7 @@ export default function App() {
     <BrowserRouter>
       <ScrollToTop />
       <Navbar />
+      <LanguageSelector />
       <AnimatedRoutes />
     </BrowserRouter>
   )

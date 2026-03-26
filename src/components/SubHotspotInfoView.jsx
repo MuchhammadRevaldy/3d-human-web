@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState, useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import MildDemyelinationPanel from './panels/MildDemyelinationPanel'
@@ -24,18 +25,20 @@ import GutOverviewPanel from './panels/GutOverviewPanel'
 
 gsap.registerPlugin(ScrollTrigger)
 
-// Master Library pemetaan Video berdasarkan ID dari subHotspot
-const VIDEO_MAP = {
-  'oxi': { src: '/models/OxidativeStressV03.mp4', label: 'RNA\nDamage' },
-  'toxins_panel': { src: '/models/ToxinsV03.mp4', label: 'Toxins\nLoad' },
-  'neural': { src: '/models/NeuralHealthV03.mp4', label: 'Neural\nHealth' },
-  'neurotrans': { src: '/models/Neurotransmiters.mp4', label: 'Synapse\nActivity' },
-  'gutzoomer': { src: '/models/MasterGutZoomerV03.mp4', label: 'Microbiome\nFlora' },
-  'cardio': { src: '/models/CardioZoomerNew.mp4', label: 'Arterial\nPlaque' },
-  'hormone_z': { src: '/models/Hormones3D.mp4', label: 'Steroid\nPathways' }
-}
-
 export default function SubHotspotInfoView({ subHotspotId, categoryData, onClose, isMobile }) {
+  const { t } = useTranslation()
+  
+  // Memoized Video Map with translated labels
+  const VIDEO_MAP = useMemo(() => ({
+    'oxi': { src: '/models/OxidativeStressV03.mp4', label: t('explore.video_labels.rna_damage') },
+    'toxins_panel': { src: '/models/ToxinsV03.mp4', label: t('explore.video_labels.toxins_load') },
+    'neural': { src: '/models/NeuralHealthV03.mp4', label: t('explore.video_labels.neural_health') },
+    'neurotrans': { src: '/models/Neurotransmiters.mp4', label: t('explore.video_labels.synapse_activity') },
+    'gutzoomer': { src: '/models/MasterGutZoomerV03.mp4', label: t('explore.video_labels.microbiome_flora') },
+    'cardio': { src: '/models/CardioZoomerNew.mp4', label: t('explore.video_labels.arterial_plaque') },
+    'hormone_z': { src: '/models/Hormones3D.mp4', label: t('explore.video_labels.steroid_pathways') }
+  }), [t])
+
   const subData = categoryData?.subHotspots?.find(s => s.id === subHotspotId) || {}
   const activeVideo = VIDEO_MAP[subData.id]
   const videoRef = useRef(null)
@@ -123,21 +126,21 @@ export default function SubHotspotInfoView({ subHotspotId, categoryData, onClose
             <span className="nav-subtitle">Cardio Zoomer:</span>
             {showOverview ? (
               <>
-                <span className="nav-inactive-btn" onClick={() => switchTo(() => { setActiveCardioTab('endothelial'); setShowOverview(false); })}>The Endothelial Dysfunction</span>
-                <span className="nav-inactive-btn" onClick={() => switchTo(() => { setActiveCardioTab('metabolic'); setShowOverview(false); })}>The Metabolic Syndrome</span>
-                <div className="nav-active-btn">Test Overview</div>
+                <span className="nav-inactive-btn" onClick={() => switchTo(() => { setActiveCardioTab('endothelial'); setShowOverview(false); })}>{t('explore.ui.endothelial')}</span>
+                <span className="nav-inactive-btn" onClick={() => switchTo(() => { setActiveCardioTab('metabolic'); setShowOverview(false); })}>{t('explore.ui.metabolic')}</span>
+                <div className="nav-active-btn">{t('explore.ui.test_overview')}</div>
               </>
             ) : activeCardioTab === 'endothelial' ? (
               <>
-                <div className="nav-active-btn">The Endothelial Dysfunction</div>
-                <span className="nav-inactive-btn" onClick={() => switchTo(() => setActiveCardioTab('metabolic'))}>The Metabolic Syndrome</span>
-                <span className="nav-inactive-btn" onClick={() => switchTo(() => setShowOverview(true))}>Test Overview</span>
+                <div className="nav-active-btn">{t('explore.ui.endothelial')}</div>
+                <span className="nav-inactive-btn" onClick={() => switchTo(() => setActiveCardioTab('metabolic'))}>{t('explore.ui.metabolic')}</span>
+                <span className="nav-inactive-btn" onClick={() => switchTo(() => setShowOverview(true))}>{t('explore.ui.test_overview')}</span>
               </>
             ) : (
               <>
-                <span className="nav-inactive-btn" onClick={() => switchTo(() => setActiveCardioTab('endothelial'))}>The Endothelial Dysfunction</span>
-                <div className="nav-active-btn">The Metabolic Syndrome</div>
-                <span className="nav-inactive-btn" onClick={() => switchTo(() => setShowOverview(true))}>Test Overview</span>
+                <span className="nav-inactive-btn" onClick={() => switchTo(() => setActiveCardioTab('endothelial'))}>{t('explore.ui.endothelial')}</span>
+                <div className="nav-active-btn">{t('explore.ui.metabolic')}</div>
+                <span className="nav-inactive-btn" onClick={() => switchTo(() => setShowOverview(true))}>{t('explore.ui.test_overview')}</span>
               </>
             )}
           </div>
@@ -146,21 +149,21 @@ export default function SubHotspotInfoView({ subHotspotId, categoryData, onClose
             <span className="nav-subtitle">Gut Zoomer:</span>
             {showOverview ? (
               <>
-                <span className="nav-inactive-btn" onClick={() => switchTo(() => { setActiveGutTab('permeability'); setShowOverview(false); })}>The Intestinal Permeability Pattern</span>
-                <span className="nav-inactive-btn" onClick={() => switchTo(() => { setActiveGutTab('estrogen'); setShowOverview(false); })}>The Estrogen Dominance</span>
-                <div className="nav-active-btn">Test Overview</div>
+                <span className="nav-inactive-btn" onClick={() => switchTo(() => { setActiveGutTab('permeability'); setShowOverview(false); })}>{t('explore.ui.intestinal_perm')}</span>
+                <span className="nav-inactive-btn" onClick={() => switchTo(() => { setActiveGutTab('estrogen'); setShowOverview(false); })}>{t('explore.ui.estrogen_dom')}</span>
+                <div className="nav-active-btn">{t('explore.ui.test_overview')}</div>
               </>
             ) : activeGutTab === 'permeability' ? (
               <>
-                <div className="nav-active-btn">The Intestinal Permeability Pattern</div>
-                <span className="nav-inactive-btn" onClick={() => switchTo(() => setActiveGutTab('estrogen'))}>The Estrogen Dominance</span>
-                <span className="nav-inactive-btn" onClick={() => switchTo(() => setShowOverview(true))}>Test Overview</span>
+                <div className="nav-active-btn">{t('explore.ui.intestinal_perm')}</div>
+                <span className="nav-inactive-btn" onClick={() => switchTo(() => setActiveGutTab('estrogen'))}>{t('explore.ui.estrogen_dom')}</span>
+                <span className="nav-inactive-btn" onClick={() => switchTo(() => setShowOverview(true))}>{t('explore.ui.test_overview')}</span>
               </>
             ) : (
               <>
-                <span className="nav-inactive-btn" onClick={() => switchTo(() => setActiveGutTab('permeability'))}>The Intestinal Permeability Pattern</span>
-                <div className="nav-active-btn">The Estrogen Dominance</div>
-                <span className="nav-inactive-btn" onClick={() => switchTo(() => setShowOverview(true))}>Test Overview</span>
+                <span className="nav-inactive-btn" onClick={() => switchTo(() => setActiveGutTab('permeability'))}>{t('explore.ui.intestinal_perm')}</span>
+                <div className="nav-active-btn">{t('explore.ui.estrogen_dom')}</div>
+                <span className="nav-inactive-btn" onClick={() => switchTo(() => setShowOverview(true))}>{t('explore.ui.test_overview')}</span>
               </>
             )}
           </div>
@@ -187,35 +190,35 @@ export default function SubHotspotInfoView({ subHotspotId, categoryData, onClose
         ) : (
           <div className="nav-pill-container">
             <span className="nav-subtitle">
-              {subData.id === 'hormone_z' ? 'Hormone Zoomer:' : 
-               subData.id === 'toxins_panel' ? 'Toxins Panel:' : 
-               subData.id === 'oxi' ? 'Oxi Zoomer:' : 
-               subData.id === 'neurotrans' ? 'Neurotransmitters Panel:' :
-               'Neural Zoomer Plus:'}
+              {subData.id === 'hormone_z' ? t('explore.hotspots.hormone_z') + ':' : 
+               subData.id === 'toxins_panel' ? t('explore.hotspots.toxins_panel') + ':' : 
+               subData.id === 'oxi' ? t('explore.hotspots.oxi') + ':' : 
+               subData.id === 'neurotrans' ? t('explore.hotspots.neurotrans') + ':' :
+               t('explore.hotspots.neural') + ':'}
             </span>
             {showOverview ? (
               <>
                 <span className="nav-inactive-btn" onClick={() => switchTo(() => setShowOverview(false))}>
-                  {subData.id === 'neurotrans' ? 'The Neurotransmitter' :
-                   subData.id === 'hormone_z' ? 'The Hormone Deficiency' :
-                   subData.id === 'toxins_panel' ? 'The Total Tox Burden' :
-                   subData.id === 'oxi' ? 'The Multi-System Oxidative Damage' :
-                   subData.id === 'neural' ? 'The Mild Demyelination' :
-                   subData.label || 'The Mild Demyelination'}
+                  {subData.id === 'neurotrans' ? t('explore.ui.neurotransmitter') :
+                   subData.id === 'hormone_z' ? t('explore.ui.hormone_def') :
+                   subData.id === 'toxins_panel' ? t('explore.ui.tox_burden') :
+                   subData.id === 'oxi' ? t('explore.ui.oxi_damage') :
+                   subData.id === 'neural' ? t('explore.ui.demyelination') :
+                   subData.label || t('explore.ui.demyelination')}
                 </span>
-                <div className="nav-active-btn">Test Overview</div>
+                <div className="nav-active-btn">{t('explore.ui.test_overview')}</div>
               </>
             ) : (
               <>
                 <div className="nav-active-btn">
-                  {subData.id === 'neurotrans' ? 'The Neurotransmitter' :
-                   subData.id === 'hormone_z' ? 'The Hormone Deficiency' :
-                   subData.id === 'toxins_panel' ? 'The Total Tox Burden' :
-                   subData.id === 'oxi' ? 'The Multi-System Oxidative Damage' :
-                   subData.id === 'neural' ? 'The Mild Demyelination' :
-                   subData.label || 'The Mild Demyelination'}
+                  {subData.id === 'neurotrans' ? t('explore.ui.neurotransmitter') :
+                   subData.id === 'hormone_z' ? t('explore.ui.hormone_def') :
+                   subData.id === 'toxins_panel' ? t('explore.ui.tox_burden') :
+                   subData.id === 'oxi' ? t('explore.ui.oxi_damage') :
+                   subData.id === 'neural' ? t('explore.ui.demyelination') :
+                   subData.label || t('explore.ui.demyelination')}
                 </div>
-                <span className="nav-inactive-btn" onClick={() => switchTo(() => setShowOverview(true))}>Test Overview</span>
+                <span className="nav-inactive-btn" onClick={() => switchTo(() => setShowOverview(true))}>{t('explore.ui.test_overview')}</span>
               </>
             )}
           </div>

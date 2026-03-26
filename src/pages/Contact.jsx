@@ -3,9 +3,11 @@ import { motion } from 'framer-motion';
 import PageTransition from '../components/PageTransition';
 import Footer from '../components/Footer';
 import { Mail, MapPin, Phone, MessageSquare, Send } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import useReveal from '../hooks/useReveal';
 
 export default function Contact() {
+  const { t } = useTranslation();
   const headerRef = useReveal();
 
   const [formData, setFormData] = useState({
@@ -61,8 +63,8 @@ export default function Contact() {
 
         <div className="contact-wrapper">
           <div className="contact-header" ref={headerRef}>
-            <h1 className="contact-title reveal-item">Get in <span className="text-gradient">Touch</span></h1>
-            <p className="contact-subtitle reveal-item reveal-delay-1">Have questions about our medical visualization platform or interested in collaboration? We'd love to hear from you.</p>
+            <h1 className="contact-title reveal-item">{t('contact.title')} <span className="text-gradient">{t('contact.title_highlight')}</span></h1>
+            <p className="contact-subtitle reveal-item reveal-delay-1">{t('contact.subtitle')}</p>
           </div>
           
           <motion.div 
@@ -75,28 +77,28 @@ export default function Contact() {
             
             {/* Contact Form */}
             <motion.div className="contact-form-card glass-panel" variants={itemVariants}>
-              <h2 className="form-heading"><MessageSquare className="inline-icon" /> Send a Message</h2>
+              <h2 className="form-heading"><MessageSquare className="inline-icon" /> {t('contact.form_title')}</h2>
               <form className="contact-form" onSubmit={handleWhatsAppRedirect}>
                 <div className="form-group-split">
                   <div className="form-group">
-                    <label>First Name</label>
-                    <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} placeholder="John" required />
+                    <label>{t('contact.first_name')}</label>
+                    <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} placeholder={t('contact.placeholder_first')} required />
                   </div>
                   <div className="form-group">
-                    <label>Last Name</label>
-                    <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} placeholder="Doe" required />
+                    <label>{t('contact.last_name')}</label>
+                    <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} placeholder={t('contact.placeholder_last')} required />
                   </div>
                 </div>
                 <div className="form-group">
-                  <label>Email Address</label>
-                  <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="john@example.com" required />
+                  <label>{t('contact.email')}</label>
+                  <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder={t('contact.placeholder_email')} required />
                 </div>
                 <div className="form-group">
-                  <label>Message</label>
-                  <textarea name="message" rows="5" value={formData.message} onChange={handleChange} placeholder="How can we help you today?" required></textarea>
+                  <label>{t('contact.message')}</label>
+                  <textarea name="message" rows="5" value={formData.message} onChange={handleChange} placeholder={t('contact.placeholder_msg')} required></textarea>
                 </div>
                 <button type="submit" className="submit-btn-premium">
-                  <span>Send Message</span> <Send size={18} />
+                  <span>{t('contact.submit')}</span> <Send size={18} />
                 </button>
               </form>
             </motion.div>
@@ -106,22 +108,22 @@ export default function Contact() {
               <motion.div className="info-card glass-panel" variants={itemVariants}>
                 <div className="info-icon-wrapper"><MapPin size={28} /></div>
                 <div>
-                  <h3>Headquarters</h3>
-                  <p>123 Medical Innovation Drive<br/>Jakarta, Indonesia 12000</p>
+                  <h3>{t('contact.headquarters')}</h3>
+                  <p dangerouslySetInnerHTML={{ __html: t('contact.address').replace(', ', '<br/>') }}></p>
                 </div>
               </motion.div>
               <motion.div className="info-card glass-panel" variants={itemVariants}>
                 <div className="info-icon-wrapper"><Mail size={28} /></div>
                 <div>
-                  <h3>Email Us</h3>
+                  <h3>{t('contact.email_us')}</h3>
                   <p>support@somalab.com<br/>partnerships@somalab.com</p>
                 </div>
               </motion.div>
               <motion.div className="info-card glass-panel" variants={itemVariants}>
                 <div className="info-icon-wrapper"><Phone size={28} /></div>
                 <div>
-                  <h3>Call Us</h3>
-                  <p>+62 811 2345 6789<br/>Mon - Fri, 9:00 AM - 5:00 PM</p>
+                  <h3>{t('contact.call_us')}</h3>
+                  <p>+62 811 2345 6789<br/>{t('contact.hours')}</p>
                 </div>
               </motion.div>
             </div>

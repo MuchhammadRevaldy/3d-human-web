@@ -1,11 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import PageTransition from '../components/PageTransition';
 import { Eye, Target, Lightbulb, ArrowRight, Microscope, BookOpen } from 'lucide-react';
 import Footer from '../components/Footer';
 import useReveal from '../hooks/useReveal';
 
 export default function About() {
+  const { t } = useTranslation();
   const heroRef = useReveal();
   const storyRef = useReveal();
 
@@ -41,16 +43,16 @@ export default function About() {
           
           {/* Hero Section */}
           <div className="about-hero" ref={heroRef}>
-            <div className="about-badge reveal-item">Discover SomaLab</div>
+            <div className="about-badge reveal-item">{t('about.badge')}</div>
             <div className="hero-content">
               <div className="hero-icon-wrapper reveal-item reveal-delay-1">
                 <BookOpen size={48} />
               </div>
               <h1 className="about-title reveal-item reveal-delay-2">
-                Bridging the Gap Between <span className="text-gradient">Medical Science</span> and You.
+                {t('about.title')} <span className="text-gradient">{t('about.title_highlight')}</span> {t('about.title_suffix')}
               </h1>
               <p className="about-subtitle reveal-item reveal-delay-3">
-                SomaLab is an interactive digital anatomy and health educational platform designed to provide a deep, accurate, and accessible visualization of the human body's structures and functions.
+                {t('about.subtitle')}
               </p>
             </div>
           </div>
@@ -58,18 +60,18 @@ export default function About() {
           {/* Main Story Section */}
           <div className="about-story-grid" ref={storyRef}>
             <div className="story-text-card glass-panel reveal-item">
-              <h2 className="story-heading">Empowering Through Knowledge</h2>
+              <h2 className="story-heading">{t('about.story_title')}</h2>
               <p>
-                This platform was created to bridge the gap between complex medical information and general public comprehension. We believe that knowledge of one's own body is the first step toward a healthier lifestyle. 
+                {t('about.story_p1')}
               </p>
               <p>
-                SomaLab brings modern 3D technology to your fingertips—empowering students, educators, medical professionals, and the general public to explore the wonders of the human body without limits.
+                {t('about.story_p2')}
               </p>
             </div>
             <div className="story-visual-card reveal-item reveal-delay-2">
                <div className="visual-glass-element">
                   <Microscope className="visual-icon" size={64} />
-                  <div className="visual-text">Explore<br/>Without Limits</div>
+                  <div className="visual-text" dangerouslySetInnerHTML={{ __html: t('about.visual_explore').replace(' ', '<br/>') }}></div>
                </div>
             </div>
           </div>
@@ -83,8 +85,8 @@ export default function About() {
             viewport={{ once: true, margin: "-100px" }}
           >
             <div className="about-pillars-header">
-              <motion.h2 variants={itemVariants}>Our Core Pillars</motion.h2>
-              <motion.p variants={itemVariants}>The foundations that drive our platform forward.</motion.p>
+              <motion.h2 variants={itemVariants}>{t('about.pillars_title')}</motion.h2>
+              <motion.p variants={itemVariants}>{t('about.pillars_subtitle')}</motion.p>
             </div>
 
             <div className="about-pillars-grid">
@@ -92,9 +94,9 @@ export default function About() {
                 <div className="pillar-icon-wrapper bg-blue-tint">
                   <Eye size={28} className="text-blue" />
                 </div>
-                <h3>Our Vision</h3>
+                <h3>{t('about.vision_title')}</h3>
                 <p>
-                  To be the leading interactive anatomy learning platform that democratizes medical knowledge, enabling individuals from all backgrounds to better recognize and understand their bodies.
+                  {t('about.vision_desc')}
                 </p>
               </motion.div>
               
@@ -102,11 +104,11 @@ export default function About() {
                 <div className="pillar-icon-wrapper bg-purple-tint">
                   <Target size={28} className="text-purple" />
                 </div>
-                <h3>Our Mission</h3>
+                <h3>{t('about.mission_title')}</h3>
                 <ul className="mission-list">
-                  <li><ArrowRight size={16} /> Present accurate yet lightweight and interactive 3D medical models.</li>
-                  <li><ArrowRight size={16} /> Transform rigid biology learning into a fun exploration experience.</li>
-                  <li><ArrowRight size={16} /> Provide reliable science-based information to improve public health literacy.</li>
+                  <li><ArrowRight size={16} /> {t('about.mission_item1')}</li>
+                  <li><ArrowRight size={16} /> {t('about.mission_item2')}</li>
+                  <li><ArrowRight size={16} /> {t('about.mission_item3')}</li>
                 </ul>
               </motion.div>
 
@@ -114,9 +116,9 @@ export default function About() {
                 <div className="pillar-icon-wrapper bg-cyan-tint">
                   <Lightbulb size={28} className="text-cyan" />
                 </div>
-                <h3>Why We Built It</h3>
+                <h3>{t('about.why_title')}</h3>
                 <p>
-                  Textbooks and 2D illustrations are often insufficient to represent the complexity of a living, moving body. SomaLab was built to create a virtual laboratory where your curiosity can be answered visually, in detail, and in real-time.
+                  {t('about.why_desc')}
                 </p>
               </motion.div>
             </div>
