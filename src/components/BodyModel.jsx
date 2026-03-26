@@ -2,7 +2,6 @@ import { useGLTF } from '@react-three/drei'
 import { useEffect } from 'react'
 import * as THREE from 'three'
 
-// Holographic material
 function applyHolographicMaterial(scene, options = {}) {
   const {
     color = '#446699',

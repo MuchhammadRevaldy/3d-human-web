@@ -7,10 +7,10 @@ export default function ToxinsPanel({ onGoToOverview, activeVideo }) {
       <h1 className="panel-title">
         The Total Tox Burden<br/>& Environmental Toxicity Pattern
       </h1>
-      
+
       <div className="panel-body-text">
         <div className="section-header">
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>The Clinical Picture</h3>
         </div>
 
@@ -20,7 +20,7 @@ export default function ToxinsPanel({ onGoToOverview, activeVideo }) {
 
         <MobileInlineVideo activeVideo={activeVideo} />
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>Key Biomarkers Working Together</h3>
         </div>
 
@@ -97,7 +97,7 @@ export default function ToxinsPanel({ onGoToOverview, activeVideo }) {
         </div>
 
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>The Clinical Insight</h3>
         </div>
 
@@ -106,7 +106,7 @@ export default function ToxinsPanel({ onGoToOverview, activeVideo }) {
         <p>The overall high tox burden overwhelms natural detox pathways, leading to bioaccumulation and increased risk of autoimmune conditions, chronic fatigue, and neurological issues.</p>
 
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>Targeted Detoxification Optimization Protocol</h3>
         </div>
 
@@ -166,7 +166,7 @@ export default function ToxinsPanel({ onGoToOverview, activeVideo }) {
             </ul>
           </div>
         </div>
-        
+
         <div className="next-button-container" onClick={onGoToOverview}>
           <div className="next-content">
             <span className="next-label">NEXT</span>
@@ -178,8 +178,7 @@ export default function ToxinsPanel({ onGoToOverview, activeVideo }) {
             </svg>
           </div>
         </div>
-        
-        {/* padding at the bottom */}
+
         <div style={{height: '100px'}}></div>
       </div>
     </>

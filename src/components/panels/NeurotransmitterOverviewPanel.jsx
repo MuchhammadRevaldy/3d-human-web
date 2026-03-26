@@ -7,18 +7,18 @@ export default function NeurotransmitterOverviewPanel({ activeVideo }) {
       <h1 className="panel-title">
         Comprehensive Neurotransmitter Balance Assessment for Mental & Cognitive Health
       </h1>
-      
+
       <div className="panel-body-text">
         <p>The Neurotransmitters Panel evaluates the levels of neurotransmitters and their metabolites in the body, which are essential for mood regulation, cognitive function, and stress response.</p>
 
         <p>Neurotransmitter imbalances underlie many mental health conditions, yet standard psychiatric evaluations don't measure them directly.</p>
 
         <p>This test provides objective data to guide targeted amino acid therapy, nutritional support, and medication selection.</p>
-        
+
         <p>By understanding both neurotransmitter levels and their metabolic patterns, practitioners can identify whether issues stem from inadequate production, excessive breakdown, or receptor dysfunction.</p>
 
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>Symptoms to Consider This Test</h3>
         </div>
         <ul className="protocol-bullets" style={{marginBottom: '32px'}}>
@@ -32,7 +32,7 @@ export default function NeurotransmitterOverviewPanel({ activeVideo }) {
 
         <MobileInlineVideo activeVideo={activeVideo} />
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>Key Highlight Markers</h3>
         </div>
         <ul className="protocol-bullets" style={{marginBottom: '32px'}}>
@@ -45,7 +45,7 @@ export default function NeurotransmitterOverviewPanel({ activeVideo }) {
         </ul>
 
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>Main Product Highlights</h3>
         </div>
         <ul className="protocol-bullets">
@@ -55,8 +55,7 @@ export default function NeurotransmitterOverviewPanel({ activeVideo }) {
           <li>Comprehensive evaluation of synthesis, metabolism, and clearance patterns</li>
           <li>Identifies specific imbalances driving mental health symptoms</li>
         </ul>
-        
-        {/* padding at the bottom */}
+
         <div style={{height: '100px'}}></div>
       </div>
     </>

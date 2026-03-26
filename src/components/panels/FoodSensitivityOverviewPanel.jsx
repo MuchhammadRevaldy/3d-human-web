@@ -6,7 +6,7 @@ export default function FoodSensitivityOverviewPanel({ activeVideo }) {
       <h1 className="panel-title">
         Comprehensive Food Sensitivity Testing — 209 Foods & 57 Additives
       </h1>
-      
+
       <div className="panel-body-text">
         <p>The Food Sensitivity Complete test identifies IgG- and IgA-mediated immune responses to a broad range of foods, helping you uncover hidden triggers.</p>
 
@@ -17,7 +17,7 @@ export default function FoodSensitivityOverviewPanel({ activeVideo }) {
         <p>By measuring both IgG and IgA responses, it captures different types of immune reactions, providing a complete picture of food reactivity.</p>
 
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>Symptoms to Consider This Test</h3>
         </div>
         <ul className="protocol-bullets" style={{marginBottom: '32px'}}>
@@ -30,7 +30,7 @@ export default function FoodSensitivityOverviewPanel({ activeVideo }) {
         </ul>
 
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>Key Highlight Markers</h3>
         </div>
         <ul className="protocol-bullets" style={{marginBottom: '32px'}}>
@@ -43,7 +43,7 @@ export default function FoodSensitivityOverviewPanel({ activeVideo }) {
         </ul>
 
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>Main Product Highlights</h3>
         </div>
         <ul className="protocol-bullets">
@@ -53,8 +53,7 @@ export default function FoodSensitivityOverviewPanel({ activeVideo }) {
           <li>Includes both immediate and delayed reactions</li>
           <li>Tests food additives often overlooked in other panels</li>
         </ul>
-        
-        {/* padding at the bottom */}
+
         <div style={{height: '100px'}}></div>
       </div>
     </>

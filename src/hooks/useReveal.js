@@ -1,15 +1,5 @@
 import { useEffect, useRef } from 'react';
 
-/**
- * Attaches Intersection Observer to all `.reveal-item` descendants
- * of the given container ref, adding `.is-visible` when they enter the viewport.
- *
- * Usage:
- *   const sectionRef = useReveal();
- *   <section ref={sectionRef}>
- *     <div className="reveal-item reveal-delay-1">...</div>
- *   </section>
- */
 export default function useReveal(threshold = 0.12) {
   const ref = useRef(null);
 

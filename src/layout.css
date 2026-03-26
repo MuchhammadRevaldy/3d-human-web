@@ -1,4 +1,4 @@
-/* src/layout.css */
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 body {
@@ -13,7 +13,6 @@ body {
   box-sizing: border-box;
 }
 
-/* Universal Navbar – Floating Capsule Frost Glass */
 .universal-navbar {
   position: fixed;
   top: 18px;
@@ -63,7 +62,6 @@ body {
   flex-shrink: 0;
 }
 
-/* Match the Explore page logo-text style */
 .navbar-logo .logo-text {
   font-family: 'Inter', sans-serif;
   font-size: 1.15rem;
@@ -109,7 +107,6 @@ body {
   color: #0077ff;
 }
 
-/* Hamburger icon lines animation via Menu/X swap */
 .navbar-toggle svg {
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
   display: block;
@@ -200,7 +197,6 @@ body {
   transform: translateX(4px);
 }
 
-/* ─── Global Scroll-Reveal Animations ─── */
 @keyframes reveal-up {
   from { opacity: 0; transform: translateY(32px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -221,7 +217,6 @@ body {
   transform: translateY(0) scale(1);
 }
 
-/* Delay classes for staggering */
 .reveal-delay-1 { transition-delay: 0.05s; }
 .reveal-delay-2 { transition-delay: 0.15s; }
 .reveal-delay-3 { transition-delay: 0.25s; }
@@ -229,8 +224,6 @@ body {
 .reveal-delay-5 { transition-delay: 0.45s; }
 .reveal-delay-6 { transition-delay: 0.55s; }
 
-/* ─── Navbar Page Padding ─── */
-/* Pages must push content down past the float capsule (18px top + 58px height + 20px gap) */
 .page-wrapper {
   min-height: 100vh;
   padding-top: 96px;
@@ -249,14 +242,11 @@ body {
   background-color: transparent;
 }
 
-/* Explore Page layout reverts strictly to native index.css */
-/* Standard Pages */
 .standard-page {
   padding: 4rem 2rem;
   max-width: 1000px;
   margin: 0 auto;
 }
-
 
 .home-bg-glow {
   position: absolute;
@@ -287,7 +277,7 @@ body {
   flex-direction: column;
   gap: 1.8rem;
   margin-top: -3rem;
-  /* visually center against 3D model */
+
 }
 
 .home-headline {
@@ -346,7 +336,6 @@ body {
   font-size: 1.1rem;
 }
 
-/* 3D Preview Glass Section */
 .home-3d-preview {
   position: relative;
   height: 640px;
@@ -528,7 +517,6 @@ body {
   background: #fafbfc;
 }
 
-/* About, Content, Contact content */
 .content-wrapper h2 {
   font-size: 2.5rem;
   margin-bottom: 1rem;
@@ -601,7 +589,6 @@ body {
   font-size: 1rem;
 }
 
-/* Contact form */
 .contact-form-container {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -702,7 +689,6 @@ body {
     height: 52px;
   }
 
-  /* Mobile Menu Styles */
   .navbar-toggle {
     display: block;
     transform: rotate(0);
@@ -710,7 +696,7 @@ body {
 
   .navbar-menu-wrapper {
     position: fixed;
-    top: 76px; /* 12px offset + 52px capsule height + 12px gap */
+    top: 76px;
     left: 16px;
     width: calc(100% - 32px);
     height: 0;
@@ -775,7 +761,6 @@ body {
     font-size: 1rem;
   }
 
-  /* Home Page Mobile Refinements */
   .home-headline {
     font-size: 2.8rem;
     text-align: center;
@@ -805,7 +790,6 @@ body {
   }
 }
 
-/* Scrollable Home wrapper */
 .home-scroll-page {
   width: 100%;
   min-height: 100vh;
@@ -813,7 +797,6 @@ body {
   flex-direction: column;
 }
 
-/* Discover Section */
 .discover-section {
   padding: 6rem 2rem;
   background: white;
@@ -851,7 +834,7 @@ body {
 }
 
 .feature-box {
-  background: #f1f5f9; /* Slightly darker as requested */
+  background: #f1f5f9;
   border-radius: 20px;
   padding: 2.5rem;
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, background 0.3s ease;
@@ -860,7 +843,7 @@ body {
 
 .feature-box:hover {
   transform: translateY(-8px);
-  box-shadow: 0 20px 50px rgba(0, 119, 255, 0.2); /* Blue shadow glow */
+  box-shadow: 0 20px 50px rgba(0, 119, 255, 0.2);
   background: #ffffff;
   border-color: #0077ff44;
 }
@@ -890,7 +873,6 @@ body {
   font-size: 1.05rem;
 }
 
-/* Footer Section */
 .home-footer {
   background: #101828;
   color: white;
@@ -992,7 +974,6 @@ body {
   gap: 0.5rem;
 }
 
-/* Scrollable Home wrapper */
 .home-scroll-page {
   width: 100%;
   min-height: 100vh;
@@ -1000,21 +981,16 @@ body {
   flex-direction: column;
 }
 
-
-
 .home-text-section,
 .home-3d-preview {
   min-width: 0;
   max-width: 100%;
 }
 
-/* ==================================
-   GLOBAL PREMIUM FOOTER
-=================================== */
 .global-footer {
   position: relative;
   background: #0b1121;
-  /* Deep premium blue-dark */
+
   color: #e2e8f0;
   padding-top: 4rem;
   z-index: 100;

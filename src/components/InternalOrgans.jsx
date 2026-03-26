@@ -3,9 +3,6 @@ import { useEffect, useRef, useMemo } from 'react'
 import * as THREE from 'three'
 import { useFrame } from '@react-three/fiber'
 
-// We removed the global activeMaterialParams constant.
-// Instead, Active/Inactive materials will be generated dynamically per organ.
-
 const inactiveMaterialParams = {
   color: new THREE.Color('#4466aa'),
   emissive: new THREE.Color('#223388'),
@@ -21,13 +18,12 @@ function InternalOrganMesh({ organ, isVisible, isActive, isMobile }) {
   const { scene } = useGLTF(organ.file)
   const ref = useRef()
 
-  // Clone scene so multiple instances don't share identical nested meshes
   const clonedScene = useMemo(() => scene.clone(true), [scene])
 
   const activeParams = useMemo(() => ({
     color: new THREE.Color(organ.color || '#ff3322'),
     emissive: new THREE.Color(organ.emissive || '#ff2200'),
-    emissiveIntensity: isMobile ? 0.35 : 1.2, // Drastically reduced for mobile to prevent overexposure blur
+    emissiveIntensity: isMobile ? 0.35 : 1.2,
     roughness: 0.2,
     metalness: 0.1,
     transparent: true,
@@ -38,16 +34,16 @@ function InternalOrganMesh({ organ, isVisible, isActive, isMobile }) {
   }), [organ, isMobile])
 
   const inactiveParams = useMemo(() => ({
-    color: new THREE.Color('#050a15'), // Near-black / dark blue
-    emissive: new THREE.Color('#000000'), // No glow
+    color: new THREE.Color('#050a15'),
+    emissive: new THREE.Color('#000000'),
     emissiveIntensity: 0.0,
-    roughness: 0.8, // Rough so it doesn't reflect sharp light
-    metalness: 0.0, // No metal reflection
+    roughness: 0.8,
+    metalness: 0.0,
     transparent: true,
-    opacity: 0.0, // Completely invisible
+    opacity: 0.0,
     transmission: 0.0,
-    envMapIntensity: 0.0, // Absolutely zero reflections
-    depthWrite: false, // Prevent depth sorting artifacts with outer mesh
+    envMapIntensity: 0.0,
+    depthWrite: false,
   }), [])
 
   const materialRef = useRef(new THREE.MeshPhysicalMaterial(
@@ -62,32 +58,26 @@ function InternalOrganMesh({ organ, isVisible, isActive, isMobile }) {
     })
   }, [clonedScene])
 
-  // Smoothly interpolate between active and inactive states
   useFrame((state, delta) => {
     const targetParams = isVisible ? activeParams : inactiveParams
 
-    // Pulsating Emission (Breathing Glow): Modulates inner light rhythmically without rubber-banding mesh
-    const breath = (Math.sin(state.clock.elapsedTime * 2.0) + 1) / 2 // 0.0 to 1.0, slower, natural rhythm
-    
-    // Kurangi glow secara drastis di HP agar tidak 'Terbakar' (overexposure) yang menyebabkan organ jadi rata seperti siluet pink blur.
-    const maxGlow = isMobile ? 0.15 : 2.5 // Even lower on mobile (tadinya 0.4) to isolate the silhouette issue
-    
+    const breath = (Math.sin(state.clock.elapsedTime * 2.0) + 1) / 2
+
+    const maxGlow = isMobile ? 0.15 : 2.5
+
     const dynamicEmissiveIntensity = isActive ? THREE.MathUtils.lerp(0.05, maxGlow, breath) : (isVisible ? targetParams.emissiveIntensity : 0.0)
 
-    const speed = 0.25 // Mempercepat transisi hide/show (tadinya 0.1)
+    const speed = 0.25
     materialRef.current.color.lerp(targetParams.color, speed)
     materialRef.current.emissive.lerp(targetParams.emissive, speed)
     materialRef.current.emissiveIntensity = THREE.MathUtils.lerp(materialRef.current.emissiveIntensity, dynamicEmissiveIntensity, speed)
     materialRef.current.opacity = THREE.MathUtils.lerp(materialRef.current.opacity, targetParams.opacity, speed)
     materialRef.current.transmission = THREE.MathUtils.lerp(materialRef.current.transmission, targetParams.transmission, speed)
-    
-    // Smoothly fade out reflections for inactive organs
+
     materialRef.current.envMapIntensity = THREE.MathUtils.lerp(materialRef.current.envMapIntensity || 0, targetParams.envMapIntensity, speed)
-    
-    // Toggle depthWrite directly (cannot interpolate boolean)
+
     materialRef.current.depthWrite = isVisible
 
-    // Ensure scale stays strictly uniform (removed physical balloon-like mesh expansion)
     if (ref.current) {
       ref.current.scale.setScalar(organ.scale)
     }
@@ -110,7 +100,6 @@ export default function InternalOrgans({ models, categories, activeCategoryId, h
     const visibleIds = new Set()
     const activeCat = categories.find(c => c.id === activeCategoryId)
 
-    // Jika sedang melihat detail overview (sub-hotspot aktif), hanya tampilkan organ target (focusOrgan)
     if (activeSubHotspotId && activeCat) {
       const activeSub = activeCat.subHotspots?.find(s => s.id === activeSubHotspotId)
       if (activeSub && activeSub.focusOrgan) {
@@ -121,10 +110,9 @@ export default function InternalOrgans({ models, categories, activeCategoryId, h
 
     const hoveredCat = categories.find(c => c.id === hoveredCategoryId)
 
-    // Default: tampilkan organ sesuai definisi "shows" dari kategori yang aktif atau di-hover
     if (activeCat && activeCat.shows) activeCat.shows.forEach(id => visibleIds.add(id))
     if (hoveredCat && hoveredCat.shows) hoveredCat.shows.forEach(id => visibleIds.add(id))
-    
+
     return visibleIds
   }
 

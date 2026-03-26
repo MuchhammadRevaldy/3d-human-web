@@ -7,18 +7,18 @@ export default function HormoneOverviewPanel({ activeVideo }) {
       <h1 className="panel-title">
         Complete Hormone Metabolism & Balance Assessment
       </h1>
-      
+
       <div className="panel-body-text">
         <p>The Hormone Zoomer provides insights into hormonal imbalances, circadian rhythm function, and stress response.</p>
 
         <p>This comprehensive approach evaluates not just hormone levels but how they're metabolized and cleared, revealing why some patients don't respond to hormone therapy.</p>
 
         <p>The Hormone Zoomer offers a comprehensive evaluation of hormone levels, including cortisol, estrogen, progesterone, testosterone, and endocrine disruptors.</p>
-        
+
         <p>By identifying toxic interference and metabolic patterns, it enables truly personalized hormone optimization strategies.</p>
 
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>Symptoms to Consider This Test</h3>
         </div>
         <ul className="protocol-bullets" style={{marginBottom: '32px'}}>
@@ -32,7 +32,7 @@ export default function HormoneOverviewPanel({ activeVideo }) {
 
         <MobileInlineVideo activeVideo={activeVideo} />
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>Key Highlight Markers</h3>
         </div>
         <ul className="protocol-bullets" style={{marginBottom: '32px'}}>
@@ -45,7 +45,7 @@ export default function HormoneOverviewPanel({ activeVideo }) {
         </ul>
 
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>Main Product Highlights</h3>
         </div>
         <ul className="protocol-bullets">
@@ -55,8 +55,7 @@ export default function HormoneOverviewPanel({ activeVideo }) {
           <li>Evaluates both hormone levels and detoxification pathways</li>
           <li>Identifies endocrine disruptors interfering with hormone function</li>
         </ul>
-        
-        {/* padding at the bottom */}
+
         <div style={{height: '100px'}}></div>
       </div>
     </>

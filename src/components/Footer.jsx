@@ -10,11 +10,9 @@ export default function Footer() {
     <footer className="global-footer">
       <div className="footer-glow-line"></div>
       <div className="footer-container">
-        
-        {/* Top Section */}
+
         <div className="footer-top">
-          
-          {/* Brand Column */}
+
           <div className="footer-brand-col">
             <Link to="/" className="footer-logo">
               <img src="/somalab_logo.png" alt="SomaLab" className="footer-logo-img" />
@@ -39,7 +37,6 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Links Column 1 */}
           <div className="footer-links-col">
             <h4 className="footer-heading">{t('footer.links')}</h4>
             <ul className="footer-link-list">
@@ -49,7 +46,6 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Links Column 2 */}
           <div className="footer-links-col">
             <h4 className="footer-heading">{t('footer.resources')}</h4>
             <ul className="footer-link-list">
@@ -59,7 +55,6 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Contact Column */}
           <div className="footer-contact-col">
             <h4 className="footer-heading">{t('footer.get_in_touch')}</h4>
             <ul className="footer-contact-list">
@@ -76,7 +71,6 @@ export default function Footer() {
 
         </div>
 
-        {/* Bottom Section */}
         <div className="footer-bottom">
           <p className="copyright">&copy; {new Date().getFullYear()} SomaLab. {t('footer.copyright')}</p>
           <div className="footer-legal-links">
@@ -85,7 +79,7 @@ export default function Footer() {
             <Link to="#">{t('footer.terms')}</Link>
           </div>
         </div>
-        
+
       </div>
     </footer>
   );

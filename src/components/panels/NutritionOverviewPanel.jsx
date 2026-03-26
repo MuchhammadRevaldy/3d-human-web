@@ -6,14 +6,14 @@ export default function NutritionOverviewPanel({ activeVideo }) {
       <h1 className="panel-title">
         Comprehensive Cellular Nutrition Assessment — 40+ Nutrients
       </h1>
-      
+
       <div className="panel-body-text">
         <p>The Micronutrient Panel provides insights into nutrient status, absorption, and potential deficiencies, helping guide personalized supplementation and dietary strategies. Nutrient deficiencies are epidemic yet often subclinical, contributing to chronic disease and suboptimal health.</p>
 
         <p>This test measures both intracellular (long-term) and extracellular (current) nutrient status, providing a complete picture that standard serum tests miss. The NutriPro version adds genetic analysis, revealing why certain nutrients are chronically low despite supplementation.</p>
 
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>Symptoms to Consider This Test</h3>
         </div>
         <ul className="protocol-bullets" style={{marginBottom: '32px'}}>
@@ -26,7 +26,7 @@ export default function NutritionOverviewPanel({ activeVideo }) {
         </ul>
 
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>Key Highlight Markers</h3>
         </div>
         <ul className="protocol-bullets" style={{marginBottom: '32px'}}>
@@ -39,7 +39,7 @@ export default function NutritionOverviewPanel({ activeVideo }) {
         </ul>
 
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>Main Product Highlights</h3>
         </div>
         <ul className="protocol-bullets">
@@ -49,8 +49,7 @@ export default function NutritionOverviewPanel({ activeVideo }) {
           <li>Most comprehensive nutrient assessment available</li>
           <li>Identifies both deficiencies and functional insufficiencies</li>
         </ul>
-        
-        {/* padding at the bottom */}
+
         <div style={{height: '100px'}}></div>
       </div>
     </>

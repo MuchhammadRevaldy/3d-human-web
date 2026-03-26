@@ -9,7 +9,6 @@ const LanguageSelector = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
-  // Hide on explore page
   if (location.pathname === '/explore') return null;
 
   const languages = [
@@ -27,14 +26,14 @@ const LanguageSelector = () => {
       <AnimatePresence>
         {isOpen && (
           <>
-            <motion.div 
+            <motion.div
               className="lang-overlay-backdrop"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsOpen(false)}
             />
-            <motion.div 
+            <motion.div
               className="lang-options-modal glass-panel"
               initial={{ opacity: 0, scale: 0.9, y: 20, x: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0, x: 0 }}

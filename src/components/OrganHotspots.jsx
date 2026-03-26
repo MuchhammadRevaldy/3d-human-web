@@ -6,7 +6,6 @@ export default function OrganHotspots({ organs, activeOrgan, onSelect, onHover, 
 
   return (
     <group>
-      {/* MAIN HOTSPOTS (Visible only when NOT zoomed in) */}
       {!activeOrgan && organs.map((organ) => {
         return (
           <Html
@@ -33,7 +32,6 @@ export default function OrganHotspots({ organs, activeOrgan, onSelect, onHover, 
         )
       })}
 
-      {/* SUB-HOTSPOTS (Visible ONLY when zoomed into a category that has them) */}
       {activeOrgan && activeData?.subHotspots && activeData.subHotspots.map((sub) => (
         <Html
           key={sub.id}

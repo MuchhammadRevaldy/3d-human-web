@@ -6,7 +6,7 @@ export default function AutoimmunityOverviewPanel({ activeVideo }) {
       <h1 className="panel-title">
         Comprehensive Autoimmune Disease Screen — 30+ Tissue Antibodies
       </h1>
-      
+
       <div className="panel-body-text">
         <p>The Autoimmune Zoomer aids in detecting autoantibodies and antigens associated with systemic autoimmunity, including thyroid disorders, rheumatoid arthritis, and type 1 diabetes.</p>
 
@@ -17,7 +17,7 @@ export default function AutoimmunityOverviewPanel({ activeVideo }) {
         <p>By identifying specific antibody patterns, it helps differentiate between various autoimmune conditions and guides targeted immune modulation strategies.</p>
 
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>Symptoms to Consider This Test</h3>
         </div>
         <ul className="protocol-bullets" style={{marginBottom: '32px'}}>
@@ -30,7 +30,7 @@ export default function AutoimmunityOverviewPanel({ activeVideo }) {
         </ul>
 
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>Key Highlight Markers</h3>
         </div>
         <ul className="protocol-bullets" style={{marginBottom: '32px'}}>
@@ -43,7 +43,7 @@ export default function AutoimmunityOverviewPanel({ activeVideo }) {
         </ul>
 
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>Main Product Highlights</h3>
         </div>
         <ul className="protocol-bullets">
@@ -53,8 +53,7 @@ export default function AutoimmunityOverviewPanel({ activeVideo }) {
           <li>Identifies autoimmune activity years before clinical diagnosis</li>
           <li>Monitors disease activity and treatment response</li>
         </ul>
-        
-        {/* padding at the bottom */}
+
         <div style={{height: '100px'}}></div>
       </div>
     </>

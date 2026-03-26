@@ -7,19 +7,19 @@ export default function CardioMetabolicPanel({ onGoToOverview, activeVideo }) {
       <h1 className="panel-title">
         The Metabolic Syndrome<br/>& Atherogenic Dyslipidemia Pattern
       </h1>
-      
+
       <div className="panel-body-text">
         <div className="section-header">
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>The Clinical Picture</h3>
         </div>
-        
+
         <p>Thomas, a 52-year-old executive, presented with central obesity, hypertension, and family history of early cardiovascular disease.</p>
         <p>Despite “normal” total cholesterol, his advanced lipid testing revealed atherogenic dyslipidemia with oxidative stress:</p>
-        
+
         <MobileInlineVideo activeVideo={activeVideo} />
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>Key Biomarkers Working Together</h3>
         </div>
 
@@ -96,7 +96,7 @@ export default function CardioMetabolicPanel({ onGoToOverview, activeVideo }) {
         </div>
 
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>The Clinical Insight</h3>
         </div>
 
@@ -106,7 +106,7 @@ export default function CardioMetabolicPanel({ onGoToOverview, activeVideo }) {
         <p>The low HDL reflects impaired reverse cholesterol transport and antioxidant capacity.</p>
 
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>Cardiovascular Support Protocol</h3>
         </div>
 
@@ -164,7 +164,7 @@ export default function CardioMetabolicPanel({ onGoToOverview, activeVideo }) {
             </ul>
           </div>
         </div>
-        
+
         <div className="next-button-container" onClick={onGoToOverview}>
           <div className="next-content">
             <span className="next-label">NEXT</span>
@@ -176,8 +176,7 @@ export default function CardioMetabolicPanel({ onGoToOverview, activeVideo }) {
             </svg>
           </div>
         </div>
-        
-        {/* padding at the bottom */}
+
         <div style={{height: '100px'}}></div>
       </div>
     </>

@@ -16,7 +16,7 @@ export default function CardioOverviewPanel({ activeVideo }) {
         <p>The comprehensive nature of this panel allows for personalized treatment strategies targeting specific risk factors rather than one-size-fits-all approaches.</p>
 
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>Symptoms to Consider This Test</h3>
         </div>
         <ul className="protocol-bullets" style={{marginBottom: '32px'}}>
@@ -30,7 +30,7 @@ export default function CardioOverviewPanel({ activeVideo }) {
 
         <MobileInlineVideo activeVideo={activeVideo} />
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>Key Highlight Markers</h3>
         </div>
         <ul className="protocol-bullets" style={{marginBottom: '32px'}}>
@@ -43,7 +43,7 @@ export default function CardioOverviewPanel({ activeVideo }) {
         </ul>
 
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>Main Product Highlights</h3>
         </div>
         <ul className="protocol-bullets">
@@ -53,8 +53,7 @@ export default function CardioOverviewPanel({ activeVideo }) {
           <li>Comprehensive evaluation beyond standard cholesterol testing</li>
           <li>Personalized risk stratification based on genetic and biochemical markers</li>
         </ul>
-        
-        {/* padding at the bottom */}
+
         <div style={{height: '100px'}}></div>
       </div>
     </>

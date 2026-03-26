@@ -24,9 +24,9 @@ export default function About() {
 
   const itemVariants = {
     hidden: { opacity: 0, y: 24, scale: 0.99 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
+    visible: {
+      opacity: 1,
+      y: 0,
       scale: 1,
       transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] }
     }
@@ -35,13 +35,11 @@ export default function About() {
   return (
     <PageTransition>
       <div className="about-page-container">
-        {/* Decorative Background Blobs */}
         <div className="about-bg-blob blob-1"></div>
         <div className="about-bg-blob blob-2"></div>
-        
+
         <div className="about-content-wrapper">
-          
-          {/* Hero Section */}
+
           <div className="about-hero" ref={heroRef}>
             <div className="about-badge reveal-item">{t('about.badge')}</div>
             <div className="hero-content">
@@ -57,7 +55,6 @@ export default function About() {
             </div>
           </div>
 
-          {/* Main Story Section */}
           <div className="about-story-grid" ref={storyRef}>
             <div className="story-text-card glass-panel reveal-item">
               <h2 className="story-heading">{t('about.story_title')}</h2>
@@ -76,8 +73,7 @@ export default function About() {
             </div>
           </div>
 
-          {/* Core Pillars */}
-          <motion.div 
+          <motion.div
             className="about-pillars-section"
             variants={containerVariants}
             initial="hidden"
@@ -99,7 +95,7 @@ export default function About() {
                   {t('about.vision_desc')}
                 </p>
               </motion.div>
-              
+
               <motion.div className="pillar-card glass-panel interactive-card" variants={itemVariants}>
                 <div className="pillar-icon-wrapper bg-purple-tint">
                   <Target size={28} className="text-purple" />
@@ -123,7 +119,7 @@ export default function About() {
               </motion.div>
             </div>
           </motion.div>
-          
+
         </div>
 
         <style>{`
@@ -217,7 +213,7 @@ export default function About() {
           .story-text-card { padding: 50px; }
           .story-heading { font-size: 2.2rem; font-weight: 800; color: #1a1a3a; margin-bottom: 24px; }
           .story-text-card p { font-size: 1.1rem; line-height: 1.75; color: #4a5a7a; margin-bottom: 20px; }
-          
+
           .story-visual-card {
             background: linear-gradient(135deg, #0077ff 0%, #00d2ff 100%);
             border-radius: 28px;
@@ -257,7 +253,7 @@ export default function About() {
             gap: 30px;
           }
           @media (max-width: 950px) { .about-pillars-grid { grid-template-columns: 1fr; } }
-          
+
           .pillar-card {
             padding: 45px 35px;
             display: flex;

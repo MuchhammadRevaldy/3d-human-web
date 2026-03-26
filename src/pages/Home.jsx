@@ -29,9 +29,9 @@ export default function Home() {
 
   const itemVariants = {
     hidden: { opacity: 0, y: 24, scale: 0.99 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
+    visible: {
+      opacity: 1,
+      y: 0,
       scale: 1,
       transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] }
     }
@@ -40,11 +40,10 @@ export default function Home() {
   return (
     <PageTransition>
       <div className="home-scroll-page">
-        {/* HERO SECTION */}
         <div className="home-page-container">
           <ParticleBg />
           <div className="home-bg-glow"></div>
-          
+
           <div className="home-content" ref={heroRef}>
             <div className="home-text-section">
               <h1 className="home-headline reveal-item reveal-delay-1">
@@ -62,7 +61,7 @@ export default function Home() {
                   {t('home.cta_learn')}
                 </Link>
               </div>
-              
+
               <div className="home-features-pill">
                 <div className="pill-item reveal-item reveal-delay-4">
                   <span className="pill-icon">🧠</span> {t('home.pill_precise')}
@@ -75,7 +74,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            
+
             <div className="home-3d-preview reveal-item reveal-delay-2">
               <div className="preview-canvas-wrapper">
                 <div className="preview-glow-bg"></div>
@@ -89,24 +88,24 @@ export default function Home() {
                     <directionalLight position={[3, 5, 3]} intensity={0.5} color="#ffffff" />
                     <pointLight position={[0, 3, 2]} intensity={0.3} color="#a0c0ff" />
                     <Environment preset="studio" />
-                    
+
                     <Float speed={2} rotationIntensity={0.2} floatIntensity={0.5}>
                       <group position={[0, -0.6, 0]}>
                         <BodyModel sex="female" />
                       </group>
                     </Float>
-                    
-                    <OrbitControls 
-                      enableZoom={false} 
-                      enablePan={false} 
-                      autoRotate 
+
+                    <OrbitControls
+                      enableZoom={false}
+                      enablePan={false}
+                      autoRotate
                       autoRotateSpeed={1.5}
                       minPolarAngle={Math.PI / 2.5}
                       maxPolarAngle={Math.PI / 1.5}
                     />
                   </Suspense>
                 </Canvas>
-                
+
                 <div className="preview-glass-overlay">
                   <div className="glass-indicator">
                     <div className="indicator-dot"></div> Live 3D Render
@@ -117,9 +116,8 @@ export default function Home() {
           </div>
         </div>
 
-        {/* FEATURES SECTION */}
         <section className="discover-section">
-          <motion.div 
+          <motion.div
             className="discover-content"
             variants={containerVariants}
             initial="hidden"
@@ -130,7 +128,7 @@ export default function Home() {
               <motion.h2 variants={itemVariants}>{t('home.why_title')}</motion.h2>
               <motion.p variants={itemVariants}>{t('home.why_subtitle')}</motion.p>
             </div>
-            
+
             <div className="features-grid">
               <motion.div className="feature-box" variants={itemVariants}>
                 <div className="feature-icon-wrapper">🔬</div>
@@ -151,7 +149,6 @@ export default function Home() {
           </motion.div>
         </section>
 
-        {/* Global Footer */}
         <Footer />
       </div>
     </PageTransition>

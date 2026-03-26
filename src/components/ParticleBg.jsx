@@ -25,7 +25,7 @@ export default function ParticleBg() {
         vx: (Math.random() - 0.5) * 0.25,
         vy: (Math.random() - 0.5) * 0.18 - 0.05,
         alpha: Math.random() * 0.35 + 0.08,
-        hue: Math.random() * 60 + 200, // blue-purple range
+        hue: Math.random() * 60 + 200,
       }
     }
 

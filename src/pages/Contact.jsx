@@ -28,7 +28,7 @@ export default function Contact() {
     const text = `Halo SomaLab,\n\nNama: ${formData.firstName} ${formData.lastName}\nEmail: ${formData.email}\n\nPesan:\n${formData.message}`;
     const encodedText = encodeURIComponent(text);
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedText}`;
-    
+
     window.open(whatsappUrl, '_blank');
   };
 
@@ -45,9 +45,9 @@ export default function Contact() {
 
   const itemVariants = {
     hidden: { opacity: 0, y: 24, scale: 0.99 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
+    visible: {
+      opacity: 1,
+      y: 0,
       scale: 1,
       transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
     }
@@ -56,8 +56,7 @@ export default function Contact() {
   return (
     <PageTransition>
       <div className="contact-page-container">
-        
-        {/* Decorative Background Blobs */}
+
         <div className="contact-bg-blob blob-c"></div>
         <div className="contact-bg-blob blob-d"></div>
 
@@ -66,16 +65,15 @@ export default function Contact() {
             <h1 className="contact-title reveal-item">{t('contact.title')} <span className="text-gradient">{t('contact.title_highlight')}</span></h1>
             <p className="contact-subtitle reveal-item reveal-delay-1">{t('contact.subtitle')}</p>
           </div>
-          
-          <motion.div 
+
+          <motion.div
             className="contact-grid"
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
           >
-            
-            {/* Contact Form */}
+
             <motion.div className="contact-form-card glass-panel" variants={itemVariants}>
               <h2 className="form-heading"><MessageSquare className="inline-icon" /> {t('contact.form_title')}</h2>
               <form className="contact-form" onSubmit={handleWhatsAppRedirect}>
@@ -103,7 +101,6 @@ export default function Contact() {
               </form>
             </motion.div>
 
-            {/* Contact Info */}
             <div className="contact-info-panel">
               <motion.div className="info-card glass-panel" variants={itemVariants}>
                 <div className="info-icon-wrapper"><MapPin size={28} /></div>

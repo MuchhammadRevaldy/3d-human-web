@@ -58,7 +58,7 @@ const ARTICLES_DATA = {
       "Furthermore, chronic inflammation acts as 'background noise' that distracts the immune system. Resolving chronic inflammation through anti-inflammatory diets, emotional regulation, and avoiding environmental toxins frees up immunological resources to fight genuine threats and clear senescent (aging) cells more efficiently."
     ]
   },
-  // Default fallback
+
   "default": {
     title: "Understanding Your Anatomy",
     category: "General Health",
@@ -86,11 +86,10 @@ export default function Article() {
   return (
     <PageTransition>
       <div className="article-reading-page">
-        {/* Dynamic Background Blob */}
         <div className={`article-bg-blob bg-gradient-to-br ${data.color} opacity-20`}></div>
 
         <div className="article-container">
-          
+
           <Link to="/content" className="back-link group">
             <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
             <span>Back to Insights</span>
@@ -107,7 +106,7 @@ export default function Article() {
               <div className="meta-item"><Clock size={16} /> {data.readTime}</div>
               <div className="meta-item">{data.date}</div>
             </div>
-            
+
             <div className="article-actions">
               <button className="action-btn" title="Share"><Share2 size={18} /></button>
               <button className="action-btn" title="Save"><Bookmark size={18} /></button>
@@ -136,7 +135,7 @@ export default function Article() {
             position: relative;
             background: #f8fafc;
           }
-          
+
           .article-bg-blob {
             position: fixed;
             top: -100px;

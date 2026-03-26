@@ -6,7 +6,7 @@ export default function OxidativeStressOverviewPanel() {
       <h1 className="panel-title">
         Advanced Oxidative Damage & Antioxidant Capacity Assessment
       </h1>
-      
+
       <div className="panel-body-text">
         <p>The Oxidative Stress Profile evaluates oxidative damage, antioxidant capacity, and cellular resilience, key factors in understanding the biological rate of aging. Oxidative stress is a fundamental driver of aging and chronic disease, yet standard tests don't measure it comprehensively.</p>
 
@@ -15,7 +15,7 @@ export default function OxidativeStressOverviewPanel() {
         <p>By identifying specific types of oxidative damage and antioxidant deficiencies, it enables targeted interventions to slow aging and prevent disease.</p>
 
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>Symptoms to Consider This Test</h3>
         </div>
         <ul className="protocol-bullets" style={{marginBottom: '32px'}}>
@@ -28,7 +28,7 @@ export default function OxidativeStressOverviewPanel() {
         </ul>
 
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>Key Highlight Markers</h3>
         </div>
         <ul className="protocol-bullets" style={{marginBottom: '32px'}}>
@@ -41,7 +41,7 @@ export default function OxidativeStressOverviewPanel() {
         </ul>
 
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>Main Product Highlights</h3>
         </div>
         <ul className="protocol-bullets">
@@ -51,8 +51,7 @@ export default function OxidativeStressOverviewPanel() {
           <li>Provides oxidative damage score compared to age group</li>
           <li>Guides personalized antioxidant strategies</li>
         </ul>
-        
-        {/* padding at the bottom */}
+
         <div style={{height: '100px'}}></div>
       </div>
     </>

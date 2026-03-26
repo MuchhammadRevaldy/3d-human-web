@@ -32,7 +32,6 @@ body,
   background: linear-gradient(135deg, var(--bg-grad-1) 0%, var(--bg-grad-2) 55%, var(--bg-grad-3) 100%);
 }
 
-/* Scoped layout lock specifically for the interactive 3D explorer page */
 .explore-page {
   position: relative;
   width: 100vw;
@@ -40,7 +39,6 @@ body,
   overflow: hidden;
 }
 
-/* Bubble Background Root */
 .bubble-bg-root {
   position: absolute;
   inset: 0;
@@ -49,7 +47,6 @@ body,
   pointer-events: none;
 }
 
-/* Solid background as requested */
 .bubble-gradient-layer {
   position: absolute;
   inset: 0;
@@ -78,7 +75,6 @@ body,
   }
 }
 
-/* Individual bubble divs */
 .floating-bubble {
   position: absolute;
   border-radius: 50%;
@@ -113,7 +109,6 @@ body,
   }
 }
 
-/* ─── Smoky Aurora Blobs ─── */
 .smoke-blob {
   position: absolute;
   border-radius: 50%;
@@ -218,8 +213,6 @@ body,
   }
 }
 
-/* ─── Full-screen crosshair cursor ─── */
-
 .crosshair-root {
   position: fixed;
   inset: 0;
@@ -249,7 +242,6 @@ body,
   will-change: transform;
 }
 
-/* ---- LAYOUT ---- */
 .app-wrapper {
   position: relative;
   width: 100vw;
@@ -264,18 +256,13 @@ body,
   height: 100dvh;
   touch-action: none;
   z-index: 1;
-  /* Explicit z-index to manage stacking context */
-  /* Disable pull-to-refresh and page swiping */
-  /* Force a separate GPU compositing layer so backdrop-filter on overlaid
-     CSS elements does NOT bleed into / blur the WebGL canvas. This is
-     especially important in Vite production builds on mobile Safari/Chrome. */
+
   isolation: isolate;
   transform: translate3d(0, 0, 0);
   -webkit-transform: translate3d(0, 0, 0);
   will-change: transform;
 }
 
-/* ---- HEADER ---- */
 .header {
   position: absolute;
   top: 0;
@@ -331,7 +318,6 @@ body,
   color: var(--text-primary);
 }
 
-/* Logo: Top Right */
 .logo {
   position: absolute;
   top: 30px;
@@ -362,7 +348,6 @@ body,
   font-weight: 300;
 }
 
-/* Sidebar: Right Aligned */
 .sidebar {
   position: absolute;
   top: 100px;
@@ -453,7 +438,6 @@ body,
   color: #1a1a3a;
 }
 
-/* Hotspots Overlay dots */
 .hotspot-wrapper {
   position: relative;
   cursor: pointer;
@@ -463,7 +447,6 @@ body,
   justify-content: center;
 }
 
-/* The faint large outer ring */
 .hotspot-ring-outer {
   position: absolute;
   width: 48px;
@@ -473,7 +456,6 @@ body,
   background: transparent;
 }
 
-/* The inner glowing ring */
 .hotspot-ring-inner {
   position: absolute;
   width: 24px;
@@ -487,7 +469,6 @@ body,
   justify-content: center;
 }
 
-/* Active hotspot styling */
 .hotspot-wrapper.active .hotspot-ring-inner,
 .hotspot-wrapper:hover .hotspot-ring-inner {
   border-color: #00d2ff;
@@ -500,7 +481,6 @@ body,
   border-color: rgba(0, 210, 255, 0.6);
 }
 
-/* Triangle dots inside active hotspot */
 .hotspot-tri-dots {
   position: relative;
   width: 8px;
@@ -532,7 +512,6 @@ body,
   right: 0;
 }
 
-/* Single dot inside inactive hotspot */
 .hotspot-dot {
   width: 4px;
   height: 4px;
@@ -541,7 +520,6 @@ body,
   box-shadow: 0 0 5px #00d2ff;
 }
 
-/* ---- ORGAN PANEL ---- */
 .organ-panel {
   position: absolute;
   left: 24px;
@@ -620,7 +598,6 @@ body,
   color: var(--text-primary);
 }
 
-/* ---- PARTICLES ---- */
 .particle-bg {
   position: absolute;
   inset: 0;
@@ -629,11 +606,6 @@ body,
   z-index: 1;
 }
 
-/* ──────────────────────────────────────────────────────── */
-/* UNIFIED TOP-LEFT CONTROL BAR                            */
-/* ──────────────────────────────────────────────────────── */
-
-/* Wrapper row – positioned top-left, always on top */
 .top-left-bar {
   position: absolute;
   top: 24px;
@@ -642,11 +614,10 @@ body,
   display: flex;
   align-items: center;
   gap: 8px;
-  /* float above everything */
+
   pointer-events: all;
 }
 
-/* Generic square icon button (home, back, music) */
 .ctrl-icon-btn {
   width: 40px;
   height: 40px;
@@ -671,7 +642,6 @@ body,
   box-shadow: 0 6px 20px rgba(0, 0, 50, 0.14);
 }
 
-/* Back button: hidden by default, slides in when zoomed */
 .back-ctrl-btn {
   opacity: 0;
   pointer-events: none;
@@ -685,20 +655,18 @@ body,
   transform: scale(1) translateX(0);
 }
 
-/* Sex toggle sits inline with the bar — tighten to match 40px icon button height */
 .top-left-bar .sex-toggle {
   margin: 0;
   padding: 4px 6px;
-  /* reduced from 6px 8px */
+
 }
 
 .top-left-bar .sex-btn {
   padding: 4px 14px;
-  /* reduced from 7px 18px */
+
   font-size: 12px;
 }
 
-/* Music button colour states */
 .music-ctrl-btn.music-on {
   background: rgba(34, 197, 94, 0.22);
   border-color: rgba(34, 197, 94, 0.55);
@@ -719,7 +687,6 @@ body,
   background: rgba(239, 68, 68, 0.32);
 }
 
-/* Mini animated wave bars inside music-on button */
 .music-wave-mini {
   display: flex;
   align-items: center;
@@ -767,7 +734,6 @@ body,
   }
 }
 
-/* ── Desktop-only footer & home button ── */
 .footer-left {
   position: absolute;
   bottom: 40px;
@@ -799,7 +765,6 @@ body,
   border-radius: 12px;
 }
 
-/* Home button floating top-left – desktop */
 .home-btn-float {
   position: absolute;
   top: 28px;
@@ -826,7 +791,6 @@ body,
   transform: scale(1.08);
 }
 
-/* ── Mobile-only unified control pill ── */
 .mobile-ctrl-pill {
   position: absolute;
   top: 60px;
@@ -848,7 +812,6 @@ body,
   pointer-events: all;
 }
 
-/* Icon-only buttons inside the pill */
 .mob-icon-btn {
   width: 32px;
   height: 32px;
@@ -868,7 +831,6 @@ body,
   background: rgba(255, 255, 255, 0.4);
 }
 
-/* Thin vertical divider between sections */
 .mob-divider {
   width: 1px;
   height: 20px;
@@ -877,7 +839,6 @@ body,
   margin: 0 2px;
 }
 
-/* Sex selector buttons inside the pill */
 .mob-sex-btn {
   display: flex;
   align-items: center;
@@ -903,7 +864,6 @@ body,
   color: var(--text-primary);
 }
 
-/* Music colours */
 .mob-music-btn.music-on {
   color: #16a34a;
 }
@@ -911,8 +871,6 @@ body,
 .mob-music-btn.music-off {
   color: #dc2626;
 }
-
-/* green wave bars inherit music-wave-mini styles already defined */
 
 .footer-center {
   position: absolute;
@@ -934,7 +892,6 @@ body,
   font-weight: 800;
 }
 
-/* ---- LOADING ---- */
 .loading-screen {
   position: fixed;
   inset: 0;
@@ -978,11 +935,6 @@ body,
   margin-top: 10px;
 }
 
-/* ========================================================= */
-/* CELLULAR HEALTH VIEW STYLES                               */
-/* ========================================================= */
-
-/* Main wrapper for the cell view (takes full screen) */
 .cell-screen {
   position: absolute;
   inset: 0;
@@ -1001,7 +953,6 @@ body,
   }
 }
 
-/* Vertical frosted glass pillar (Top Left) */
 .vertical-pillar {
   position: absolute;
   top: 30px;
@@ -1036,7 +987,6 @@ body,
   transform: rotate(180deg);
 }
 
-/* Back button (Bottom Left) */
 .btn-back-body {
   position: absolute;
   bottom: 30px;
@@ -1065,15 +1015,13 @@ body,
   border-color: rgba(255, 255, 255, 0.3);
 }
 
-/* Hotspot Points with Lines & Pills */
 .cell-hotspot-container {
   pointer-events: none;
   display: flex;
   align-items: center;
-  /* Will position relative to the 3D Html anchor */
+
 }
 
-/* The actual glowing dot */
 .cell-dot {
   width: 14px;
   height: 14px;
@@ -1085,7 +1033,6 @@ body,
   border: 2px solid rgba(150, 200, 255, 0.8);
 }
 
-/* Pulse animation for the dot */
 .cell-dot::after {
   content: '';
   position: absolute;
@@ -1107,11 +1054,10 @@ body,
   }
 }
 
-/* The fine line connecting dot to label */
 .cell-line {
   height: 1px;
   width: 60px;
-  /* Base length, overridden via inline style mostly */
+
   background: linear-gradient(90deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.1) 100%);
   z-index: 1;
 }
@@ -1120,7 +1066,6 @@ body,
   background: linear-gradient(-90deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.1) 100%);
 }
 
-/* The floating pill label */
 .cell-label {
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.25);
@@ -1137,7 +1082,6 @@ body,
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
 }
 
-/* Modifier based on direction (left from dot or right from dot) */
 .cell-hotspot-container.dir-right {
   flex-direction: row;
 }
@@ -1145,10 +1089,6 @@ body,
 .cell-hotspot-container.dir-left {
   flex-direction: row-reverse;
 }
-
-/* ========================================================= */
-/* BOTTOM NAVIGATION UI & BACK BUTTON                        */
-/* ========================================================= */
 
 .back-zoom-overlay {
   position: absolute;
@@ -1167,7 +1107,6 @@ body,
   pointer-events: all;
 }
 
-/* Back to Website Button on Explore Page */
 .home-back-btn {
   position: absolute;
   top: 30px;
@@ -1313,7 +1252,6 @@ body,
   color: #0088ff;
 }
 
-/* Tooltip Card above buttons */
 .nav-tooltip {
   position: absolute;
   top: -65px;
@@ -1350,7 +1288,6 @@ body,
   white-space: nowrap;
 }
 
-/* Tooltip tail arrow */
 .nav-tooltip::after {
   content: '';
   position: absolute;
@@ -1368,10 +1305,6 @@ body,
   opacity: 1;
   transform: translateY(0);
 }
-
-/* ========================================================= */
-/* SUB-HOTSPOTS (ZOOMED VIEW OVERLAYS)                       */
-/* ========================================================= */
 
 .sub-hotspot-pill {
   display: flex;
@@ -1403,7 +1336,7 @@ body,
 
 .sub-hotspot-pill:hover {
   background: rgba(255, 255, 255, 0.95);
-  /* Memanjang ke kanan via max-width ikon di bawah, scale dihilangkan */
+
   box-shadow: 0 10px 30px rgba(0, 100, 255, 0.25);
 }
 
@@ -1421,7 +1354,6 @@ body,
   overflow: hidden;
 }
 
-/* Animasi lingkaran warna biru memenuhi area saat di hover */
 .sub-hotspot-ring::before {
   content: '';
   position: absolute;
@@ -1448,7 +1380,7 @@ body,
   box-shadow: 0 0 8px rgba(255, 255, 255, 1);
   position: relative;
   z-index: 1;
-  /* Pastikan dot putih selalu di atas background biru */
+
 }
 
 .sub-hotspot-label {
@@ -1459,7 +1391,6 @@ body,
   white-space: nowrap;
 }
 
-/* Ikon Arrow yang memanjangkan kapsul pas di hover */
 .sub-hotspot-arrow {
   color: #0077ff;
   display: flex;
@@ -1478,17 +1409,13 @@ body,
   transform: translateX(0);
 }
 
-/* ========================================================= */
-/* SUB-HOTSPOT INFO VIEW (SIDEBAR & NAVBAR)                  */
-/* ========================================================= */
-
 .sub-info-overlay {
   position: absolute;
   inset: 0;
   z-index: 60;
   pointer-events: none;
   animation: fade-in 0.4s ease-out;
-  /* Prevent blur bleed into canvas */
+
   isolation: isolate;
   transform: translate3d(0, 0, 0);
   -webkit-transform: translate3d(0, 0, 0);
@@ -1584,10 +1511,10 @@ body,
   height: 100%;
   overflow-y: auto;
   padding: 0 50px 50px 50px;
-  /* Hardware acceleration for smooth scrolling */
+
   transform: translateZ(0);
   will-change: transform;
-  /* Hide scrollbar for cleaner look */
+
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
@@ -1631,10 +1558,6 @@ body,
 .panel-scroll-area::-webkit-scrollbar {
   display: none;
 }
-
-/* ========================================================= */
-/* OXI VIDEO OVERLAY (GSAP SCROLL-TRIGGERED)                 */
-/* ========================================================= */
 
 .oxi-video-position-wrapper {
   position: absolute;
@@ -1680,7 +1603,6 @@ body,
   transform-origin: bottom left;
 }
 
-/* --- NEURAL ZOOMER STYLES --- */
 .nav-inactive-btn {
   font-family: 'Inter', sans-serif;
   font-size: 13px;
@@ -1703,7 +1625,6 @@ body,
   transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
 }
 
-/* Smooth panel content animation */
 @keyframes panel-slide-in {
   from {
     opacity: 0;
@@ -1720,7 +1641,6 @@ body,
   animation: panel-slide-in 0.38s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Nav pill tab swap animation */
 @keyframes tab-pop-in {
   from {
     opacity: 0;
@@ -1736,10 +1656,6 @@ body,
 .nav-active-btn {
   animation: tab-pop-in 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
-
-/* ========================================================= */
-/* CSS EQUALIZER WAVE ANIMATION FOR SOUND BUTTON             */
-/* ========================================================= */
 
 .music-wave-container {
   display: flex;
@@ -1799,7 +1715,6 @@ body,
   }
 }
 
-/* Home Button Floating in Explore */
 .home-btn-float {
   position: absolute;
   top: 35px;
@@ -2022,17 +1937,16 @@ body,
   transition: all 0.3s ease;
 }
 
-/* ---- SPLASH SCREEN PRELOADER ---- */
 .splash-overlay {
   position: fixed;
   inset: 0;
   background: #ffffff;
-  /* Premium white to make logo pop */
+
   z-index: 99999;
   display: flex;
   align-items: center;
   justify-content: center;
-  /* When exiting, delay the background fade out by 0.3s so the logo scales up visibly first */
+
   transition: opacity 1.2s cubic-bezier(0.87, 0, 0.13, 1) 0.3s;
 }
 
@@ -2049,7 +1963,7 @@ body,
 }
 
 .logo-scale-out {
-  /* Exit phase: Massive scale up to scale: 60 */
+
   animation: logoScaleOut 1.5s cubic-bezier(0.87, 0, 0.13, 1) forwards;
 }
 
@@ -2058,7 +1972,7 @@ body,
   height: auto;
   object-fit: contain;
   will-change: transform;
-  /* Phase 1: Infinite spin */
+
   animation: logoSpin 3.5s linear infinite;
   transform-origin: center;
 }
@@ -2081,7 +1995,6 @@ body,
   }
 }
 
-/* Floating Home Button on Explore */
 .home-btn-float {
   position: absolute;
   top: 40px;
@@ -2107,10 +2020,6 @@ body,
   background: rgba(255, 255, 255, 0.3);
   transform: scale(1.08);
 }
-
-/* ========================================================= */
-/* MOBILE RESPONSIVE STYLES                                  */
-/* ========================================================= */
 
 .mobile-toggle-btn {
   display: flex;
@@ -2152,21 +2061,16 @@ body,
     display: none !important;
   }
 
-  /* Push the 3D scene down so the model head clears the pill bar */
   .canvas-container {
     top: 60px;
     height: calc(100dvh - 60px);
   }
 
-  /* Sub-hotspot mode: organ fills the full screen then panel slides from bottom */
   .subhotspot-active .canvas-container {
     top: 0;
     height: 100dvh;
   }
 
-  /* ── Mobile top-left bar alignment fixes ── */
-
-  /* Logo: keep at top-right on mobile (its natural position) */
   .logo {
     top: 20px;
     right: 16px;
@@ -2174,7 +2078,6 @@ body,
     transform: none;
   }
 
-  /* Bar: fixed height so all children share the same vertical midline */
   .top-left-bar {
     top: 16px;
     left: 12px;
@@ -2183,7 +2086,6 @@ body,
     gap: 6px;
   }
 
-  /* Icon buttons: same fixed size */
   .ctrl-icon-btn {
     width: 36px;
     height: 36px;
@@ -2191,7 +2093,6 @@ body,
     align-self: center;
   }
 
-  /* Sex toggle pill: constrain to fit inside 44px bar */
   .top-left-bar .sex-toggle {
     padding: 3px 5px;
     height: 36px;
@@ -2201,7 +2102,6 @@ body,
     align-self: center;
   }
 
-  /* Sex buttons: tighten to fit */
   .top-left-bar .sex-btn {
     padding: 3px 10px;
     font-size: 11px;
@@ -2209,7 +2109,6 @@ body,
     line-height: 1;
   }
 
-  /* Sidebar Bottom Sheet */
   .sidebar {
     top: auto;
     bottom: 0;
@@ -2257,7 +2156,6 @@ body,
     display: none;
   }
 
-  /* Zoom Bottom Bar */
   .bottom-bar-container {
     width: 90vw;
     bottom: 25px;
@@ -2291,7 +2189,6 @@ body,
     background: transparent;
   }
 
-  /* Overview Panel Bottom Sheet (Refactored to separate class) */
   .sub-info-side-panel-mobile {
     top: 0;
     bottom: 0;
@@ -2307,7 +2204,7 @@ body,
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
     box-shadow: none;
-    /* Force separate layer on mobile to avoid compositor blur bugs */
+
     isolation: isolate;
     transform: translate3d(0, 0, 0);
     -webkit-transform: translate3d(0, 0, 0);
@@ -2315,15 +2212,15 @@ body,
     position: absolute;
     z-index: 50;
     overflow: hidden;
-    /* Lock parent constraint */
+
   }
 
   .panel-scroll-area {
     padding: 60vh 0 0 0;
     height: 100%;
-    /* Fills parent 100dvh */
+
     overflow-y: auto;
-    /* Sole scrollable area */
+
     pointer-events: auto;
   }
 
@@ -2343,12 +2240,10 @@ body,
     margin-bottom: 24px;
   }
 
-  /* Hide custom cursor */
   .sub-info-plus-cursor {
     display: none !important;
   }
 
-  /* Sub Hotspot View Layouts */
   .sub-info-top-navbar {
     top: auto;
     bottom: 0;
@@ -2392,7 +2287,7 @@ body,
   .nav-pill-container .nav-inactive-btn {
     color: #8c95a6;
     opacity: 1;
-    /* override desktop opacity */
+
   }
 
   .nav-pill-container .nav-active-btn {
@@ -2416,7 +2311,6 @@ body,
     display: none;
   }
 
-  /* Top Fixed Back Button */
   .sub-info-back-btn {
     top: 20px;
     left: 20px;
@@ -2448,7 +2342,6 @@ body,
     height: 180px;
   }
 
-  /* UI Elements adjustments */
   .home-btn-float {
     top: 20px;
     left: 20px;
@@ -2482,7 +2375,7 @@ body,
 
   .footer-center {
     display: none;
-    /* Hide on mobile to save space */
+
   }
 
   .next-button-container {
@@ -2492,11 +2385,10 @@ body,
     margin-top: 40px;
   }
 
-  /* Biomarker Cards Mobile Adjustment */
   .biomarker-card {
     padding: 12px 14px;
     gap: 8px;
-    /* Ensure space between info and pill */
+
   }
 
   .bm-name {
@@ -2515,7 +2407,7 @@ body,
     text-align: center;
     max-width: 40%;
     white-space: normal;
-    /* allow text wrapping if needed */
+
   }
 
   .bm-value .arrow-up,

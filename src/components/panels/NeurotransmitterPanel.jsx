@@ -7,14 +7,14 @@ export default function NeurotransmitterPanel({ onGoToOverview, activeVideo }) {
       <h1 className="panel-title">
         The Neurotransmitter Imbalance<br/>& Mood-Cognitive Pattern
       </h1>
-      
+
       <div className="panel-body-text">
         <p style={{fontSize: '18px', color: '#5b9cf6', fontWeight: 600, marginTop: '-20px', marginBottom: '32px'}}>
           When Barrier Function Breaks Down
         </p>
 
         <div className="section-header">
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>The Clinical Picture</h3>
         </div>
 
@@ -23,7 +23,7 @@ export default function NeurotransmitterPanel({ onGoToOverview, activeVideo }) {
 
         <MobileInlineVideo activeVideo={activeVideo} />
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>Key Biomarkers Working Together</h3>
         </div>
 
@@ -70,7 +70,7 @@ export default function NeurotransmitterPanel({ onGoToOverview, activeVideo }) {
         </div>
 
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>The Clinical Insight</h3>
         </div>
 
@@ -80,7 +80,7 @@ export default function NeurotransmitterPanel({ onGoToOverview, activeVideo }) {
         <p>This interconnected imbalance creates a cycle where stress depletes neurotransmitters, leading to further mood and cognitive symptoms.</p>
 
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>Neurotransmitter Balance Support Protocol</h3>
         </div>
 
@@ -154,8 +154,7 @@ export default function NeurotransmitterPanel({ onGoToOverview, activeVideo }) {
             </svg>
           </div>
         </div>
-        
-        {/* padding at the bottom */}
+
         <div style={{height: '100px'}}></div>
       </div>
     </>

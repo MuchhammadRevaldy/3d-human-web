@@ -7,23 +7,23 @@ export default function CardioEndothelialPanel({ onGoToOverview, activeVideo }) 
       <h1 className="panel-title">
         The Endothelial Dysfunction<br/>& Cardiovascular Risk Pattern
       </h1>
-      
+
       <div className="panel-body-text">
         <p style={{fontSize: '18px', color: '#5b9cf6', fontWeight: 600, marginTop: '-20px', marginBottom: '32px'}}>
           Beyond Standard Lipid Panels
         </p>
 
         <div className="section-header">
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>The Clinical Picture</h3>
         </div>
-        
+
         <p>Michael, a 45-year-old financial advisor, presented with elevated blood pressure readings during routine checkups and occasional chest tightness during strenuous exercise.</p>
         <p>His family history included early cardiovascular disease, and recent stress tests showed borderline abnormal results with reduced exercise tolerance.</p>
 
         <MobileInlineVideo activeVideo={activeVideo} />
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>Key Biomarkers Working Together</h3>
         </div>
 
@@ -80,7 +80,7 @@ export default function CardioEndothelialPanel({ onGoToOverview, activeVideo }) 
         </div>
 
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>The Clinical Insight</h3>
         </div>
 
@@ -90,7 +90,7 @@ export default function CardioEndothelialPanel({ onGoToOverview, activeVideo }) 
         <p>The critically low arginine/ADMA ratio strongly predicts increased risk for atherothrombotic events and suggests the need for aggressive cardiovascular risk reduction strategies.</p>
 
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>Cardiovascular Support Protocol</h3>
         </div>
 
@@ -151,7 +151,7 @@ export default function CardioEndothelialPanel({ onGoToOverview, activeVideo }) 
             </ul>
           </div>
         </div>
-        
+
         <div className="next-button-container" onClick={onGoToOverview}>
           <div className="next-content">
             <span className="next-label">NEXT</span>
@@ -163,8 +163,7 @@ export default function CardioEndothelialPanel({ onGoToOverview, activeVideo }) 
             </svg>
           </div>
         </div>
-        
-        {/* padding at the bottom */}
+
         <div style={{height: '100px'}}></div>
       </div>
     </>

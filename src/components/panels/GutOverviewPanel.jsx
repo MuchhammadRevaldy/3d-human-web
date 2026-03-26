@@ -6,7 +6,7 @@ export default function GutOverviewPanel({ activeVideo }) {
       <h1 className="panel-title">
         The Most Comprehensive Gut Microbiome & Digestive Health Analysis — 300+ Markers
       </h1>
-      
+
       <div className="panel-body-text">
         <p>The Gut Zoomer provides the most comprehensive assessment of gut health available, measuring beneficial bacteria, pathogens, inflammation, permeability, and metabolic function in one test.</p>
 
@@ -17,7 +17,7 @@ export default function GutOverviewPanel({ activeVideo }) {
         <p>By evaluating the gut ecosystem comprehensively, it reveals connections between gut health and systemic conditions from autoimmunity to mental health.</p>
 
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>Symptoms to Consider This Test</h3>
         </div>
         <ul className="protocol-bullets" style={{marginBottom: '32px'}}>
@@ -30,7 +30,7 @@ export default function GutOverviewPanel({ activeVideo }) {
         </ul>
 
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>Key Highlight Markers</h3>
         </div>
         <ul className="protocol-bullets" style={{marginBottom: '32px'}}>
@@ -43,7 +43,7 @@ export default function GutOverviewPanel({ activeVideo }) {
         </ul>
 
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>Main Product Highlights</h3>
         </div>
         <ul className="protocol-bullets">
@@ -53,8 +53,7 @@ export default function GutOverviewPanel({ activeVideo }) {
           <li>Includes pathogen detection often missed by culture methods</li>
           <li>Provides specific probiotic and prebiotic recommendations</li>
         </ul>
-        
-        {/* padding at the bottom */}
+
         <div style={{height: '100px'}}></div>
       </div>
     </>

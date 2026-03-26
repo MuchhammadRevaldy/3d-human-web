@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 export default function Sidebar({ organs, activeOrgan, onSelect, onHover }) {
   const [isExpanded, setIsExpanded] = useState(false);
-  // Sidebar items matched with Organs array
+
   return (
     <div className={`sidebar ${activeOrgan ? 'hidden' : ''} ${isExpanded ? 'expanded' : ''}`}>
       <div className="sidebar-header" onClick={() => setIsExpanded(!isExpanded)}>
@@ -22,7 +22,7 @@ export default function Sidebar({ organs, activeOrgan, onSelect, onHover }) {
               className={`organ-btn ${isActive ? 'active' : ''}`}
               onClick={() => {
                 onSelect(isActive ? null : organ.id);
-                if (!isActive) setIsExpanded(false); // Close sidebar on selection in mobile
+                if (!isActive) setIsExpanded(false);
               }}
               onMouseEnter={() => onHover(organ.id)}
               onMouseLeave={() => onHover(null)}

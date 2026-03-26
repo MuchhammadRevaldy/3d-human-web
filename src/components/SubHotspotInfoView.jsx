@@ -27,8 +27,7 @@ gsap.registerPlugin(ScrollTrigger)
 
 export default function SubHotspotInfoView({ subHotspotId, categoryData, onClose, isMobile }) {
   const { t } = useTranslation()
-  
-  // Memoized Video Map with translated labels
+
   const VIDEO_MAP = useMemo(() => ({
     'oxi': { src: '/models/OxidativeStressV03.mp4', label: t('explore.video_labels.rna_damage') },
     'toxins_panel': { src: '/models/ToxinsV03.mp4', label: t('explore.video_labels.toxins_load') },
@@ -52,7 +51,6 @@ export default function SubHotspotInfoView({ subHotspotId, categoryData, onClose
   const [showOverview, setShowOverview] = useState(false)
   const [panelKey, setPanelKey] = useState(0)
 
-  // Helper to change tab/overview and trigger animation
   const switchTo = (fn) => {
     fn()
     setPanelKey(k => k + 1)
@@ -65,12 +63,11 @@ export default function SubHotspotInfoView({ subHotspotId, categoryData, onClose
     setPanelKey(k => k + 1)
   }, [subHotspotId])
 
-  // Explicit Video Loader to aggressively bypass Browser AutoPlay safety blocks
   useEffect(() => {
     if (activeVideo && videoElementRef.current) {
       videoElementRef.current.src = activeVideo.src
       videoElementRef.current.load()
-      
+
       const playPromise = videoElementRef.current.play()
       if (playPromise !== undefined) {
         playPromise.catch(error => {
@@ -80,9 +77,8 @@ export default function SubHotspotInfoView({ subHotspotId, categoryData, onClose
     }
   }, [activeVideo])
 
-  // GSAP Scroll-Triggered Morphing Logic
   useEffect(() => {
-    // Apabila tombol tidak memiliki mapping video, animasi timeline dilewati
+
     if (!activeVideo || !videoRef.current || !wrapperRef.current || !labelRef.current || !scrollerRef.current || !contentRef.current) return
 
     const tl = gsap.timeline({
@@ -95,12 +91,10 @@ export default function SubHotspotInfoView({ subHotspotId, categoryData, onClose
       }
     })
 
-    // Phase 1: Grow & Morph dari Circle 250px ke Rounded Rectangle 45vw
     tl.to(wrapperRef.current, { width: '45vw', height: '75vh', right: '4%', duration: 1, ease: 'power1.inOut' }, 'grow')
       .to(videoRef.current, { borderRadius: '32px', duration: 1, ease: 'power1.inOut' }, 'grow')
       .to(labelRef.current, { bottom: '25%', left: '15%', scale: 1.5, duration: 1, ease: 'power1.inOut' }, 'grow')
 
-    // Phase 2: Shrink & Morph kembali menjadi Circle
     tl.to(wrapperRef.current, { width: '250px', height: '250px', right: '18%', duration: 1, ease: 'power1.inOut' }, 'shrink')
       .to(videoRef.current, { borderRadius: '50%', duration: 1, ease: 'power1.inOut' }, 'shrink')
       .to(labelRef.current, { bottom: '8%', left: '8%', scale: 1.0, duration: 1, ease: 'power1.inOut' }, 'shrink')
@@ -112,7 +106,7 @@ export default function SubHotspotInfoView({ subHotspotId, categoryData, onClose
 
   return (
     <div className="sub-info-overlay">
-      
+
       <button className="sub-info-back-btn" onClick={onClose} aria-label="Back">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
           <polyline points="15 18 9 12 15 6"></polyline>
@@ -190,9 +184,9 @@ export default function SubHotspotInfoView({ subHotspotId, categoryData, onClose
         ) : (
           <div className="nav-pill-container">
             <span className="nav-subtitle">
-              {subData.id === 'hormone_z' ? t('explore.hotspots.hormone_z') + ':' : 
-               subData.id === 'toxins_panel' ? t('explore.hotspots.toxins_panel') + ':' : 
-               subData.id === 'oxi' ? t('explore.hotspots.oxi') + ':' : 
+              {subData.id === 'hormone_z' ? t('explore.hotspots.hormone_z') + ':' :
+               subData.id === 'toxins_panel' ? t('explore.hotspots.toxins_panel') + ':' :
+               subData.id === 'oxi' ? t('explore.hotspots.oxi') + ':' :
                subData.id === 'neurotrans' ? t('explore.hotspots.neurotrans') + ':' :
                t('explore.hotspots.neural') + ':'}
             </span>
@@ -228,11 +222,11 @@ export default function SubHotspotInfoView({ subHotspotId, categoryData, onClose
       {activeVideo && (
         <div className="oxi-video-position-wrapper desktop-only" ref={wrapperRef}>
           <div className="oxi-video-container" ref={videoRef}>
-            <video 
+            <video
               ref={videoElementRef}
-              autoPlay 
-              loop 
-              muted 
+              autoPlay
+              loop
+              muted
               playsInline
               className="oxi-video-element"
             />
@@ -248,7 +242,6 @@ export default function SubHotspotInfoView({ subHotspotId, categoryData, onClose
         </div>
       )}
 
-      {/* Left Main Content Panel */}
       <div className={isMobile ? "sub-info-side-panel-mobile" : "sub-info-side-panel-desktop"}>
         <div className="panel-scroll-area" ref={scrollerRef}>
           <div key={panelKey} className="scroll-content-wrapper panel-transition-enter" ref={contentRef}>

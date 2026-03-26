@@ -7,20 +7,20 @@ export default function OxidativeStressPanel({ onGoToOverview, activeVideo }) {
       <h1 className="panel-title">
         The Chronic Fatigue &<br/>Multi-System Oxidative Damage Pattern
       </h1>
-      
+
       <div className="panel-body-text">
         <div className="section-header">
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>The Clinical Picture</h3>
         </div>
-        
+
         <p>Robert, a 48-year-old IT director, experienced progressive fatigue over 18 months that no longer improved with rest.</p>
-        
+
         <p>He had difficulty concentrating at work, muscle aches after minimal exercise, and felt “aged beyond his years” despite normal routine blood tests:</p>
-        
+
         <MobileInlineVideo activeVideo={activeVideo} />
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>Key Biomarkers Working Together</h3>
         </div>
 
@@ -77,7 +77,7 @@ export default function OxidativeStressPanel({ onGoToOverview, activeVideo }) {
         </div>
 
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>The Clinical Insight</h3>
         </div>
 
@@ -87,7 +87,7 @@ export default function OxidativeStressPanel({ onGoToOverview, activeVideo }) {
         <p>Elevated nitrotyrosine and nitrative stress markers reveal protein nitration processes that create dysfunctional enzymes and disrupt normal cellular signaling pathways.</p>
 
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>Neuroprotective Support Protocol</h3>
         </div>
 
@@ -143,7 +143,7 @@ export default function OxidativeStressPanel({ onGoToOverview, activeVideo }) {
             </ul>
           </div>
         </div>
-        
+
         <div className="next-button-container" onClick={onGoToOverview}>
           <div className="next-content">
             <span className="next-label">NEXT</span>
@@ -155,8 +155,7 @@ export default function OxidativeStressPanel({ onGoToOverview, activeVideo }) {
             </svg>
           </div>
         </div>
-        
-        {/* padding at the bottom */}
+
         <div style={{height: '100px'}}></div>
       </div>
     </>

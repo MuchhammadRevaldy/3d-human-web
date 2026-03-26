@@ -9,17 +9,17 @@ export default function MildDemyelinationPanel({ onGoToOverview, activeVideo }) 
       <h1 className="panel-title">
         {t('explore.panels.mild_demyelination.title')}
       </h1>
-      
+
       <div className="panel-body-text">
         <div className="section-header">
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>{t('explore.panels.mild_demyelination.clinical_picture')}</h3>
         </div>
 
         <p>{t('explore.panels.mild_demyelination.case_history')}</p>
         <MobileInlineVideo activeVideo={activeVideo} />
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>{t('explore.panels.mild_demyelination.biomarkers_title')}</h3>
         </div>
 
@@ -76,7 +76,7 @@ export default function MildDemyelinationPanel({ onGoToOverview, activeVideo }) 
         </div>
 
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>{t('explore.panels.mild_demyelination.clinical_insight')}</h3>
         </div>
 
@@ -85,7 +85,7 @@ export default function MildDemyelinationPanel({ onGoToOverview, activeVideo }) 
         <p>{t('explore.panels.mild_demyelination.insight_desc3')}</p>
 
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>{t('explore.panels.mild_demyelination.protocol_title')}</h3>
         </div>
 
@@ -157,8 +157,7 @@ export default function MildDemyelinationPanel({ onGoToOverview, activeVideo }) 
             </svg>
           </div>
         </div>
-        
-        {/* padding at the bottom */}
+
         <div style={{height: '100px'}}></div>
       </div>
     </>

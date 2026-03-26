@@ -7,19 +7,19 @@ export default function HormonePanel({ onGoToOverview, activeVideo }) {
       <h1 className="panel-title">
         The Postmenopausal Bone Loss<br/>& Hormone Deficiency Pattern
       </h1>
-      
+
       <div className="panel-body-text">
         <div className="section-header">
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>The Clinical Picture</h3>
         </div>
-        
+
         <p>Margaret, a 56-year-old teacher, experienced her last menstrual period 18 months ago and recently noticed height loss and back pain.</p>
         <p>Her recent DEXA scan showed early osteopenia, and she was concerned about her family history of hip fractures:</p>
-        
+
         <MobileInlineVideo activeVideo={activeVideo} />
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>Key Biomarkers Working Together</h3>
         </div>
 
@@ -86,7 +86,7 @@ export default function HormonePanel({ onGoToOverview, activeVideo }) {
         </div>
 
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>The Clinical Insight</h3>
         </div>
 
@@ -95,7 +95,7 @@ export default function HormonePanel({ onGoToOverview, activeVideo }) {
         <p>DHEA depletion removes anabolic bone support, while oxidative stress accelerates bone matrix degradation and impairs repair mechanisms.</p>
 
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>Comprehensive Bone Protection Protocol</h3>
         </div>
 
@@ -148,7 +148,6 @@ export default function HormonePanel({ onGoToOverview, activeVideo }) {
           <div className="protocol-card">
             <div className="protocol-header">
               <span className="protocol-name">DHEA</span>
-              {/* No dosage provided in user input */}
             </div>
             <ul className="protocol-bullets">
               <li>DHEA supplements boost DHEA levels by directly increasing the availability of this hormone in the bloodstream.</li>
@@ -156,7 +155,7 @@ export default function HormonePanel({ onGoToOverview, activeVideo }) {
             </ul>
           </div>
         </div>
-        
+
         <div className="next-button-container" onClick={onGoToOverview}>
           <div className="next-content">
             <span className="next-label">NEXT</span>
@@ -168,8 +167,7 @@ export default function HormonePanel({ onGoToOverview, activeVideo }) {
             </svg>
           </div>
         </div>
-        
-        {/* padding at the bottom */}
+
         <div style={{height: '100px'}}></div>
       </div>
     </>

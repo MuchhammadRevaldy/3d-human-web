@@ -9,7 +9,6 @@ import { Environment, Float, useGLTF } from '@react-three/drei';
 import useReveal from '../hooks/useReveal';
 import * as THREE from 'three';
 
-// 3D Model Component for Cards
 function CardModel({ path, scale, position, rotation, color, emissive }) {
   const { scene } = useGLTF(path)
   const ref = useRef()
@@ -258,9 +257,9 @@ export default function Content() {
 
   const cardVariants = {
     hidden: { opacity: 0, y: 30, scale: 0.95 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
+    visible: {
+      opacity: 1,
+      y: 0,
       scale: 1,
       transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
     }
@@ -270,7 +269,6 @@ export default function Content() {
     <PageTransition>
       <div className="content-page-container">
 
-        {/* Decorative Background */}
         <div className="content-bg-blob blob-a"></div>
         <div className="content-bg-blob blob-b"></div>
 
@@ -279,8 +277,8 @@ export default function Content() {
           <p className="content-subtitle reveal-item reveal-delay-1">Explore expertly curated articles on maintaining organ health and understanding your body's complex systems.</p>
         </div>
 
-        <motion.div 
-          className="bento-grid-container" 
+        <motion.div
+          className="bento-grid-container"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -325,7 +323,6 @@ export default function Content() {
           ))}
         </motion.div>
 
-        {/* Modal Overlay using Framer Motion */}
         <AnimatePresence>
           {selectedArticle && (
             <div className="modal-container">
@@ -372,7 +369,7 @@ export default function Content() {
             max-width: 1400px;
             margin: 0 auto;
           }
-          
+
           .content-bg-blob {
             position: absolute;
             border-radius: 50%;
@@ -462,7 +459,7 @@ export default function Content() {
           .bento-square-small { grid-column: span 1; grid-row: span 1; }
           .bento-tall { grid-column: span 1; grid-row: span 2; }
           .bento-wide { grid-column: span 2; grid-row: span 1; }
-          
+
           @media (max-width: 1024px) {
             .bento-hero, .bento-tall, .bento-wide, .bento-square-small {
               grid-column: span 2;
@@ -732,7 +729,7 @@ export default function Content() {
             line-height: 1.8;
             color: #4a5a7a;
           }
-          
+
           .article-modal::-webkit-scrollbar { width: 6px; }
           .article-modal::-webkit-scrollbar-track { background: transparent; }
           .article-modal::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }

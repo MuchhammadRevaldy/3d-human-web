@@ -9,14 +9,14 @@ export default function NeuralOverviewPanel({ activeVideo }) {
       <h1 className="panel-title">
         {t('explore.panels.neural.title')}
       </h1>
-      
+
       <div className="panel-body-text">
         <p>{t('explore.panels.neural.desc1')}</p>
         <p>{t('explore.panels.neural.desc2')}</p>
         <p>{t('explore.panels.neural.desc3')}</p>
 
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>{t('explore.panels.neural.symptoms_title')}</h3>
         </div>
         <ul className="protocol-bullets" style={{marginBottom: '32px'}}>
@@ -27,7 +27,7 @@ export default function NeuralOverviewPanel({ activeVideo }) {
 
         <MobileInlineVideo activeVideo={activeVideo} />
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>{t('explore.panels.neural.markers_title')}</h3>
         </div>
         <ul className="protocol-bullets" style={{marginBottom: '32px'}}>
@@ -37,7 +37,7 @@ export default function NeuralOverviewPanel({ activeVideo }) {
         </ul>
 
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>{t('explore.panels.neural.highlights_title')}</h3>
         </div>
         <ul className="protocol-bullets">
@@ -45,8 +45,7 @@ export default function NeuralOverviewPanel({ activeVideo }) {
             <li key={i}>{item}</li>
           ))}
         </ul>
-        
-        {/* padding at the bottom */}
+
         <div style={{height: '100px'}}></div>
       </div>
     </>

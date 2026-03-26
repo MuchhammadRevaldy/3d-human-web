@@ -7,24 +7,24 @@ export default function GutPermeabilityPanel({ onGoToOverview, activeVideo }) {
       <h1 className="panel-title">
         The Intestinal Permeability<br/>& Inflammation Pattern
       </h1>
-      
+
       <div className="panel-body-text">
         <p style={{fontSize: '18px', color: '#5b9cf6', fontWeight: 600, marginTop: '-20px', marginBottom: '32px'}}>
           When Barrier Function Breaks Down
         </p>
 
         <div className="section-header">
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>The Clinical Picture</h3>
         </div>
-        
+
         <p>Sarah, a 42-year-old professional, presented with chronic fatigue, brain fog, and multiple food sensitivities.</p>
-        
+
         <p>Her Gut Zoomer revealed a clear pattern of compromised intestinal barrier function.</p>
-        
+
         <MobileInlineVideo activeVideo={activeVideo} />
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>Key Biomarkers Working Together</h3>
         </div>
 
@@ -91,7 +91,7 @@ export default function GutPermeabilityPanel({ onGoToOverview, activeVideo }) {
         </div>
 
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>The Clinical Insight</h3>
         </div>
 
@@ -100,7 +100,7 @@ export default function GutPermeabilityPanel({ onGoToOverview, activeVideo }) {
         <p>The positive gliadin antibodies suggest gluten triggering additional barrier disruption.</p>
 
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>Targeted Supplementation Strategy</h3>
         </div>
 
@@ -155,7 +155,7 @@ export default function GutPermeabilityPanel({ onGoToOverview, activeVideo }) {
             </ul>
           </div>
         </div>
-        
+
         <div className="next-button-container" onClick={onGoToOverview}>
           <div className="next-content">
             <span className="next-label">NEXT</span>
@@ -167,8 +167,7 @@ export default function GutPermeabilityPanel({ onGoToOverview, activeVideo }) {
             </svg>
           </div>
         </div>
-        
-        {/* padding at the bottom */}
+
         <div style={{height: '100px'}}></div>
       </div>
     </>

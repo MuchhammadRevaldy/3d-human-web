@@ -6,7 +6,7 @@ export default function GeneticsOverviewPanel({ activeVideo }) {
       <h1 className="panel-title">
         Comprehensive Genetic Blueprint for Personalized Health Optimization
       </h1>
-      
+
       <div className="panel-body-text">
         <p>The Methylation Panel evaluates genetic and biochemical pathways involved in detoxification, DNA repair, and overall cellular function. Genetic testing reveals inherited predispositions that explain why standard treatments fail for some patients.</p>
 
@@ -17,7 +17,7 @@ export default function GeneticsOverviewPanel({ activeVideo }) {
         <p>Understanding genetic variants guides targeted supplementation, dietary modifications, and lifestyle interventions for optimal health expression.</p>
 
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>Symptoms to Consider This Test</h3>
         </div>
         <ul className="protocol-bullets" style={{marginBottom: '32px'}}>
@@ -30,7 +30,7 @@ export default function GeneticsOverviewPanel({ activeVideo }) {
         </ul>
 
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>Key Highlight Markers</h3>
         </div>
         <ul className="protocol-bullets" style={{marginBottom: '32px'}}>
@@ -42,7 +42,7 @@ export default function GeneticsOverviewPanel({ activeVideo }) {
         </ul>
 
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>Main Product Highlights</h3>
         </div>
         <ul className="protocol-bullets">
@@ -52,8 +52,7 @@ export default function GeneticsOverviewPanel({ activeVideo }) {
           <li>One-time testing provides lifetime insights</li>
           <li>Guides personalized supplementation and lifestyle</li>
         </ul>
-        
-        {/* padding at the bottom */}
+
         <div style={{height: '100px'}}></div>
       </div>
     </>

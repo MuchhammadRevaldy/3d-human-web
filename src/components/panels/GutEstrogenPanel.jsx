@@ -7,19 +7,19 @@ export default function GutEstrogenPanel({ onGoToOverview, activeVideo }) {
       <h1 className="panel-title">
         The Estrogen Dominance<br/>& Gut Dysbiosis Pattern
       </h1>
-      
+
       <div className="panel-body-text">
         <div className="section-header">
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>The Clinical Picture</h3>
         </div>
-        
+
         <p>Rebecca, a 44-year-old marketing director, presented with heavy menstrual bleeding, breast tenderness, mood swings, and weight gain despite hormone replacement therapy.</p>
         <p>Her comprehensive gut and hormone testing revealed impaired estrogen clearance due to dysbiotic gut bacteria.</p>
-        
+
         <MobileInlineVideo activeVideo={activeVideo} />
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>Key Biomarkers Working Together</h3>
         </div>
 
@@ -86,18 +86,18 @@ export default function GutEstrogenPanel({ onGoToOverview, activeVideo }) {
         </div>
 
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>The Clinical Insight</h3>
         </div>
 
         <p>This pattern reveals dysbiotic bacteria driving estrogen recirculation through excessive β-glucuronidase production. Depleted beneficial bacteria cannot produce adequate SCFAs to maintain gut barrier integrity.</p>
-        
+
         <p>Elevated DCA from bacterial overgrowth creates intestinal inflammation, while low LCA indicates impaired bile acid metabolism.</p>
-        
+
         <p>The combination of poor estrogen elimination and inflammatory gut environment perpetuates hormone imbalance despite external hormone therapy.</p>
 
         <div className="section-header" style={{marginTop: '48px'}}>
-          <span className="section-icon">∴</span> 
+          <span className="section-icon">∴</span>
           <h3>Targeted Supplementation Strategy</h3>
         </div>
 
@@ -155,7 +155,7 @@ export default function GutEstrogenPanel({ onGoToOverview, activeVideo }) {
             </ul>
           </div>
         </div>
-        
+
         <div className="next-button-container" onClick={onGoToOverview}>
           <div className="next-content">
             <span className="next-label">NEXT</span>
@@ -167,8 +167,7 @@ export default function GutEstrogenPanel({ onGoToOverview, activeVideo }) {
             </svg>
           </div>
         </div>
-        
-        {/* padding at the bottom */}
+
         <div style={{height: '100px'}}></div>
       </div>
     </>
