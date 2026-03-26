@@ -68,7 +68,12 @@ function InternalOrganMesh({ organ, isVisible, isActive }) {
 
     // Pulsating Emission (Breathing Glow): Modulates inner light rhythmically without rubber-banding mesh
     const breath = (Math.sin(state.clock.elapsedTime * 2.0) + 1) / 2 // 0.0 to 1.0, slower, natural rhythm
-    const dynamicEmissiveIntensity = isActive ? THREE.MathUtils.lerp(0.8, 2.5, breath) : (isVisible ? targetParams.emissiveIntensity : 0.0)
+    
+    // Kurangi glow secara drastis di HP agar tidak 'Terbakar' (overexposure) yang menyebabkan organ jadi rata seperti siluet pink blur.
+    const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768
+    const maxGlow = isMobile ? 0.4 : 2.5
+    
+    const dynamicEmissiveIntensity = isActive ? THREE.MathUtils.lerp(0.1, maxGlow, breath) : (isVisible ? targetParams.emissiveIntensity : 0.0)
 
     const speed = 0.25 // Mempercepat transisi hide/show (tadinya 0.1)
     materialRef.current.color.lerp(targetParams.color, speed)
