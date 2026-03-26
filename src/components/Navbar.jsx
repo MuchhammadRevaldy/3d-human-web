@@ -48,13 +48,13 @@ export default function Navbar() {
           <div className="navbar-links">
             <NavLink to="/" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>Home</NavLink>
             <NavLink to="/about" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>About</NavLink>
-            <NavLink to="/content" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>Konten</NavLink>
+            <NavLink to="/content" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>Content</NavLink>
             <NavLink to="/contact" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>Contact</NavLink>
           </div>
 
           <div className="navbar-cta">
             <Link to="/explore" className="cta-button primary-btn">
-              Mulai Eksplorasi 3D
+              Start 3D Exploration
             </Link>
           </div>
         </div>

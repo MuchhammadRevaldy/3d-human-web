@@ -208,7 +208,7 @@ export default function Content() {
       color: "#f97316",
       emissive: "#c2410c",
       modelPath: "/models/realistic_human_heart.glb",
-      modelScale: 0.70,
+      modelScale: 0.90,
       modelPos: [0, 0, 0],
       modelRotation: [0, 0, 0],
       bgClass: "bg-orange-50",
@@ -490,7 +490,7 @@ export default function Content() {
               right: unset !important;
               bottom: unset !important;
               width: 100% !important;
-              height: 200px !important;
+              height: 280px !important;
               opacity: 1 !important;
               display: block;
               flex-shrink: 0;
