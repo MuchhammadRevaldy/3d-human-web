@@ -96,7 +96,6 @@ export default function About() {
             position: relative;
             min-height: 100vh;
             padding: 120px 20px 80px;
-            overflow: hidden;
             font-family: 'Inter', sans-serif;
           }
 

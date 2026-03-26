@@ -24,12 +24,11 @@
 html,
 body,
 #root {
-  width: 100vw;
-  height: 100dvh;
+  min-height: 100vh;
   margin: 0;
   padding: 0;
-  overflow: hidden;
-  /* Lock viewport scrolling completely */
+  overflow-x: hidden;
+  /* Allow vertical scrolling while preventing horizontal overflow */
   font-family: 'Inter', sans-serif;
   background: linear-gradient(135deg, var(--bg-grad-1) 0%, var(--bg-grad-2) 55%, var(--bg-grad-3) 100%);
 }

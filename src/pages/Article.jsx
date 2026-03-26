@@ -134,7 +134,6 @@ export default function Article() {
             padding: 140px 5% 80px;
             font-family: 'Inter', sans-serif;
             position: relative;
-            overflow: hidden;
             background: #f8fafc;
           }
           

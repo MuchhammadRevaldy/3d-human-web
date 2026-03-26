@@ -103,7 +103,6 @@ export default function Contact() {
             min-height: 100vh;
             padding: 120px 5% 80px;
             font-family: 'Inter', sans-serif;
-            overflow: hidden;
           }
           
           .contact-bg-blob {

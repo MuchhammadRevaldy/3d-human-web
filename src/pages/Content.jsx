@@ -339,7 +339,6 @@ export default function Content() {
             min-height: 100vh;
             padding: 120px 5% 80px;
             font-family: 'Inter', sans-serif;
-            overflow: hidden;
             max-width: 1400px;
             margin: 0 auto;
           }
@@ -366,6 +365,7 @@ export default function Content() {
             color: #1a1a3a;
             margin-bottom: 16px;
             letter-spacing: -0.02em;
+            text-align: center;
           }
           .text-gradient {
             background: linear-gradient(135deg, #0077ff 0%, #a78bfa 100%);
@@ -460,8 +460,49 @@ export default function Content() {
             width: 55%;
             padding: 40px;
           }
-          @media (max-width: 1024px) {
-             .bento-hero .bento-card-content { width: 100%; z-index: 3; }
+
+          @media (max-width: 768px) {
+            /* Cards become vertical flex on mobile */
+            .bento-card {
+              overflow: hidden;
+              min-height: unset !important;
+              flex-direction: column;
+            }
+
+            .bento-hero .bento-card-content,
+            .bento-wide .bento-card-content {
+              width: 100%;
+              padding: 24px;
+            }
+
+            .bento-card-content {
+              padding: 24px;
+              height: auto;
+              width: 100%;
+              box-sizing: border-box;
+            }
+
+            /* On mobile, make 3D canvas appear below content as a block */
+            .bento-canvas-wrapper {
+              position: relative !important;
+              top: unset !important;
+              left: unset !important;
+              right: unset !important;
+              bottom: unset !important;
+              width: 100% !important;
+              height: 200px !important;
+              opacity: 1 !important;
+              display: block;
+              flex-shrink: 0;
+            }
+          }
+
+          @media (min-width: 769px) {
+            .bento-hero .bento-card-content { width: 55%; padding: 40px; }
+          }
+
+          @media (max-width: 1024px) and (min-width: 769px) {
+            .bento-hero .bento-card-content { width: 100%; z-index: 3; }
           }
 
           .bento-canvas-wrapper {
@@ -498,9 +539,9 @@ export default function Content() {
             opacity: 0.6;
           }
           @media (max-width: 1024px) {
-             .canvas-layout-bento-hero { opacity: 0.3; width: 100%; right: 0; }
-             .canvas-layout-bento-tall { opacity: 0.3; height: 100%; }
-             .canvas-layout-bento-wide { opacity: 0.3; width: 100%; right: 0; }
+            .canvas-layout-bento-hero { opacity: 0.3; width: 100%; right: 0; }
+            .canvas-layout-bento-tall { opacity: 0.3; height: 100%; }
+            .canvas-layout-bento-wide { opacity: 0.3; width: 100%; right: 0; }
           }
 
           .bento-card-header {
