@@ -263,13 +263,14 @@ body,
   width: 100vw;
   height: 100dvh;
   touch-action: none;
+  z-index: 1; /* Explicit z-index to manage stacking context */
   /* Disable pull-to-refresh and page swiping */
   /* Force a separate GPU compositing layer so backdrop-filter on overlaid
      CSS elements does NOT bleed into / blur the WebGL canvas. This is
      especially important in Vite production builds on mobile Safari/Chrome. */
   isolation: isolate;
-  transform: translateZ(0);
-  -webkit-transform: translateZ(0);
+  transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
   will-change: transform;
 }
 
@@ -1486,6 +1487,10 @@ body,
   z-index: 60;
   pointer-events: none;
   animation: fade-in 0.4s ease-out;
+  /* Prevent blur bleed into canvas */
+  isolation: isolate;
+  transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
 }
 
 .sub-info-back-btn {
@@ -2294,9 +2299,14 @@ body,
     border: none;
     padding-top: 0;
     background: transparent;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
+    filter: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
     box-shadow: none;
+    /* Force separate layer on mobile to avoid compositor blur bugs */
+    isolation: isolate;
+    transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
     pointer-events: none;
     position: absolute;
     z-index: 50;
@@ -2315,8 +2325,9 @@ body,
 
   .scroll-content-wrapper {
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(240, 245, 255, 0.55) 100%);
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
+    filter: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
     border-radius: 40px 40px 0 0;
     padding: 30px 24px 100px 24px;
     min-height: 100vh;

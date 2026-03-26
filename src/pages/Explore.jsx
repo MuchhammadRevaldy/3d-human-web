@@ -546,6 +546,7 @@ export default function Explore() {
                 activeCategoryId={activeOrgan}
                 hoveredCategoryId={hoveredOrgan}
                 activeSubHotspotId={activeSubHotspot}
+                isMobile={isMobileView}
               />
 
               <group visible={!activeSubHotspot}>

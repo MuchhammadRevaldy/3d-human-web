@@ -17,7 +17,7 @@ const inactiveMaterialParams = {
   transmission: 0.0,
 }
 
-function InternalOrganMesh({ organ, isVisible, isActive }) {
+function InternalOrganMesh({ organ, isVisible, isActive, isMobile }) {
   const { scene } = useGLTF(organ.file)
   const ref = useRef()
 
@@ -27,7 +27,7 @@ function InternalOrganMesh({ organ, isVisible, isActive }) {
   const activeParams = useMemo(() => ({
     color: new THREE.Color(organ.color || '#ff3322'),
     emissive: new THREE.Color(organ.emissive || '#ff2200'),
-    emissiveIntensity: 1.5,
+    emissiveIntensity: isMobile ? 0.35 : 1.2, // Drastically reduced for mobile to prevent overexposure blur
     roughness: 0.2,
     metalness: 0.1,
     transparent: true,
@@ -35,7 +35,7 @@ function InternalOrganMesh({ organ, isVisible, isActive }) {
     transmission: 0.2,
     envMapIntensity: 1.0,
     depthWrite: true,
-  }), [organ])
+  }), [organ, isMobile])
 
   const inactiveParams = useMemo(() => ({
     color: new THREE.Color('#050a15'), // Near-black / dark blue
@@ -70,10 +70,9 @@ function InternalOrganMesh({ organ, isVisible, isActive }) {
     const breath = (Math.sin(state.clock.elapsedTime * 2.0) + 1) / 2 // 0.0 to 1.0, slower, natural rhythm
     
     // Kurangi glow secara drastis di HP agar tidak 'Terbakar' (overexposure) yang menyebabkan organ jadi rata seperti siluet pink blur.
-    const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768
-    const maxGlow = isMobile ? 0.4 : 2.5
+    const maxGlow = isMobile ? 0.15 : 2.5 // Even lower on mobile (tadinya 0.4) to isolate the silhouette issue
     
-    const dynamicEmissiveIntensity = isActive ? THREE.MathUtils.lerp(0.1, maxGlow, breath) : (isVisible ? targetParams.emissiveIntensity : 0.0)
+    const dynamicEmissiveIntensity = isActive ? THREE.MathUtils.lerp(0.05, maxGlow, breath) : (isVisible ? targetParams.emissiveIntensity : 0.0)
 
     const speed = 0.25 // Mempercepat transisi hide/show (tadinya 0.1)
     materialRef.current.color.lerp(targetParams.color, speed)
@@ -105,7 +104,7 @@ function InternalOrganMesh({ organ, isVisible, isActive }) {
   )
 }
 
-export default function InternalOrgans({ models, categories, activeCategoryId, hoveredCategoryId, activeSubHotspotId }) {
+export default function InternalOrgans({ models, categories, activeCategoryId, hoveredCategoryId, activeSubHotspotId, isMobile }) {
 
   const getVisibleModelIds = () => {
     const activeCat = categories.find(c => c.id === activeCategoryId)
@@ -133,6 +132,7 @@ export default function InternalOrgans({ models, categories, activeCategoryId, h
             organ={model}
             isVisible={isVisible}
             isActive={isActive}
+            isMobile={isMobile}
           />
         )
       })}
