@@ -513,8 +513,8 @@ export default function Explore() {
       <div className="canvas-container">
         <Canvas
           camera={{ position: [0, 0.4, 5.0], fov: 38 }}
-          gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
-          dpr={[1, 1.5]}
+          gl={{ antialias: true, alpha: true, powerPreference: "high-performance", stencil: false }}
+          dpr={[1, 2.5]}
         >
           <Suspense fallback={null}>
             <ambientLight intensity={0.4} color="#c8d8ff" />
@@ -560,16 +560,18 @@ export default function Explore() {
               </group>
             </ParallaxGroup>
 
-            {/* Always mount EffectComposer to prevent WebGL pipeline crashes when resizing from Desktop to Mobile, but zero out the intensities on mobile to disable the blur. */}
-            <EffectComposer>
-              <Bloom
-                intensity={isMobileView ? 0 : 0.6}
-                luminanceThreshold={0.4}
-                luminanceSmoothing={0.9}
-                radius={0.8}
-              />
-              <Vignette eskil={false} offset={0.15} darkness={isMobileView ? 0 : 0.4} />
-            </EffectComposer>
+            {/* Strictly disable post-processing entirely on mobile to isolate the Prod blur bug and save GPU */}
+            {!isMobileView ? (
+              <EffectComposer>
+                <Bloom
+                  intensity={0.6}
+                  luminanceThreshold={0.4}
+                  luminanceSmoothing={0.9}
+                  radius={0.8}
+                />
+                <Vignette eskil={false} offset={0.15} darkness={0.4} />
+              </EffectComposer>
+            ) : null}
 
             <OrbitControls
               ref={controlsRef}
