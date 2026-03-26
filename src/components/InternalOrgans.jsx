@@ -104,7 +104,6 @@ export default function InternalOrgans({ models, categories, activeCategoryId, h
       const activeSub = activeCat.subHotspots?.find(s => s.id === activeSubHotspotId)
       if (activeSub && activeSub.focusOrgan) {
         visibleIds.add(activeSub.focusOrgan)
-        return visibleIds
       }
     }
 
