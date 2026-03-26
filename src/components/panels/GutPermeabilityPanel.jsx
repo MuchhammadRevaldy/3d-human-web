@@ -168,7 +168,6 @@ export default function GutPermeabilityPanel({ onGoToOverview, activeVideo }) {
           </div>
         </div>
         
-        {/* padding at the bottom */}
         <div style={{height: '100px'}}></div>
       </div>
     </>

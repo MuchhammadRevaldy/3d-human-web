@@ -56,7 +56,6 @@ export default function ToxinsOverviewPanel({ activeVideo }) {
           <li>Guides targeted detoxification protocols</li>
         </ul>
         
-        {/* padding at the bottom */}
         <div style={{height: '100px'}}></div>
       </div>
     </>

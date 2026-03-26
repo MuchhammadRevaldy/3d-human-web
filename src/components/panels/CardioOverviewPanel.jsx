@@ -54,7 +54,6 @@ export default function CardioOverviewPanel({ activeVideo }) {
           <li>Personalized risk stratification based on genetic and biochemical markers</li>
         </ul>
         
-        {/* padding at the bottom */}
         <div style={{height: '100px'}}></div>
       </div>
     </>

@@ -55,7 +55,6 @@ export default function NeuralOverviewPanel({ activeVideo }) {
           <li>Useful for complex neurological cases with unclear etiology</li>
         </ul>
         
-        {/* padding at the bottom */}
         <div style={{height: '100px'}}></div>
       </div>
     </>

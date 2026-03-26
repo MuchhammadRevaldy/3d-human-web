@@ -52,7 +52,6 @@ export default function OxidativeStressOverviewPanel() {
           <li>Guides personalized antioxidant strategies</li>
         </ul>
         
-        {/* padding at the bottom */}
         <div style={{height: '100px'}}></div>
       </div>
     </>
