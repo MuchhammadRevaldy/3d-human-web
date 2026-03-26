@@ -560,18 +560,16 @@ export default function Explore() {
               </group>
             </ParallaxGroup>
 
-            {/* Disable Bloom post-processing on mobile to prevent the blurry glowing blob effect */}
-            {!isMobileView && (
-              <EffectComposer>
-                <Bloom
-                  intensity={0.6}
-                  luminanceThreshold={0.4}
-                  luminanceSmoothing={0.9}
-                  radius={0.8}
-                />
-                <Vignette eskil={false} offset={0.15} darkness={0.4} />
-              </EffectComposer>
-            )}
+            {/* Always mount EffectComposer to prevent WebGL pipeline crashes when resizing from Desktop to Mobile, but zero out the intensities on mobile to disable the blur. */}
+            <EffectComposer>
+              <Bloom
+                intensity={isMobileView ? 0 : 0.6}
+                luminanceThreshold={0.4}
+                luminanceSmoothing={0.9}
+                radius={0.8}
+              />
+              <Vignette eskil={false} offset={0.15} darkness={isMobileView ? 0 : 0.4} />
+            </EffectComposer>
 
             <OrbitControls
               ref={controlsRef}
